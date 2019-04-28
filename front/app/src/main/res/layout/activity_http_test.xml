@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HttpTestActivity">
+
+    <EditText
+        android:id="@+id/userNameTv"
+        android:layout_width="256dp"
+        android:layout_height="35dp"
+        android:text="user name"
+        android:layout_margin="10px"
+        android:layout_gravity="center" />
+
+    <EditText
+        android:id="@+id/passwordTv"
+        android:layout_width="254dp"
+        android:layout_height="35dp"
+        android:text="password"
+        android:layout_margin="10px"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_gravity="center"/>
+</LinearLayout>
