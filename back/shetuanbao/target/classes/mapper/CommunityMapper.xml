@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stb.dao.CommunityMapper">
+  <resultMap id="BaseResultMap" type="com.stb.model.Community">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="community_id" jdbcType="INTEGER" property="communityId" />
+    <result column="community_name" jdbcType="CHAR" property="communityName" />
+    <result column="community_introduce" jdbcType="CHAR" property="communityIntroduce" />
+    <result column="community_kouhao" jdbcType="CHAR" property="communityKouhao" />
+    <result column="community_tubiao" jdbcType="CHAR" property="communityTubiao" />
+    <result column="community_picture" jdbcType="CHAR" property="communityPicture" />
+    <result column="community_stat" jdbcType="CHAR" property="communityStat" />
+  </resultMap>
+</mapper>
