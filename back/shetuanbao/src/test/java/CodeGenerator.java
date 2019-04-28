@@ -38,7 +38,15 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
 //        genCode("activities");
-        genCode("users");
+//        genCode("administrator");
+//        genCode("community");
+//        genCode("community_cishan");
+//        genCode("community_compaign");
+//        genCode("community_tiyu");
+//        genCode("community_wenyi");
+//        genCode("community_xueshu");
+//        genCode("president");
+//        genCode("users");
     }
 
     /**
