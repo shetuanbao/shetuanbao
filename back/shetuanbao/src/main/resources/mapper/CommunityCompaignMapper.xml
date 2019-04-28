@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stb.dao.CommunityCompaignMapper">
+  <resultMap id="BaseResultMap" type="com.stb.model.CommunityCompaign">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="compaign_id" jdbcType="INTEGER" property="compaignId" />
+    <result column="compaign_picture_id" jdbcType="INTEGER" property="compaignPictureId" />
+    <result column="compaign_introduce" jdbcType="CHAR" property="compaignIntroduce" />
+    <result column="compaign_time" jdbcType="TIMESTAMP" property="compaignTime" />
+    <result column="community_id" jdbcType="INTEGER" property="communityId" />
+  </resultMap>
+</mapper>
