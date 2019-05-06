@@ -83,7 +83,7 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_shezhi:
-                Intent intent1 = new Intent(MainPersonalActivity.this, user_shezhi.class);
+                Intent intent1 = new Intent(MainPersonalActivity.this, PersonalSettingsActivity.class);
                 intent1.putExtra("name", name);
                 startActivity(intent1);
                 break;
