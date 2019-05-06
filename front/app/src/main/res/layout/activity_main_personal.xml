@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/mine_all"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/wodexiaoyuanLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/user_backgroud"
+            android:orientation="vertical" >
+            <com.community.shetuanbao.utils.RoundImageView
+                android:id="@+id/mine_userphoto_imagezhu"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft ="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/touxiang"/>
+
+            <TextView
+                android:id="@+id/mine_userphoto_text"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/mine_userphoto_imagezhu"
+                />
+
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/wodexiaoyuan_Lineraout02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/wodexiaoyuanLinearLayout">
+            <TextView
+                android:id="@+id/mine_shezhi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gengduo_beijingtiao"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:padding="10dp"
+                android:text="设置"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/mine_lianxiwomen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gengduo_beijingtiao"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:padding="11dp"
+                android:text="联系我们"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+
+
+
+            <TextView
+                android:id="@+id/mine_yijianfankui"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gengduo_beijingtiao"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:padding="11dp"
+                android:text="意见反馈"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/mine_yonghubangzhu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gengduo_beijingtiao"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:padding="11dp"
+                android:text="用户帮助"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/mine_guanli"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gengduo_beijingtiao"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:padding="11dp"
+                android:text="管理"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
