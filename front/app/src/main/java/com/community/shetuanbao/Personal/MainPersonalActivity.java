@@ -87,23 +87,23 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                 intent1.putExtra("name", name);
                 startActivity(intent1);
                 break;
-            case R.id.mine_lianxiwomen:
-                Intent intent2 = new Intent(MainPersonalActivity.this, user_lianxiwomen.class);
-                startActivity(intent2);
-                break;
-            case R.id.mine_yonghubangzhu:
-                Intent intent3 = new Intent(MainPersonalActivity.this, user_yonghubangzhu.class);
-                //����Activity
-                startActivity(intent3);
-                break;
-            case R.id.mine_yijianfankui:
-                Intent intent4 = new Intent(MainPersonalActivity.this, user_yijianfankui.class);
-                startActivity(intent4);
-                break;
-            case R.id.mine_guanli:
-                Intent intent5 = new Intent(MainPersonalActivity.this, user_guanli.class);
-                startActivity(intent5);
-                break;
+//            case R.id.mine_lianxiwomen:
+//                Intent intent2 = new Intent(MainPersonalActivity.this, user_lianxiwomen.class);
+//                startActivity(intent2);
+//                break;
+//            case R.id.mine_yonghubangzhu:
+//                Intent intent3 = new Intent(MainPersonalActivity.this, user_yonghubangzhu.class);
+//                //����Activity
+//                startActivity(intent3);
+//                break;
+//            case R.id.mine_yijianfankui:
+//                Intent intent4 = new Intent(MainPersonalActivity.this, user_yijianfankui.class);
+//                startActivity(intent4);
+//                break;
+//            case R.id.mine_guanli:
+//                Intent intent5 = new Intent(MainPersonalActivity.this, user_guanli.class);
+//                startActivity(intent5);
+//                break;
             default:
         }
     }
