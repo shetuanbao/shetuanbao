@@ -13,4 +13,12 @@
     <result column="community_picture" jdbcType="CHAR" property="communityPicture" />
     <result column="community_stat" jdbcType="CHAR" property="communityStat" />
   </resultMap>
+  
+  <select id="panfindByCommunityName" resultMap="BaseResultMap">
+    SELECT * FROM `community` WHERE `community_name`=#{communityName}
+  </select>
+  
+  <select id="panfindByCommunityUser" resultType="Integer">
+    SELECT `user_id` FROM `community_users` WHERE `community_id`=#{communityId}
+  </select>
 </mapper>

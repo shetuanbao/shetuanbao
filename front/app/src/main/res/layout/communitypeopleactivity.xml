@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/shetuanrenyuan_title"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@mipmap/gengduo_modifybiaoti12">
+        <TextView
+            android:id="@+id/shetuanrenyuani_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="0.6"
+            android:paddingLeft="20dp"
+            android:textColor="#ffffff"
+            android:text="@string/more_back"
+            android:textSize="16sp"
+            />
+        <ImageView
+            android:id="@+id/shetuanchengyuan_text2"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="120dp"
+            android:src="@mipmap/shetuanrenyuan"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/shetuancheng_text2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:divider="@color/blue2"
+            android:dividerHeight="1px"
+            android:orientation="vertical" >
+        </ListView>
+    </LinearLayout>
+
+
+
+</LinearLayout>

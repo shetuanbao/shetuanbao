@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shetuan_fen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/shetuan_tool"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@mipmap/gengduo_modifybiaoti12">
+        <ImageView
+            android:id="@+id/shetuan_tool_text2"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/shetuanxiangqing"/>
+        <TextView
+            android:id="@+id/shetuan_tool_text1"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_weight="0.6"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    <utils.ObservableScrollView
+        android:id="@+id/gundong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="180dip"
+                android:orientation="vertical">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </android.support.v4.view.ViewPager>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/viewGroup3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="165dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+            <LinearLayout
+                android:id="@+id/shetuan_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@mipmap/wodexiaoyuan02">
+                <TextView
+                    android:id="@+id/shetuan_name_1"
+                    android:layout_width="110dp"
+                    android:layout_height="43dp"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"
+                    android:text="社团名称"
+                    android:background="#EEEED1"
+                    android:textColor="#3366cc"
+                    android:textSize="20sp"  />
+                <TextView
+                    android:id="@+id/shetuan_name_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/touming"
+                    android:text="迎新晚会"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="#666666"
+                    android:textSize="17sp" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shetuan_kouhao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/huongdong_kouhao_1"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"
+                    android:text="社团口号"
+                    android:background="#EEEED1"
+                    android:textColor="#3366cc"
+                    android:textSize="20sp"  />
+                <TextView
+                    android:id="@+id/shetuan_kouhao_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"
+                    android:text="2016年5月1日"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shetuan_people"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@mipmap/gengduo_beijingtiao1">
+
+                <TextView
+                    android:id="@+id/shetuan_people_1"
+                    android:layout_width="110dp"
+                    android:layout_height="43dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#EEEED1"
+                    android:padding="10dp"
+                    android:text="社团成员"
+                    android:textColor="#3366cc"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/shetuan_people_2"
+                    android:layout_width="225dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="校礼堂"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/go_shetuan_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/go"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shetuan_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@mipmap/gengduo_beijingtiao1"
+                >
+                <TextView
+                    android:id="@+id/shetuan_detail_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    android:text="社团介绍"
+                    android:textColor="#3366cc"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/shetuan_detail_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:text="安：又是一年秋风送爽时，又是一轮花好月圆日。陈：我们刚在感念施恩的氛围中度过难忘的教师节，如今我们怀化医专又迎来了08级的新同学安：今晚我们欢聚一堂，共迎08级新同学的到来。方：今晚我们载歌载舞，共享11年新学期的精彩昂：让我们唱起美妙的歌曲，跳起欢快的舞蹈，一起融合进这欢乐的海洋中；铿：让我们怀抱昨日的师恩，期待明日的团圆，共同歌唱我们的大学岁月。安：军训的号角还在耳边回响，希望的种子已慢慢发芽，陈：求学的钟声早经敲响，大学生活已拉开帷幕。安：在这欢乐的日子里，我们向08级新同学表示热烈的欢迎。怀化医专2011年迎新晚会现在正式开始!陈：出席本次本次晚会领导有：安：出席即今天晚会的的还有各处室各系部的领导及老师，在这里就不再做一一介绍，让我们再次用掌声对他们的他们的到来表示热烈的欢迎!陈：有爱的地方就有梦想!安：有梦想的地方就有希望!陈：愿我们的新同学在今后收获累累的硕果!安：愿怀化医专的明天会更好!陈:迎新晚会到此结束,合：朋友们！再见！。"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shetuan_pinglun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@mipmap/gengduo_beijingtiao1">
+                <TextView
+                    android:id="@+id/shetuan_pinglun_2"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"
+                    android:text="活动总览"
+                    android:textColor="#666666"
+                    android:textSize="14sp"/>
+                <ListView
+                    android:id="@+id/shetuandetail_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </ListView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </utils.ObservableScrollView>
+
+</LinearLayout>

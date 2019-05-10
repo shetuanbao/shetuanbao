@@ -14,4 +14,10 @@
     <result column="community_id" jdbcType="INTEGER" property="communityId" />
     <result column="leixing" jdbcType="INTEGER" property="leixing" />
   </resultMap>
+  
+  <select id="pangetactivityByCommunityId" resultMap="BaseResultMap">
+    SELECT * FROM `activities` WHERE `community_id`=#{communityId}
+  </select>
+  
+  
 </mapper>

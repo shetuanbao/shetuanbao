@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/myselftool"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@mipmap/gengduo_modifybiaoti12">
+        <ImageView
+            android:id="@+id/myselftool_text2"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/yonghuziliao"/>
+
+        <TextView
+            android:id="@+id/go_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20dp"
+            android:layout_weight="0.6"
+            android:text="@string/more_back"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myselfmain_1"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/buttonclock" >
+
+        <TextView
+            android:id="@+id/shetuan_user_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:padding="10dp"
+            android:text="头像："
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <utils.RoundImageView
+            android:id="@+id/shetuan_user_photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/touxiang" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/myselfmain_2"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="@drawable/roundshape">
+        <LinearLayout
+            android:id="@+id/myselfmain_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/wodexiaoyuan02"
+            >
+            <TextView
+                android:id="@+id/shetuan_user_sno_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:text="账号："
+                android:textColor="#666666"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/shetuan_user_sno_edit"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/touming"
+                android:text="空"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:gravity="left|center_vertical"
+                android:textColor="#666666"
+                android:enabled="false"
+                android:textSize="14sp" >
+
+            </TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/myselfmain_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/wodexiaoyuan02"
+            >
+            <TextView
+                android:id="@+id/shetuan_user_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:text="姓名："
+                android:textColor="#666666"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/shetuan_user_name_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/touming"
+                android:hint="空"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:enabled="false"
+                android:textSize="14sp" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/myselfmain_sex"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/wodexiaoyuan02"
+            >
+            <TextView
+                android:id="@+id/shetuan_user_sex_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:text="性别："
+                android:textColor="#666666"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/shetuan_user_sex_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/touming"
+                android:enabled="false"
+                android:hint="空"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="14sp" >
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/myselfmain_3"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@drawable/roundshape">
+
+        <LinearLayout
+            android:id="@+id/myselfmain_e_mail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/wodexiaoyuan02"
+            >
+            <TextView
+                android:id="@+id/shetuan_user_e_mail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:text="邮箱："
+                android:textColor="#666666"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/shetuan_user_e_mail_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/touming"
+                android:enabled="false"
+                android:hint="空"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="14sp" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/myselfmain_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/wodexiaoyuan02"
+            >
+            <TextView
+                android:id="@+id/shetuan_user_phone_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:text="电话："
+                android:textColor="#666666"
+                android:textSize="14sp"
+                />
+            <EditText
+                android:id="@+id/shetuan_user_phone_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/touming"
+                android:hint="空"
+                android:enabled="false"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="14sp" >
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/save_person"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundbutton"
+        android:text="保存联系人"
+        android:textColor="#ffffff"
+        android:textSize="20sp" >
+    </Button>
+</LinearLayout>

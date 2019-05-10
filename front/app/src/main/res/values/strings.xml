@@ -1,4 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Shetuanbao</string>
+
+    <string name="app_name">社团宝</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="folder_all">所有图片</string>
+    <string name="preview">预览</string>
+    <string name="msg_no_camera">没有系统相机</string>
+    <string name="msg_amount_limit">已经达到最高选择数量</string>
+    <string name="de_dialog_item_message_delete">删除消息</string>
+    <string name="de_save">"保存"</string>
+
+    <string name="sex_select">"选择性别"</string>
+    <string name="app_sign_in">登录</string>
+    <string name="app_sign_up">注册</string>
+
+    <string name="more_username">账号：</string>
+    <string name="more_pleaseputusername">请输入账号</string>
+    <string name="more_password">密码： </string>
+    <string name="more_password1">确认密码：</string>
+    <string name="more_name">昵称：</string>
+    <string name="more_e_mail">绑定邮箱：</string>
+    <string name="more_phone">联系电话：</string>
+
+    <string name="scan_text"> </string>
+
+
+
+
+
+
+
+
+    <string name="andy">活动名称:迎新舞会\r\n活动时间:2016年5月1日\r\n活动地点:校礼堂</string>
+    <string name="bill">活动名称:元旦晚会\r\n活动时间:2016年10月5日\r\n活动地点:教室</string>
+    <string name="edgar">活动名称:篮球赛\r\n活动时间:2016年5月10日\r\n活动地点:篮球场</string>
+    <string name="torvalds">活动名称:足球赛\r\n活动时间:2016年6月3日\r\n活动地点:操场</string>
+    <string name="turing">活动名称:羽毛球赛\r\n活动时间:2016年7月1日\r\n活动地点:体育馆</string>
+    <string name="turing1">活动名称:乒乓球赛\r\n活动时间:2016年5月14日\r\n活动地点:体育馆</string>
+    <string name="turing2">活动名称:网球赛\r\n活动时间:2016年5月10日\r\n活动地点:体育馆</string>
+    <string name="andy2">读书社团</string>
+    <string name="bill2">购物社团</string>
+    <string name="edgar2">风雨社团</string>
+    <string name="torvalds2">足球社团</string>
     <string name="more_back">返回</string>
+    <string name="yijianfankui">意见反馈</string>
+    <string name="advice">请在这里填写您对我们的意见或建议，您的支持是我们最大的动力！</string>
+    <string name="advicee_mail">QQ，邮件，电话或微信</string>
+    <string name="advicee_mail_inf">您的联系方式有助于我们沟通和解决问题，仅工作人员可见</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新…</string>
+    <string name="time_error">时间有问题</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <string name="advice2">社团宝app致力于更好的服务华北理工大学社团和学生的一款专属app，我们的app可以随时查询校内各种社团信息，活动信息这些基础功能外，并且有更多的附加功能，用户可以和注册用户进行即时通讯，还可以进行互加好友，并且在个人界面中可以修改自己的信息，提交建议等。</string>
 </resources>

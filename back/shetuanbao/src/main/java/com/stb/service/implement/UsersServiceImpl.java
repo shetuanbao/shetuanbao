@@ -20,8 +20,31 @@ public class UsersServiceImpl extends AbstractService<Users> implements UsersSer
     private UsersMapper usersMapper;
 
     @Override
-    public Users findByUserName(String userName) {
-        return usersMapper.findByUserName(userName);
+    public Users findByUserName(int userId) {
+        return usersMapper.findByUserName(userId);
+    }
+    
+    //pan通过用户id获取状态
+    @Override
+    public String pangetstatusByuserId(int userId) {
+    	return usersMapper.pangetstatusByuserId(userId);
     }
 
+  //pan通过用户id获取用户
+    @Override
+    public Users pangetuserByuserId(int userId) {
+    	return usersMapper.pangetuserByuserId(userId);
+    }
+    
+  //pan通过用户id检查是否存在朋友
+    @Override
+    public int pancheckfriendByuserId(int userId,int friendId) {
+    	return usersMapper.pancheckfriendByuserId(userId,friendId);
+    }
+    
+  //pan通过用户id添加朋友
+    @Override
+    public void panaddfriendByuserId(int userId,int friendId) {
+    	usersMapper.panaddfriendByuserId(userId,friendId);
+    }
 }

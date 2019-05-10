@@ -3,7 +3,8 @@
     package="com.community.shetuanbao">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,26 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.LoadActivity" />
-        <activity android:name=".HttpTestActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".Activities.ActivityInfoActivity" />
-        <activity android:name=".Personal.PersonalInformationActivity"></activity>
-        <activity android:name=".Personal.MainPersonalActivity">
+        <activity android:name=".Login.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Personal.PersonalSettingsActivity"></activity>
+        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".Login.MainFrame"></activity>
+        <activity android:name="community.MainCommunityActivity"></activity>
+        <activity android:name="community.CommunitySportActivity"></activity>
+        <activity android:name="community.CommunityLiteratureActivity"></activity>
+        <activity android:name="community.CommunityLearningActivity"></activity>
+        <activity android:name="community.CommunityCharitableActivity"></activity>
+        <activity android:name="community.CommunitySearchActivity"></activity>
+        <activity android:name="community.CommunityDetailActivity"></activity>
+        <activity android:name="community.CommunityPeopleActivity"></activity>
+        <activity android:name="community.CommunityStaffActivity"></activity>
     </application>
 
 </manifest>
