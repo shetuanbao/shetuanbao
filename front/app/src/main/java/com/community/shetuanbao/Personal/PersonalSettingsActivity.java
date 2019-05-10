@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -51,6 +52,14 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+        }
+        return false;
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.emailtoolshezhi_text1:
@@ -70,10 +79,10 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
                 break;
             case R.id.my_erweima:
                 Bitmap bitmap=createBitmap(Constant.userName);
-//                Intent intent=new Intent(PersonalSettingsActivity.this,user_Qr.class);
-//                intent.putExtra("name", name);
-//                intent.putExtra("Bitmap",bitmap);
-//                startActivity(intent);
+                Intent intent=new Intent(PersonalSettingsActivity.this,user_Qr.class);
+                intent.putExtra("name", name);
+                intent.putExtra("Bitmap",bitmap);
+                startActivity(intent);
                 break;
             default:
         }
