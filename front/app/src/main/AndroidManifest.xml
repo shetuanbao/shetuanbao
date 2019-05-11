@@ -22,7 +22,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Activities.ActivityInfoActivity" />
-        <activity android:name=".Personal.PersonalInformationActivity"></activity>
+        <activity android:name=".Personal.PersonalInformationActivity" />
         <activity android:name=".Personal.MainPersonalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Personal.PersonalSettingsActivity"></activity>
+        <activity android:name=".Personal.PersonalSettingsActivity" />
+        <activity android:name=".Personal.PersonalQr" />
+        <activity android:name=".Personal.PersonalContactUs" />
+        <activity android:name=".Personal.PersonalContactQQ" />
+        <activity android:name=".Personal.PersonalContactPhone" />
+        <activity android:name=".Personal.PersonalContactWechat" />
+        <activity android:name=".Personal.PersonalContactWeibo" />
+        <activity android:name=".Personal.PersonalContactEmail"></activity>
     </application>
 
 </manifest>

@@ -50,33 +50,33 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
 //        Exit.getInstance().addActivities(this);
         information=(TextView)findViewById(R.id.mine_userphoto_text);
         photo=(RoundImageView)findViewById(R.id.mine_userphoto_imagezhu);
-        thread_getuserpicture th=new thread_getuserpicture();
-        th.start();
-        try{
-            th.join();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        photo.setImageBitmap(imageData);
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhh"+zhuangtai);
-        if(zhuangtai.equals("1")){
-            information.setText(name+"|ID:"+Constant.userName);
-        }else if(zhuangtai.equals("0")){
-            information.setText(name+"|ID:"+Constant.userName+"|账号被封禁");
-        }
+//        thread_getuserpicture th=new thread_getuserpicture();
+//        th.start();
+//        try{
+//            th.join();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        photo.setImageBitmap(imageData);
+//        System.out.println("hhhhhhhhhhhhhhhhhhhhhh"+zhuangtai);
+//        if(zhuangtai.equals("1")){
+//            information.setText(name+"|ID:"+Constant.userName);
+//        }else if(zhuangtai.equals("0")){
+//            information.setText(name+"|ID:"+Constant.userName+"|账号被封禁");
+//        }
 
         shezhi=(TextView)findViewById(R.id.mine_shezhi);
         shezhi.setOnClickListener(this);
         lianxi=(TextView)findViewById(R.id.mine_lianxiwomen);
         lianxi.setOnClickListener(this);
-        yonghubangzhu=(TextView)findViewById(R.id.mine_yonghubangzhu);
-        yonghubangzhu.setOnClickListener(this);
-        yijianfankui=(TextView)findViewById(R.id.mine_yijianfankui);
-        yijianfankui.setOnClickListener(this);
-        guanli=(TextView)findViewById(R.id.mine_guanli);
-        guanli.setOnClickListener(this);
-        FontManager.initTypeFace(this);
-        FontManager.changeFonts(FontManager.getContentView(this),this);
+//        yonghubangzhu=(TextView)findViewById(R.id.mine_yonghubangzhu);
+//        yonghubangzhu.setOnClickListener(this);
+//        yijianfankui=(TextView)findViewById(R.id.mine_yijianfankui);
+//        yijianfankui.setOnClickListener(this);
+//        guanli=(TextView)findViewById(R.id.mine_guanli);
+//        guanli.setOnClickListener(this);
+//        FontManager.initTypeFace(this);
+//        FontManager.changeFonts(FontManager.getContentView(this),this);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                 intent1.putExtra("name", name);
                 startActivity(intent1);
                 break;
-//            case R.id.mine_lianxiwomen:
-//                Intent intent2 = new Intent(MainPersonalActivity.this, user_lianxiwomen.class);
-//                startActivity(intent2);
-//                break;
+            case R.id.mine_lianxiwomen:
+                Intent intent2 = new Intent(MainPersonalActivity.this, PersonalContactUs.class);
+                startActivity(intent2);
+                break;
 //            case R.id.mine_yonghubangzhu:
 //                Intent intent3 = new Intent(MainPersonalActivity.this, user_yonghubangzhu.class);
 //                //����Activity
