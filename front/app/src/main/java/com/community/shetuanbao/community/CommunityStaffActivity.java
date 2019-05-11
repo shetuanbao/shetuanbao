@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.F_GetBitmap;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +33,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import utils.F_GetBitmap;
-import utils.FontManager;
-import utils.RequestUtils;
 
 public class CommunityStaffActivity extends Activity {
     private int userId;

@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -25,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.F_GetBitmap;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,39 +42,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.F_GetBitmap;
-import utils.FontManager;
-import utils.RequestUtils;
 
-public class CommunitySportActivity extends Activity {
-    private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
-    private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
-    private ListView listview = null;
-    private String all[][] = null;
-    private String all_2[][] = null;
-    private int id[] = null;
-    private int tempid[] = null;
-    private String shetuan[] = null;
-    private String all_3[][] = null;
-    private String all_4[][] = null;
-    private String image[];
-    private String kouhao[] = null;
-    private baseAdapter base = null;
-    private List<String[]> imagey = new ArrayList<String[]>();
-    private List<String[]> kouhaoy = new ArrayList<String[]>();
-    byte all_image[][];
-    Bitmap imageData[];
-    private List<String[]> shetuany = new ArrayList<String[]>();
-    private List<String[]> idy = new ArrayList<String[]>();
-    ProgressDialog pd;
+public class CommunityLearningActivity extends Activity {
+    private List<Map<String,Object>> listItem=new ArrayList<Map<String,Object>>();
+    private List<Map<String,Object>> data=new ArrayList<Map<String,Object>>();
+    private ListView listview=null;
+    private String all[][]=null;
+    private String all_2[][]=null;
+
+    private byte[][] all_image;
+    private int id[]=null;
+    private int tempid[]=null;
+    private String shetuan[]=null;
+    private String image[]=null;
+    private String kouhao[]=null;
+    private String all_3[][]=null;
+    private String all_4[][]=null;
+    private baseAdapter base=null;
+
+    private Bitmap imageData[];
+    private List<String[]> shetuany=new ArrayList<String[]>();
+    private List<String[]> idy=new ArrayList<String[]>();
+    private List<String[]> imagey=new ArrayList<String[]>();
+    private List<String[]> kouhaoy=new ArrayList<String[]>();
     private View footView;
     TextView js;
+    ProgressDialog pd;
     Map<String, Object> params;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.communitysportactivity);
+        setContentView(R.layout.communitylearningactivity);
         footView = getLayoutInflater().inflate(R.layout.listfoot, null);
         js = (TextView) footView.findViewById(R.id.iv_down_2);
         pd = new ProgressDialog(this);
@@ -79,20 +81,20 @@ public class CommunitySportActivity extends Activity {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);
         pd.setMessage("加载中...请稍后");
-        //加载listview数据
+        //数据加载线程
         new AysncTask_team().execute();
-
         FontManager.initTypeFace(this);
-        FontManager.changeFonts(FontManager.getContentView(this), this);
+        FontManager.changeFonts(FontManager.getContentView(this),this);
     }
-    private class thread_tiyu extends Thread {
+    private class thread_tiyu extends Thread
+    {
         @Override
-        public void run() {
+        public void run(){
             try {
                 params=new HashMap<>();
                 params.put("page",0);
                 params.put("size",0);
-                String res = RequestUtils.post("/community/tiyu/list",params);
+                String res = RequestUtils.post("/community/xueshu/list",params);
                 try {
                     JSONObject jsonObject = new JSONObject(res);
                     if (jsonObject.getInt("code") == 200) {
@@ -104,7 +106,7 @@ public class CommunitySportActivity extends Activity {
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(CommunitySportActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CommunityLearningActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -126,7 +128,7 @@ public class CommunitySportActivity extends Activity {
                                     shetuan[i]=list.getJSONObject(j).getString("communityName");
                                     id[i]=list.getJSONObject(j).getInt("communityId");
                                     kouhao[i]=list.getJSONObject(j).getString("communityKouhao");
-                                    image[i]=list.getJSONObject(j).getString("communityTubiao")+ ".png";
+                                    image[i]=list.getJSONObject(j).getString("communityTubiao")+".png";
                                     break;
                                 }
                             }
@@ -142,7 +144,7 @@ public class CommunitySportActivity extends Activity {
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(CommunitySportActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CommunityLearningActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -151,8 +153,10 @@ public class CommunitySportActivity extends Activity {
                 e.printStackTrace();
             }
             initList();
+
         }
     }
+
     public class Thread_pic extends Thread{
         @Override
         public void run(){
@@ -182,7 +186,7 @@ public class CommunitySportActivity extends Activity {
                                 System.out.println(imageData.length);
                             } else {
                                 Looper.prepare();
-                                Toast.makeText(CommunitySportActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CommunityLearningActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -201,8 +205,9 @@ public class CommunitySportActivity extends Activity {
         }
     }
 
-    public void initList() {
-        for (int i = 0; i < shetuan.length; i++) {
+    public void initList(){
+        for(int i=0;i<shetuan.length;i++)
+        {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("name", shetuan[i]);
             map.put("id", id[i]);
@@ -232,46 +237,44 @@ public class CommunitySportActivity extends Activity {
             }
         }
     };
-    public void initBaseAdapter() {
-        listview = (ListView) findViewById(R.id.shetuan_listview_tiyu);
-        listview.addFooterView(footView);
+    public void initBaseAdapter(){
 
-        base = new baseAdapter(this);
+        listview=(ListView)findViewById(R.id.shetuan_listview_xueshu);
+        listview.addFooterView(footView);
+        base=new baseAdapter(this);
         listview.setAdapter(base);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                LinearLayout view1 = (LinearLayout) arg1;
-                LinearLayout ll = (LinearLayout) view1.getChildAt(1);
-                LinearLayout l = (LinearLayout) ll.getChildAt(0);
-                LinearLayout l2 = (LinearLayout) ll.getChildAt(1);
-                TextView text = (TextView) l.getChildAt(0);
-                TextView text2 = (TextView) l2.getChildAt(0);
-                String mes = text.getText().toString();
-                String mes2 = text2.getText().toString();
-                Intent it = new Intent(CommunitySportActivity.this, CommunityDetailActivity.class);
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int arg2, long arg3) {
+                LinearLayout view1=(LinearLayout)arg1;
+                LinearLayout ll=(LinearLayout) view1.getChildAt(1);
+                LinearLayout l=(LinearLayout) ll.getChildAt(0);
+                LinearLayout l2=(LinearLayout)ll.getChildAt(1);
+                TextView text=(TextView) l.getChildAt(0);
+                TextView text2=(TextView)l2.getChildAt(0);
+                String mes=text.getText().toString();
+                String mes2=text2.getText().toString();
+                Intent it = new Intent(CommunityLearningActivity.this,CommunityDetailActivity.class);
                 it.putExtra("name", mes);
-                it.putExtra("id", id[arg2]);
+                it.putExtra("id" ,id[arg2]);
                 it.putExtra("kouhao", mes2);
                 startActivity(it);
             }
         });
     }
-
     private class baseAdapter extends BaseAdapter {
-        private LayoutInflater mInflater = null;
-
-        public baseAdapter(Context context) {
+        private LayoutInflater mInflater=null;
+        public baseAdapter(Context context){
 
             mInflater = LayoutInflater.from(context);
 
             data.addAll(listItem);
             listItem.clear();
         }
-
         @Override
         public int getCount() {
-            return data.size();// ��¼��ǰ�б����ж�������
+            return data.size();//��¼��ǰ�б����ж�������
         }
 
         @Override
@@ -286,43 +289,45 @@ public class CommunitySportActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder myViews;
-            if (convertView == null) {
-                myViews = new ViewHolder();
-                convertView = mInflater.inflate(R.layout.shetuan_list, null);
+            ViewHolder  myViews;
+            if (convertView == null)
+            {
+                myViews = new ViewHolder ();
+                convertView =mInflater.inflate(R.layout.shetuan_list, null) ;
                 myViews.image = (ImageView) convertView.findViewById(R.id.shetuan_image);
                 myViews.name = (TextView) convertView.findViewById(R.id.shetuan_name);
                 myViews.id = (TextView) convertView.findViewById(R.id.shetuan_id);
                 convertView.setTag(myViews);
-            } else {
-                myViews = (ViewHolder) convertView.getTag();
+            }
+            else {
+                myViews = (ViewHolder ) convertView.getTag();
 
             }
             myViews.name.setTypeface(FontManager.tf);
             myViews.id.setTypeface(FontManager.tf);
             js.setText("共"+shetuan.length+""+"个社团 ");
             myViews.image.setImageBitmap((Bitmap) data.get(position).get("image"));
-            myViews.name.setText((String) data.get(position).get("name"));
-            myViews.id.setText((String) data.get(position).get("kouhao"));
+            myViews.name.setText( (String) data.get(position).get("name"));
+            myViews.id .setText( (String) data.get(position).get("kouhao"));
             return convertView;
         }
 
     }
     static class ViewHolder {
+
         private ImageView image;
-        private TextView name;
-        private TextView id;
+        private TextView  name;
+        private TextView  id;
     }
     class AysncTask_team extends AsyncTask<Void, Integer, Void> {
         @Override
         protected void onPreExecute() {
-            //在有后端的时候打开测试
+            //加载数据再测试
             pd.show();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            //加载数据
 //            initList();
             thread_tiyu th2 = new thread_tiyu();
             th2.start();
@@ -347,9 +352,10 @@ public class CommunitySportActivity extends Activity {
         }
     }
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) // ��д���ؼ�
+    public boolean onKeyDown(int keyCode, KeyEvent event)      //��д���ؼ�
     {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
             finish();
         }
         return false;

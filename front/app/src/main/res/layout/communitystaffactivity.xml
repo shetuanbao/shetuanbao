@@ -54,7 +54,7 @@
             android:textColor="#666666"
             android:textSize="14sp" />
 
-        <utils.RoundImageView
+        <com.community.shetuanbao.utils.RoundImageView
             android:id="@+id/shetuan_user_photo"
             android:layout_width="60dp"
             android:layout_height="60dp"

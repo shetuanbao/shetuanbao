@@ -21,12 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.community.MainCommunityActivity;
+import com.community.shetuanbao.utils.Exit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import community.MainCommunityActivity;
-import utils.Exit;
 
 @SuppressLint("HandlerLeak")
 @SuppressWarnings("deprecation")

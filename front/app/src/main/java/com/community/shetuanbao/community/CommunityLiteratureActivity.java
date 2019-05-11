@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -25,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.F_GetBitmap;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,40 +42,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.F_GetBitmap;
-import utils.FontManager;
-import utils.RequestUtils;
 
-public class CommunityCharitableActivity extends Activity {
+public class CommunityLiteratureActivity extends Activity {
     private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
     private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
     private ListView listview = null;
     private String all[][] = null;
     private String all_2[][] = null;
+    private String all_3[][] = null;
+    private String all_4[][] = null;
     private int id[] = null;
     private int tempid[] = null;
     private String shetuan[] = null;
+    private String kouhao[] = null;
+    private String image[] = null;
     private baseAdapter base = null;
     private List<String[]> shetuany = new ArrayList<String[]>();
     private List<String[]> idy = new ArrayList<String[]>();
-    private String all_3[][] = null;
-    private String all_4[][] = null;
-    private String kouhao[] = null;
-    private String image[] = null;
-
     private List<String[]> kouhaoy = new ArrayList<String[]>();
     private List<String[]> imagey = new ArrayList<String[]>();
-    private View footView;
-    TextView js;
     private byte[][] all_image;
     private Bitmap imageData[];
     ProgressDialog pd;
+    private View footView;
+    TextView js;
     Map<String, Object> params;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.communitycharitableactivity);
+        setContentView(R.layout.communityliteratureactivity);
         footView = getLayoutInflater().inflate(R.layout.listfoot, null);
         js = (TextView) footView.findViewById(R.id.iv_down_2);
         pd = new ProgressDialog(this);
@@ -80,7 +79,7 @@ public class CommunityCharitableActivity extends Activity {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);
         pd.setMessage("加载中...请稍后");
-        //加载数据线程
+        //加载数据
         new AysncTask_team().execute();
         FontManager.initTypeFace(this);
         FontManager.changeFonts(FontManager.getContentView(this), this);
@@ -92,7 +91,7 @@ public class CommunityCharitableActivity extends Activity {
                 params=new HashMap<>();
                 params.put("page",0);
                 params.put("size",0);
-                String res = RequestUtils.post("/community/cishan/list",params);
+                String res = RequestUtils.post("/community/wenyi/list",params);
                 try {
                     JSONObject jsonObject = new JSONObject(res);
                     if (jsonObject.getInt("code") == 200) {
@@ -104,7 +103,7 @@ public class CommunityCharitableActivity extends Activity {
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(CommunityCharitableActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CommunityLiteratureActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -132,7 +131,7 @@ public class CommunityCharitableActivity extends Activity {
                             }
                         }
                         all_image=new byte[tempid.length][];
-                        //加载图标的线程
+                        //加载图标线程
                         Thread_pic thread_pic=new Thread_pic();
                         thread_pic.start();
                         try {
@@ -142,7 +141,7 @@ public class CommunityCharitableActivity extends Activity {
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(CommunityCharitableActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CommunityLiteratureActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -183,7 +182,7 @@ public class CommunityCharitableActivity extends Activity {
                                 System.out.println(imageData.length);
                             } else {
                                 Looper.prepare();
-                                Toast.makeText(CommunityCharitableActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CommunityLiteratureActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -203,14 +202,6 @@ public class CommunityCharitableActivity extends Activity {
     }
 
     public void initList() {
-//        shetuan = new String[1];
-//        id = new String[1];
-//        kouhao = new String[1];
-//        imageData = new Bitmap[1];
-//        shetuan[0]="公益社团";
-//        id[0]="123";
-//        kouhao[0]="棒";
-//        imageData[0]=null;
         for (int i = 0; i < shetuan.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("name", shetuan[i]);
@@ -243,7 +234,7 @@ public class CommunityCharitableActivity extends Activity {
     };
     public void initBaseAdapter() {
 
-        listview = (ListView) findViewById(R.id.shetuan_listview_cishan);
+        listview = (ListView) findViewById(R.id.shetuan_listview_wenyi);
         listview.addFooterView(footView);
         base = new baseAdapter(this);
         listview.setAdapter(base);
@@ -258,7 +249,7 @@ public class CommunityCharitableActivity extends Activity {
                 TextView text2 = (TextView) l2.getChildAt(0);
                 String mes = text.getText().toString();
                 String mes2 = text2.getText().toString();
-                Intent it = new Intent(CommunityCharitableActivity.this, CommunityDetailActivity.class);
+                Intent it = new Intent(CommunityLiteratureActivity.this, CommunityDetailActivity.class);
                 it.putExtra("name", mes);
                 it.putExtra("id", id[arg2]);
                 it.putExtra("kouhao", mes2);
@@ -281,7 +272,7 @@ public class CommunityCharitableActivity extends Activity {
 
         @Override
         public int getCount() {
-            return data.size();
+            return data.size();// ��¼��ǰ�б����ж�������
         }
 
         @Override
@@ -317,6 +308,7 @@ public class CommunityCharitableActivity extends Activity {
             return convertView;
         }
     }
+
     static class ViewHolder {
 
         private ImageView image;
@@ -326,7 +318,7 @@ public class CommunityCharitableActivity extends Activity {
     class AysncTask_team extends AsyncTask<Void, Integer, Void> {
         @Override
         protected void onPreExecute() {
-            //数据加载时再测试
+            //加载数据后测试
             pd.show();
         }
 

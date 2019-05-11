@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +36,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.Exit;
+import com.community.shetuanbao.utils.F_GetBitmap;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,10 +54,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.Exit;
-import utils.F_GetBitmap;
-import utils.FontManager;
-import utils.RequestUtils;
 
 
 public class MainCommunityActivity extends Activity implements ViewPager.OnPageChangeListener, AbsListView.OnScrollListener {
@@ -159,7 +159,7 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
         // 设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
         viewPager.setCurrentItem((mImageViews.length) * 100);
         // 设置监听，主要是设置点点的背景
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 setImageBackground(position % mImageViews.length);

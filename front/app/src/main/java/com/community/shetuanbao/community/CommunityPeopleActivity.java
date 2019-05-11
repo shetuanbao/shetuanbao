@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,8 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.FontManager;
-import utils.RequestUtils;
 
 public class CommunityPeopleActivity extends Activity implements AdapterView.OnItemClickListener {
     List<String[]> namey=new ArrayList<String[]>();

@@ -9,8 +9,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.community.shetuanbao.R;
-
-import utils.Exit;
+import com.community.shetuanbao.utils.Exit;
 
 public class LoadActivity extends Activity {
     private ImageView welcomeImg = null;

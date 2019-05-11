@@ -18,7 +18,7 @@ import okhttp3.Response;
  */
 public class RequestUtils {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-    public static final String HOSTPORT = "http://192.168.62.1:8010"; //后端端口号已设置为8010无需修改，ip地址改成当前的ipv4地址
+    public static final String HOSTPORT = "http://192.168.43.173:8010"; //后端端口号已设置为8010无需修改，ip地址改成当前的ipv4地址
 
     private static OkHttpClient client = new OkHttpClient();
 
