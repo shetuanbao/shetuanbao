@@ -53,8 +53,6 @@
         <activity android:name="community.CommunityStaffActivity" />
         <activity android:name=".Personal.PersonalHelpActivity" />
         <activity android:name=".Personal.PersonalAdviceActivity"></activity>
-        <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".Login.MainFrame"></activity>
         <activity android:name=".community.MainCommunityActivity"></activity>
         <activity android:name=".community.CommunitySportActivity"></activity>
         <activity android:name=".community.CommunityLiteratureActivity"></activity>
