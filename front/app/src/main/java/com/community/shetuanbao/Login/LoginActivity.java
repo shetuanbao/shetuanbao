@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.Exit;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,12 +29,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import community.MainCommunityActivity;
-import utils.Constant;
-import utils.Exit;
-import utils.NetInfoUtil;
-import utils.RequestUtils;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     public static SharedPreferences sp;

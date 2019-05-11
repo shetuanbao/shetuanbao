@@ -78,11 +78,11 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
 //                LoginActivity.sp.edit().clear().commit();
                 break;
             case R.id.my_erweima:
-                Bitmap bitmap=createBitmap(Constant.userName);
-                Intent intent=new Intent(PersonalSettingsActivity.this,user_Qr.class);
-                intent.putExtra("name", name);
-                intent.putExtra("Bitmap",bitmap);
-                startActivity(intent);
+//                Bitmap bitmap=createBitmap(Constant.userName);
+//                Intent intent=new Intent(PersonalSettingsActivity.this,user_Qr.class);
+//                intent.putExtra("name", name);
+//                intent.putExtra("Bitmap",bitmap);
+//                startActivity(intent);
                 break;
             default:
         }

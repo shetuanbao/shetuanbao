@@ -1,4 +1,4 @@
-package community;
+package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.F_GetBitmap;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,9 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.F_GetBitmap;
-import utils.FontManager;
-import utils.RequestUtils;
 
 public class CommunitySearchActivity extends Activity {
     private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();

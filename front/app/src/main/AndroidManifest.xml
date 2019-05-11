@@ -21,15 +21,15 @@
         </activity>
         <activity android:name=".Login.LoginActivity"></activity>
         <activity android:name=".Login.MainFrame"></activity>
-        <activity android:name="community.MainCommunityActivity"></activity>
-        <activity android:name="community.CommunitySportActivity"></activity>
-        <activity android:name="community.CommunityLiteratureActivity"></activity>
-        <activity android:name="community.CommunityLearningActivity"></activity>
-        <activity android:name="community.CommunityCharitableActivity"></activity>
-        <activity android:name="community.CommunitySearchActivity"></activity>
-        <activity android:name="community.CommunityDetailActivity"></activity>
-        <activity android:name="community.CommunityPeopleActivity"></activity>
-        <activity android:name="community.CommunityStaffActivity"></activity>
+        <activity android:name=".community.MainCommunityActivity"></activity>
+        <activity android:name=".community.CommunitySportActivity"></activity>
+        <activity android:name=".community.CommunityLiteratureActivity"></activity>
+        <activity android:name=".community.CommunityLearningActivity"></activity>
+        <activity android:name=".community.CommunityCharitableActivity"></activity>
+        <activity android:name=".community.CommunitySearchActivity"></activity>
+        <activity android:name=".community.CommunityDetailActivity"></activity>
+        <activity android:name=".community.CommunityPeopleActivity"></activity>
+        <activity android:name=".community.CommunityStaffActivity"></activity>
     </application>
 
 </manifest>
