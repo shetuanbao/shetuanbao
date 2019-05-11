@@ -7,6 +7,8 @@ import com.stb.core.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 
@@ -18,5 +20,10 @@ import javax.annotation.Resource;
 public class ActivitiesServiceImpl extends AbstractService<Activities> implements ActivitiesService {
     @Resource
     private ActivitiesMapper activitiesMapper;
-
+    
+  //pan通过社团id获取活动
+    public List<Activities> pangetactivityByCommunityId(int communityId){
+    	return activitiesMapper.pangetactivityByCommunityId(communityId);
+    }
+    
 }

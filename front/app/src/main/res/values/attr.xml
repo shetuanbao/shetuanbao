@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 
-<resources> 
+<resources>
 
-    <declare-styleable name="roundedimageview"> 
+    <declare-styleable name="roundedimageview">
 
-        <attr name="border_thickness" format="dimension"/> 
+        <attr name="border_thickness" format="dimension"/>
 
-        <attr name="border_inside_color" format="color"/> 
+        <attr name="border_inside_color" format="color"/>
 
-        <attr name="border_outside_color" format="color"></attr> 
+        <attr name="border_outside_color" format="color"></attr>
 
-    </declare-styleable> 
+    </declare-styleable>
 
 </resources>

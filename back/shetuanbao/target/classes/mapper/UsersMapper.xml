@@ -19,7 +19,24 @@
   </resultMap>
 
   <select id="findByUserName" resultMap="BaseResultMap">
-    SELECT * FROM `users` WHERE `user_name`=#{userName}
+    SELECT * FROM `users` WHERE `user_id`=#{userId}
   </select>
+  
+  <select id="pangetstatusByuserId" resultType="string">
+    SELECT `status` FROM `users` WHERE `user_id`=#{userid}
+  </select>
+  
+  <select id="pangetuserByuserId" resultMap="BaseResultMap">
+    SELECT * FROM `users` WHERE `user_id`=#{userId}
+  </select>
+  
+  <select id="pancheckfriendByuserId" resultType="Integer">
+    SELECT `user_id` FROM `friends` WHERE `user_id`=#{param1} AND `friend_id`=#{param2}
+  </select>
+  
+  <insert id="panaddfriendByuserId" parameterType="java.lang.Integer">
+  	insert into `friends`(`user_id`, `friend_id`) 
+  	values (#{param1}, #{param2})
+  </insert>
 
 </mapper>

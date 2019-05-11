@@ -7,6 +7,8 @@ import com.stb.core.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 
@@ -18,5 +20,14 @@ import javax.annotation.Resource;
 public class CommunityServiceImpl extends AbstractService<Community> implements CommunityService {
     @Resource
     private CommunityMapper communityMapper;
-
+    
+  //pan通过社团名查找社团
+    public Community panfindByCommunityName(String communityName) {
+    	return communityMapper.panfindByCommunityName(communityName);
+    }
+    
+  //pan通过社团id查找社团成员
+    public List<Integer> panfindByCommunityUser(int communityId){
+    	return communityMapper.panfindByCommunityUser(communityId);
+    }
 }

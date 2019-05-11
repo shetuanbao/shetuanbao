@@ -2,15 +2,27 @@ package com.stb.controller;
 import com.stb.core.Result;
 import com.stb.core.ResultGenerator;
 import com.stb.model.Community;
+import com.stb.model.Users;
 import com.stb.service.CommunityService;
+import com.stb.util.Imageutil;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +64,39 @@ public class CommunityController {
         List<Community> list = communityService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    
+  //pan通过社团名查找社团
+    @PostMapping("/panfindByCommunityName")
+    public Result panfindByCommunityName(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        String communityName = jsonObject.getString("communityName");
+        Community community = communityService.panfindByCommunityName(communityName);
+        if (community == null) {
+            return ResultGenerator.genFailResult("社团不存在");
+        }
+        return ResultGenerator.genSuccessResult(community);
+    }
+    
+  //pan通过社团id查找社团成员
+    @PostMapping("/panfindByCommunityUser")
+    public Result panfindByCommunityUser(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int communityId = jsonObject.getInteger("communityId");
+        List<Integer> result= communityService.panfindByCommunityUser(communityId);
+        return ResultGenerator.genSuccessResult(result);
+    }
+    
+    //pan通过社团图标名称获取头像
+    @PostMapping("/panfindtubiao")
+    public Result panfindtubiao(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        String name = jsonObject.getString("tubiao");
+        byte[] result=Imageutil.getImage(name);
+        List<Byte> result1=new ArrayList();
+        for(int i=0;i<result.length;i++) {
+        	result1.add(result[i]);
+        }
+        return ResultGenerator.genSuccessResult(result1);
     }
 }
