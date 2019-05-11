@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.FontManager;
 
-public class PersonalContactEmail extends Activity {
+public class PersonalContactWeiboActivity extends Activity {
 
     TextView fanhui=null;
 
@@ -18,13 +18,14 @@ public class PersonalContactEmail extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_personal_contact_email);
-        fanhui=(TextView)findViewById(R.id.emailtool_text1);
+        setContentView(R.layout.activity_personal_contact_weibo);
         FontManager.changeFonts(FontManager.getContentView(this), this);
+        fanhui=(TextView)findViewById(R.id.weibotool_text1);
         fanhui.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
+                // TODO Auto-generated method stub
                 finish();
             }
         });

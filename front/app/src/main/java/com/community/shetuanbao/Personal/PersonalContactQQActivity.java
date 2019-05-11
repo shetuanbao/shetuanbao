@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.FontManager;
 
-public class PersonalContactWeibo extends Activity {
+public class PersonalContactQQActivity extends Activity {
 
     TextView fanhui=null;
 
@@ -18,14 +18,13 @@ public class PersonalContactWeibo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_personal_contact_weibo);
+        setContentView(R.layout.activity_personal_contact_qq);
+        fanhui=(TextView)findViewById(R.id.qqtool_text1);
         FontManager.changeFonts(FontManager.getContentView(this), this);
-        fanhui=(TextView)findViewById(R.id.weibotool_text1);
         fanhui.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 finish();
             }
         });

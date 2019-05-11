@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.FontManager;
 
-public class PersonalContactUs extends Activity implements View.OnClickListener {
+public class PersonalContactUsActivity extends Activity implements View.OnClickListener {
 
     TextView fanhui=null;
     TextView lianxiwomenqq=null;
@@ -51,23 +51,23 @@ public class PersonalContactUs extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.lianxi_qq:
-                Intent it1 = new Intent(PersonalContactUs.this,PersonalContactQQ.class);
+                Intent it1 = new Intent(PersonalContactUsActivity.this,PersonalContactQQActivity.class);
                 startActivity(it1);
                 break;
             case R.id.lianxi_weixin:
-                Intent it2 = new Intent(PersonalContactUs.this,PersonalContactWechat.class);
+                Intent it2 = new Intent(PersonalContactUsActivity.this,PersonalContactWechatActivity.class);
                 startActivity(it2);
                 break;
             case R.id.lianxi_guanfangweibo:
-                Intent it3 = new Intent(PersonalContactUs.this,PersonalContactWeibo.class);
+                Intent it3 = new Intent(PersonalContactUsActivity.this,PersonalContactWeiboActivity.class);
                 startActivity(it3);
                 break;
             case R.id.lianxi_dianhua:
-                Intent it4 = new Intent(PersonalContactUs.this,PersonalContactPhone.class);
+                Intent it4 = new Intent(PersonalContactUsActivity.this,PersonalContactPhoneActivity.class);
                 startActivity(it4);
                 break;
             case R.id.lianxi_lianxiyouxiang:
-                Intent it5 = new Intent(PersonalContactUs.this,PersonalContactEmail.class);
+                Intent it5 = new Intent(PersonalContactUsActivity.this,PersonalContactEmailActivity.class);
                 startActivity(it5);
                 break;
             default:

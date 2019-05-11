@@ -69,14 +69,14 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
         shezhi.setOnClickListener(this);
         lianxi=(TextView)findViewById(R.id.mine_lianxiwomen);
         lianxi.setOnClickListener(this);
-//        yonghubangzhu=(TextView)findViewById(R.id.mine_yonghubangzhu);
-//        yonghubangzhu.setOnClickListener(this);
-//        yijianfankui=(TextView)findViewById(R.id.mine_yijianfankui);
-//        yijianfankui.setOnClickListener(this);
+        yonghubangzhu=(TextView)findViewById(R.id.mine_yonghubangzhu);
+        yonghubangzhu.setOnClickListener(this);
+        yijianfankui=(TextView)findViewById(R.id.mine_yijianfankui);
+        yijianfankui.setOnClickListener(this);
 //        guanli=(TextView)findViewById(R.id.mine_guanli);
 //        guanli.setOnClickListener(this);
-//        FontManager.initTypeFace(this);
-//        FontManager.changeFonts(FontManager.getContentView(this),this);
+        FontManager.initTypeFace(this);
+        FontManager.changeFonts(FontManager.getContentView(this),this);
     }
 
     @Override
@@ -88,18 +88,17 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                 startActivity(intent1);
                 break;
             case R.id.mine_lianxiwomen:
-                Intent intent2 = new Intent(MainPersonalActivity.this, PersonalContactUs.class);
+                Intent intent2 = new Intent(MainPersonalActivity.this, PersonalContactUsActivity.class);
                 startActivity(intent2);
                 break;
-//            case R.id.mine_yonghubangzhu:
-//                Intent intent3 = new Intent(MainPersonalActivity.this, user_yonghubangzhu.class);
-//                //����Activity
-//                startActivity(intent3);
-//                break;
-//            case R.id.mine_yijianfankui:
-//                Intent intent4 = new Intent(MainPersonalActivity.this, user_yijianfankui.class);
-//                startActivity(intent4);
-//                break;
+            case R.id.mine_yonghubangzhu:
+                Intent intent3 = new Intent(MainPersonalActivity.this, PersonalHelpActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.mine_yijianfankui:
+                Intent intent4 = new Intent(MainPersonalActivity.this, PersonalAdviceActivity.class);
+                startActivity(intent4);
+                break;
 //            case R.id.mine_guanli:
 //                Intent intent5 = new Intent(MainPersonalActivity.this, user_guanli.class);
 //                startActivity(intent5);

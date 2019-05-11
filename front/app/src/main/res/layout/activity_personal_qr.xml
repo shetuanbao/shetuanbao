@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Personal.PersonalQr">
+    tools:context=".Personal.PersonalQrActivity">
     <LinearLayout
         android:id="@+id/erweima"
         android:layout_width="match_parent"

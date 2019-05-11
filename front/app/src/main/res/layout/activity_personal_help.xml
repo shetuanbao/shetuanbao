@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/yonghu_bangzhu"
+        android:layout_height="50dp"
+        android:layout_width="380dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/gengduo_modifybiaoti12"
+        >
+        <TextView
+            android:id="@+id/yonghubangxhu_fanhui"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.6"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            />
+        <ImageView
+            android:id="@+id/yonghubangzhu_1"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="135dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/yonghubangzhu" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bangzhu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/roundshapepress"
+        android:orientation="vertical" >
+        <EditText
+            android:id="@+id/bangzhu_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:hint="@string/advice2"
+            android:textColor="#000000"
+            android:background="@drawable/touming"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:enabled="false" android:editable="false" />
+    </LinearLayout>
+</LinearLayout>

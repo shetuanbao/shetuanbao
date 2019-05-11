@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.FontManager;
 
-public class PersonalContactPhone extends Activity {
+public class PersonalContactPhoneActivity extends Activity {
 
     TextView fanhui=null;
     TextView number1,number2,number3;
@@ -65,11 +65,11 @@ public class PersonalContactPhone extends Activity {
                     {
                         Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel://"+phone_number));
                         //Intent i=new Intent(Intent.ACTION_CALL_BUTTON);
-                        PersonalContactPhone.this.startActivity(intent);
+                        PersonalContactPhoneActivity.this.startActivity(intent);
                     }
                     else
                     {
-                        Toast.makeText(PersonalContactPhone.this, "�绰���벻���ϸ�ʽ������", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PersonalContactPhoneActivity.this, "�绰���벻���ϸ�ʽ������", Toast.LENGTH_LONG).show();
 
                     }
                     break;
@@ -81,12 +81,12 @@ public class PersonalContactPhone extends Activity {
                     {//�Ϸ��򲦺�
                         Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel://"+phone_number));
                         //Intent i=new Intent(Intent.ACTION_CALL_BUTTON);
-                        PersonalContactPhone.this.startActivity(intent);
+                        PersonalContactPhoneActivity.this.startActivity(intent);
                     }
                     else
                     {//���Ϸ�����ʾ
                         Toast.makeText(
-                                PersonalContactPhone.this, //������
+                                PersonalContactPhoneActivity.this, //������
                                 "�绰���벻���ϸ�ʽ������", //��ʾ����
                                 Toast.LENGTH_LONG			//��Ϣ��ʾʱ��
                         ).show();
@@ -101,12 +101,12 @@ public class PersonalContactPhone extends Activity {
                     {//�Ϸ��򲦺�
                         Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel://"+phone_number));
                         //Intent i=new Intent(Intent.ACTION_CALL_BUTTON);
-                        PersonalContactPhone.this.startActivity(intent);
+                        PersonalContactPhoneActivity.this.startActivity(intent);
                     }
                     else
                     {//���Ϸ�����ʾ
                         Toast.makeText(
-                                PersonalContactPhone.this, //������
+                                PersonalContactPhoneActivity.this, //������
                                 "�绰���벻���ϸ�ʽ������", //��ʾ����
                                 Toast.LENGTH_LONG			//��Ϣ��ʾʱ��
                         ).show();

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Personal.PersonalContactQQ">
+    tools:context=".Personal.PersonalContactQQActivity">
     <LinearLayout
         android:id="@+id/qqtool"
         android:layout_width="match_parent"

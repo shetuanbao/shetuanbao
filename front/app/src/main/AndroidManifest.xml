@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".Login.LoadActivity" />
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Login.MainFrame" />
         <activity android:name=".HttpTestActivity">
 
             <!-- <intent-filter> -->
@@ -26,37 +28,31 @@
         <activity android:name=".Activities.ActivityInfoActivity" />
         <activity android:name=".Personal.PersonalInformationActivity" />
         <activity android:name=".Personal.MainPersonalActivity">
-=======
-        <activity android:name=".Login.LoadActivity">
->>>>>>> panzhixuan
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".Personal.PersonalSettingsActivity" />
-        <activity android:name=".Personal.PersonalQr" />
-        <activity android:name=".Personal.PersonalContactUs" />
-        <activity android:name=".Personal.PersonalContactQQ" />
-        <activity android:name=".Personal.PersonalContactPhone" />
-        <activity android:name=".Personal.PersonalContactWechat" />
-        <activity android:name=".Personal.PersonalContactWeibo" />
-        <activity android:name=".Personal.PersonalContactEmail"></activity>
-=======
-        <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".Login.MainFrame"></activity>
-        <activity android:name="community.MainCommunityActivity"></activity>
-        <activity android:name="community.CommunitySportActivity"></activity>
-        <activity android:name="community.CommunityLiteratureActivity"></activity>
-        <activity android:name="community.CommunityLearningActivity"></activity>
-        <activity android:name="community.CommunityCharitableActivity"></activity>
-        <activity android:name="community.CommunitySearchActivity"></activity>
-        <activity android:name="community.CommunityDetailActivity"></activity>
-        <activity android:name="community.CommunityPeopleActivity"></activity>
-        <activity android:name="community.CommunityStaffActivity"></activity>
->>>>>>> panzhixuan
+        <activity android:name=".Personal.PersonalQrActivity" />
+        <activity android:name=".Personal.PersonalContactUsActivity" />
+        <activity android:name=".Personal.PersonalContactQQActivity" />
+        <activity android:name=".Personal.PersonalContactPhoneActivity" />
+        <activity android:name=".Personal.PersonalContactWechatActivity" />
+        <activity android:name=".Personal.PersonalContactWeiboActivity" />
+        <activity android:name=".Personal.PersonalContactEmailActivity" />
+        <activity android:name="community.MainCommunityActivity" />
+        <activity android:name="community.CommunitySportActivity" />
+        <activity android:name="community.CommunityLiteratureActivity" />
+        <activity android:name="community.CommunityLearningActivity" />
+        <activity android:name="community.CommunityCharitableActivity" />
+        <activity android:name="community.CommunitySearchActivity" />
+        <activity android:name="community.CommunityDetailActivity" />
+        <activity android:name="community.CommunityPeopleActivity" />
+        <activity android:name="community.CommunityStaffActivity" />
+        <activity android:name=".Personal.PersonalHelpActivity" />
+        <activity android:name=".Personal.PersonalAdviceActivity"></activity>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.FontManager;
 
-public class PersonalContactQQ extends Activity {
+public class PersonalContactWechatActivity extends Activity {
 
     TextView fanhui=null;
 
@@ -18,13 +18,14 @@ public class PersonalContactQQ extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_personal_contact_qq);
-        fanhui=(TextView)findViewById(R.id.qqtool_text1);
+        setContentView(R.layout.activity_personal_contact_wechat);
         FontManager.changeFonts(FontManager.getContentView(this), this);
+        fanhui=(TextView)findViewById(R.id.weixintool_text1);
         fanhui.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
+                // TODO Auto-generated method stub
                 finish();
             }
         });

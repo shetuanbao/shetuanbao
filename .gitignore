@@ -1,4 +1,7 @@
-/.idea
-/front/.idea
-/front/.gradle
-/back/shetuanbao/.idea
+.idea/
+/front/.idea/
+/front/.gradle/
+/front/build.gradle
+/front/gradle/
+/front/local.properties
+/back/shetuanbao/.idea/

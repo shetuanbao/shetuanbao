@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Personal.PersonalContactUs">
+    tools:context=".Personal.PersonalContactUsActivity">
     <LinearLayout
         android:id="@+id/lianxiwomen_title"
         android:layout_width="match_parent"

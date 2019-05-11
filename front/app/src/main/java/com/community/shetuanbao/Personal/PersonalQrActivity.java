@@ -20,7 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonalQr extends Activity{
+public class PersonalQrActivity extends Activity{
     private ImageView qr=null;
     RoundImageView touxiang;
     TextView name;
@@ -69,7 +69,7 @@ public class PersonalQr extends Activity{
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 all_image = stream.toByteArray();
                 F_GetBitmap.setInSDBitmap(all_image, name2.get(0)[0]+".png");
-                Toast.makeText(PersonalQr.this, "保存成功!!",
+                Toast.makeText(PersonalQrActivity.this, "保存成功!!",
                         Toast.LENGTH_LONG).show();
             }
         });
