@@ -104,4 +104,11 @@ public class UsersController {
         }
         return ResultGenerator.genSuccessResult(result1);
     }
+   @PostMapping("/yangGetIdCount")
+    public Result yangGetIdCount(@RequestBody String body){
+       JSONObject jsonObject = JSONObject.parseObject(body);
+       Integer name = jsonObject.getInteger("userId");
+       int a=usersService.yangGetIdCount(name);
+       return ResultGenerator.genSuccessResult(a);
+   }
 }

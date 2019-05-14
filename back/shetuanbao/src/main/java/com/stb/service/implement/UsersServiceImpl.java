@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -47,4 +48,11 @@ public class UsersServiceImpl extends AbstractService<Users> implements UsersSer
     public void panaddfriendByuserId(int userId,int friendId) {
     	usersMapper.panaddfriendByuserId(userId,friendId);
     }
+
+    @Override
+    public int yangGetIdCount(Integer userId) {
+        return usersMapper.yangGetIdCount(userId);
+    }
+
+
 }
