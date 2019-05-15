@@ -112,11 +112,11 @@ public class MainFrame extends ActivityGroup
                 }
                 else if(position==2)
                 {
-//                    v=getTwo();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(2);
-//                    list.add(2,v);
+                    v=getTwo();
+                    container.removeView(v);
+                    container.addView(v);
+                    list.remove(2);
+                    list.add(2,v);
                 }
                 else if(position==3)
                 {
@@ -207,13 +207,12 @@ public class MainFrame extends ActivityGroup
     @SuppressWarnings("deprecation")
     public View getTwo()                           //�õ������г�view
     {
-//        view2 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("shopping",
-//                        new Intent(MainFrame.this,MainSocialActivity.class))
-//                .getDecorView();
-//        return view2;                              //����view
-        return null;
+        view2 = MainFrame.this
+                .getLocalActivityManager()
+                .startActivity("shopping",
+                        new Intent(MainFrame.this,MainSocialActivity.class))
+                .getDecorView();
+        return view2;                              //����view
     }
     @SuppressWarnings("deprecation")
     public View getThree()                           //�õ�����view
