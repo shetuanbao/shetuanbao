@@ -7,6 +7,7 @@ import com.stb.model.Users;
 import com.stb.service.UsersService;
 import com.stb.util.Imageutil;
 
+import com.stb.util.JwtUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -146,9 +147,17 @@ public class UsersController {
         byte[] result=Imageutil.getImage(name);
         List<Byte> result1=new ArrayList();
         for(int i=0;i<result.length;i++) {
-            result1.add(result[i]);
+             result1.add(result[i]);
         }
         return ResultGenerator.genSuccessResult(result1);
+    }
+     //得到token的代码
+    @PostMapping("/getToken")
+    public Result getToken(@RequestBody String body){
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int name = jsonObject.getInteger("userId");
+        String a=JwtUtil.sign(name);
+        return ResultGenerator.genSuccessResult(a);
     }
 
 
