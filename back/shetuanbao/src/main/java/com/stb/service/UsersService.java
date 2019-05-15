@@ -26,4 +26,10 @@ public interface UsersService extends Service<Users> {
     //通过账号查看账号是否重复
     public int yangGetIdCount(Integer userId);
 
+    //注册代码
+    public void register(Users user);
+
+    //根据用户id得到用户信息
+    public Users yangGetUserById(Integer userId);
+
 }

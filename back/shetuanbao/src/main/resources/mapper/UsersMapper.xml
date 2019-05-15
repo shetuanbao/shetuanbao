@@ -6,14 +6,14 @@
       WARNING - @mbg.generated
     -->
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="user_name" jdbcType="CHAR" property="userName" />
-    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="username" jdbcType="CHAR" property="userName" />
+    <result column="userpassword" jdbcType="CHAR" property="password" />
     <result column="useremail" jdbcType="CHAR" property="useremail" />
     <result column="userphone" jdbcType="CHAR" property="userphone" />
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="userpen" jdbcType="CHAR" property="userpen" />
     <result column="userphoto" jdbcType="CHAR" property="userphoto" />
-    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="static" jdbcType="CHAR" property="status" />
     <result column="major" jdbcType="CHAR" property="major" />
     <result column="xueyuan" jdbcType="CHAR" property="xueyuan" />
   </resultMap>
@@ -23,7 +23,7 @@
   </select>
   
   <select id="pangetstatusByuserId" resultType="string">
-    SELECT `status` FROM `users` WHERE `user_id`=#{userid}
+    SELECT `static` FROM `users` WHERE `user_id`=#{userid}
   </select>
   
   <select id="pangetuserByuserId" resultMap="BaseResultMap">
@@ -38,5 +38,16 @@
   	insert into `friends`(`user_id`, `friend_id`) 
   	values (#{param1}, #{param2})
   </insert>
+
+    <insert id="register" parameterType="com.stb.model.Users" >
+        insert into users (user_id, username, userpassword, useremail, userphone, sex, userpen, major, xueyuan) values (#{userId},#{userName},#{password},#{useremail},#{userphone},#{sex},#{userpen},#{major},#{xueyuan})
+    </insert>
+
+    <select id="yangGetIdCount"  parameterType="java.lang.Integer"  resultType="Integer">
+        SELECT count(user_id) FROM  users WHERE users.user_id=#{userId}
+    </select>
+<select id="yangGetUserById" resultMap="BaseResultMap">
+  select * from users where user_id=#{userId}
+</select>
 
 </mapper>

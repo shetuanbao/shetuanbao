@@ -54,5 +54,15 @@ public class UsersServiceImpl extends AbstractService<Users> implements UsersSer
         return usersMapper.yangGetIdCount(userId);
     }
 
+    @Override
+    public void register(Users user) {
+       usersMapper.register(user);
+    }
+
+    @Override
+    public Users yangGetUserById(Integer userId) {
+        return usersMapper.yangGetUserById(userId);
+    }
+
 
 }

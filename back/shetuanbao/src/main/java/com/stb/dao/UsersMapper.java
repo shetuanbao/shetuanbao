@@ -22,4 +22,9 @@ public interface UsersMapper extends Mapper<Users> {
 
     //通过账号查看账号是否重复
     public int yangGetIdCount(Integer userId);
+
+    public void register(Users user);
+
+    //yang根据userId得到user信息
+    public Users yangGetUserById(Integer userId);
 }
