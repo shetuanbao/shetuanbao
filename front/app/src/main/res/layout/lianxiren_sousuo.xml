@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.community.shetuanbao.chat.sousuo_lianxiren">
+    <RelativeLayout
+        android:id="@+id/main_search_title_clock"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:background="@drawable/gengduo_modifybiaoti123">
+        <ImageView
+            android:id="@+id/historytssool_t1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/saomiao4" />
+        <AutoCompleteTextView
+            android:id="@+id/titlSOUSUOREN"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:paddingLeft="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/roundsearch"
+            android:singleLine="true"
+            android:hint="搜索账号"
+            android:textColor="#c0c0c0"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/mn_searddchren_image"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_weight="0"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:background="@mipmap/find"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/main_search__clock"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="fill_parent">
+        <TextView
+            android:id="@+id/texcct1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

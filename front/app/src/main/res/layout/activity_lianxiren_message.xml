@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.community.shetuanbao.chat.lianxiren_message">
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_height="50.0dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/gengduo_modifybiaoti12"
+        android:gravity="center_vertical" android:id="@+id/myselftool">
+
+        <ImageView
+            android:layout_height="25dp"
+            android:layout_width="105dp"
+            android:id="@+id/myselftool_text2"
+            android:src="@drawable/gerenziliao"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/myselftoffol_text1"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:text="@string/more_back"
+            android:layout_weight="0.6"
+            android:paddingLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/faxiaosssxi"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:text="删除"
+            android:layout_weight="0.6"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/userfriend_sc">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/userfriend_ll">
+
+            <RelativeLayout
+                android:layout_height="75dp"
+                android:layout_width="fill_parent"
+                android:id="@+id/myselfmain_1"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/buttonclock" >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/userfriend_photo_TextView"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:text="头像："
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:padding="10dp"/>
+
+                <com.bn.util.RoundImageView
+                    android:layout_height="60dp"
+                    android:layout_width="60dp"
+                    android:background="@drawable/touxiang"
+                    android:id="@+id/userfriend_photo_EditView"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="250dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/myselfmain_2"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/roundshape">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_username">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain2_username_text"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="账号："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="330dp"
+                        android:background="@drawable/touming"
+                        android:gravity="left|center_vertical"
+                        android:id="@+id/userfriend_zhanghao_EditView"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="空"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_name">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_name_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="昵称："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/userfriend_name_EditView"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_sex">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_sex_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="性别："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/userfriend_sex_EditView"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_xueyuan">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_xueyuan_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="学院："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/myselfmain_xueyuan_edit"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_major">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_major_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="专业："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/myselfmain_major_edit"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/roundshape"
+                android:id="@+id/myselfmain_3"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_e_mail">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_e_mail_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="邮箱："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/myselfmain_e_mail_edit"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_phone">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_phone_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="电话："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/userfriend_phone_EditView"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/wodexiaoyuan02"
+                    android:id="@+id/myselfmain_pen">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/myselfmain_pen_t"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:text="个性签名："
+                        android:layout_marginLeft="3dp"
+                        android:padding="10dp"/>
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/touming"
+                        android:id="@+id/myselfmain_pen_edit"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:padding="10dp"
+                        android:editable="false"
+                        android:singleLine="true"
+                        android:hint="空">
+                    </EditText>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/roundbutton"
+                android:id="@+id/faxiaoxi"
+                android:textSize="15dp"
+                android:text="发消息"
+                android:layout_marginTop="22dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="80dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
