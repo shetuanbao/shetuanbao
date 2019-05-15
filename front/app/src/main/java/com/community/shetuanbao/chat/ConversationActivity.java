@@ -1,0 +1,195 @@
+package com.community.shetuanbao.chat;
+
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.Exit;
+import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.GetFriendInfo;
+import com.community.shetuanbao.utils.RequestUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ConversationActivity extends FragmentActivity {
+    private TextView title;//对话活动题目
+    private String sName;
+    private String sId;
+    private TextView back;
+    int count=0;
+    TextView baocun;
+    Bitmap touxiang=null;//头像
+    private  String pen="";
+    Map<String, Object> params=new HashMap<>();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_conversation);
+
+        title=findViewById(R.id.liaotian_name);
+        back=findViewById(R.id.back_conversition);
+        baocun=findViewById(R.id.baocun);
+        back.setTypeface(FontManager.tf);
+        Exit.getInstance().addActivities(this);
+        sId=getIntent().getData().getQueryParameter("targetId");
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                finish();
+            }
+        });
+        init();
+        baocun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                init2();
+            }
+        });
+    }
+    public void init()
+    {//从数据库中根据用户id获取用户的名字
+        //然后得到用户的朋友个数
+        //如果朋友为0则发用朋友为空的对话框
+        new Thread()
+        {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void run()
+            {
+                String userName="许";
+
+//                    sName=NetInfoUtil.getusername(sId);
+                try {
+                    count=GetFriendInfo.getfriends().length();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(count==0){
+                    mHandler.sendEmptyMessage(1);
+                }
+                initTitle();
+            }
+
+        }.start();
+    }
+    public void init2()
+    {//点击保存之后，用户插入新的朋友
+        String userId="111";
+        String friendId="1111";
+        params.put("userName", userId);
+        params.put("password", friendId);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String res = RequestUtils.post("/friends/Add", params);
+                    Log.d("response", res);
+
+                    // dosomething with res
+                    try {
+                        JSONObject jsonObject = new JSONObject(res);
+                        if (jsonObject.getInt("code") == 200) {
+                            // 后台返回成功结果
+                            //Toast里面启动了一个handler，所以要加Looper
+                            Looper.prepare();
+//                            Toast.makeText(HttpTestActivity.this,"登陆成功", Toast.LENGTH_LONG).show();
+//                                    Looper.loop();
+//                            Intent intent = new Intent(HttpTestActivity.this, ActivityInfoActivity.class);
+//                            startActivity(intent);
+                        } else {
+                            // 后台返回失败结果
+                            Looper.prepare();
+                            Toast.makeText(ConversationActivity.this,"连接服务器失败", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+//                    NetInfoUtil.insertFriend(Constant.userName+"<#>"+sId);
+//                    pen=NetInfoUtil.getuserpen(sId);
+//                    System.out.println("====================="+pen+"閿熸枻鎷?);
+//                    String photo=NetInfoUtil.getuseronephoto(sId);
+//                    if(F_GetBitmap.isEmpty(photo))
+//                    {
+//                        byte[] b=NetInfoUtil.getPicture(photo);
+//                        F_GetBitmap.setInSDBitmap(b, photo);
+//                        InputStream input = null;
+//                        BitmapFactory.Options options = new BitmapFactory.Options();
+//                        options.inSampleSize = 1;
+//                        input = new ByteArrayInputStream(b);
+//                        @SuppressWarnings({ "rawtypes", "unchecked" })
+//                        SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(
+//                                input, null, options));
+//                        touxiang =(Bitmap) softRef.get();
+//                    }
+//                    else
+//                    {
+//                        touxiang=F_GetBitmap.getSDBitmap(photo);
+//                        if(F_GetBitmap.bitmap!=null && !F_GetBitmap.bitmap.isRecycled())
+//                        {
+//                            F_GetBitmap.bitmap = null;
+//                        }
+//                    }
+//                mHandler.sendEmptyMessage(2);
+//            }
+//
+//        }.start();
+    }
+    public void initTitle()
+    {
+        Message msg=new Message();
+        msg.what=0;
+        mHandler.sendMessage(msg);
+    }
+    Handler mHandler=new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            switch(msg.what)
+            {
+                case 0:title.setText(sName);
+                    title.setTypeface(FontManager.tf);
+                    break;
+                case 1:baocun.setVisibility(View.VISIBLE);
+                    break;
+
+                case 2:
+                    baocun.setVisibility(View.GONE);
+                    Map<String,Object> map=new HashMap<String,Object>();
+                    map.put("name", sName);
+                    map.put("pen", pen);
+                    map.put("photo", touxiang);
+                    shejiao_lianxiren.list.add(map);
+                    shejiao_lianxiren.ba.notifyDataSetChanged();
+                    shejiao_lianxiren.xuehao.add(sId);
+                    break;
+            }
+        }
+    };
+}
