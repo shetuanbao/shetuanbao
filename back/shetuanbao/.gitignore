@@ -1,8 +1,8 @@
-/target/
+target/
 
-.idea
+.idea/
 .project
 shetuanbao.iml
 .classpath
-.settings
-/src/test/
+.settings/
+src/test/
