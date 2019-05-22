@@ -7,10 +7,13 @@ import com.stb.model.Users;
 import com.stb.service.UsersService;
 import com.stb.util.Imageutil;
 
+import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -103,5 +106,22 @@ public class UsersController {
         	result1.add(result[i]);
         }
         return ResultGenerator.genSuccessResult(result1);
+    }
+    
+    //lu通过用户id获取用户图片等信息
+    @PostMapping("/lugetUserByUserId")
+    public Result lugetUserByUserId(@RequestBody String body) {
+    	JSONObject jsonObject = JSONObject.parseObject(body);
+    	Integer userId = jsonObject.getInteger("userId");
+    	Users user = usersService.findById(userId);
+    	byte[] userphoto = Imageutil.getImage(user.getUserphoto());
+        List<Byte> photo=new ArrayList<Byte>();
+        for(int i=0;i<userphoto.length;i++) {
+        	photo.add(userphoto[i]);
+        }
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("user", user);
+    	map.put("photo", photo);
+    	return ResultGenerator.genSuccessResult(map);
     }
 }
