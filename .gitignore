@@ -5,3 +5,6 @@
 /front/gradle/
 /front/local.properties
 /back/shetuanbao/.idea/
+/back/shetuanbao/target/
+/back/shetuanbao/.project
+/back/shetuanbao/shetuanbao.iml
