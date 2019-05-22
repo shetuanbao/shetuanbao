@@ -1,8 +1,7 @@
 target/
 
 .idea/
-.project
-shetuanbao.iml
-.classpath
 .settings/
 src/test/
+.project
+.classpath
