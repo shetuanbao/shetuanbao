@@ -11,4 +11,6 @@ public interface CommunityMapper extends Mapper<Community> {
 	
 	//pan通过社团id查找社团成员
 	public List<Integer> panfindByCommunityUser(int communityId);
+	
+	public List<String> lugetCommunityNamesByUserId(int userId);
 }

@@ -7,6 +7,8 @@ import com.stb.model.Users;
 import com.stb.service.UsersService;
 import com.stb.util.Imageutil;
 
+import freemarker.core.ReturnInstruction.Return;
+
 import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -123,5 +125,35 @@ public class UsersController {
     	map.put("user", user);
     	map.put("photo", photo);
     	return ResultGenerator.genSuccessResult(map);
+    }
+    
+    //lu更新用户个人信息
+    @PostMapping("/luupdateUser")
+    public Result luupdateUser(@RequestBody String body) {
+    	JSONObject jsonObject = JSONObject.parseObject(body);
+    	Users users = new Users();
+    	Integer userId = new Integer(jsonObject.getString("userId"));
+    	if (userId == null || usersService.findById(userId) == null) {
+    		return ResultGenerator.genFailResult("该用户不存在");
+    	} else {
+    		users.setUserId(userId);
+    	}
+    	if (jsonObject.getString("userName") != null) {
+    		users.setUserName(jsonObject.getString("userName"));
+    	}
+    	if (jsonObject.getString("sex") != null) {
+    		users.setSex(jsonObject.getString("sex"));
+    	}
+    	if (jsonObject.getString("useremail") != null) {
+    		users.setUseremail(jsonObject.getString("useremail"));
+    	}
+    	if (jsonObject.getString("userphone") != null) {
+    		users.setUserphone(jsonObject.getString("userphone"));
+    	}
+    	if (jsonObject.getString("userpen") != null) {
+    		users.setUserpen(jsonObject.getString("userpen"));
+    	}
+    	usersService.update(users);
+    	return ResultGenerator.genSuccessResult();
     }
 }
