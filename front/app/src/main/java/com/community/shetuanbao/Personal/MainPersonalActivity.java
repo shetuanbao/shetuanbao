@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.ACache;
-import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
@@ -155,7 +154,6 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                             for (int i = 0; i < photo.length(); i++) {
                                 image[i] = (byte)photo.getInt(i);
                             }
-                            aCache.put("userphoto", image);
                             F_GetBitmap.setInSDBitmap(image, imageStr);
                             InputStream input = null;
                             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -173,6 +171,7 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                                 F_GetBitmap.bitmap = null;
                             }
                         }
+                        aCache.put("userphoto", imageData);
                     } else {
                         // 后台返回失败结果
                         Looper.prepare();
