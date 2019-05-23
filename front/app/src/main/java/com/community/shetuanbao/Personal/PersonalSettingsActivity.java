@@ -37,7 +37,7 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
         setContentView(R.layout.activity_personal_settings);
 
         Intent intent =new Intent();
-        name=intent.getStringExtra("name");
+        name=intent.getStringExtra("nickname");
 
         FontManager.changeFonts(FontManager.getContentView(this), this);
         fanhui=(TextView)findViewById(R.id.emailtoolshezhi_text1);
@@ -80,7 +80,7 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
             case R.id.my_erweima:
                 Bitmap bitmap=createBitmap(Constant.userName);
                 Intent intent=new Intent(PersonalSettingsActivity.this,PersonalQrActivity.class);
-                intent.putExtra("name", name);
+                intent.putExtra("nickname", name);
                 intent.putExtra("Bitmap",bitmap);
                 startActivity(intent);
                 break;

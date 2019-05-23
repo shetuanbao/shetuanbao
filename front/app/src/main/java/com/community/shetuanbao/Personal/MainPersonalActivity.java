@@ -14,14 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.community.shetuanbao.Activities.ActivityInfoActivity;
-import com.community.shetuanbao.HttpTestActivity;
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.ACache;
 import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
-import com.community.shetuanbao.utils.NetInfoUtil;
 import com.community.shetuanbao.utils.RequestUtils;
 import com.community.shetuanbao.utils.RoundImageView;
 
@@ -49,7 +47,8 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
     public static Button zhuce=null;
     private byte[] image;
     private String imageStr;
-    private String name=null;
+    private String nickname =null;
+    private int name = 0;
     private Bitmap imageData;
     private TextView guanli=null;
     private String zhuangtai=null;
@@ -73,9 +72,9 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
         photo.setImageBitmap(imageData);
         System.out.println("hhhhhhhhhhhhhhhhhhhhhh"+zhuangtai);
         if(zhuangtai.equals("1")){
-            information.setText(name+" | ID:"+Constant.userName);
+            information.setText(nickname +" | ID:"+name);
         }else if(zhuangtai.equals("0")){
-            information.setText(name+"|ID:"+Constant.userName+"|账号被封禁");
+            information.setText(nickname +"|ID:"+name+"|账号被封禁");
         }
 
         shezhi=(TextView)findViewById(R.id.mine_shezhi);
@@ -97,7 +96,7 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.mine_shezhi:
                 Intent intent1 = new Intent(MainPersonalActivity.this, PersonalSettingsActivity.class);
-                intent1.putExtra("name", name);
+                intent1.putExtra("nickname", nickname);
                 startActivity(intent1);
                 break;
             case R.id.mine_lianxiwomen:
@@ -139,7 +138,13 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                         Looper.prepare();
                         JSONObject data = jsonObject.getJSONObject("data");
                         JSONObject user = data.getJSONObject("user");
-                        name = user.getString("userName");
+
+                        // 将user信息存到缓存中
+                        ACache aCache = ACache.get(MainPersonalActivity.this);
+                        aCache.put("user", user);
+
+                        name = user.getInt("userId");
+                        nickname = user.getString("userName");
                         zhuangtai = user.getString("status");
                         imageStr = user.getString("userphoto");
 
@@ -150,6 +155,7 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
                             for (int i = 0; i < photo.length(); i++) {
                                 image[i] = (byte)photo.getInt(i);
                             }
+                            aCache.put("userphoto", image);
                             F_GetBitmap.setInSDBitmap(image, imageStr);
                             InputStream input = null;
                             BitmapFactory.Options options = new BitmapFactory.Options();
