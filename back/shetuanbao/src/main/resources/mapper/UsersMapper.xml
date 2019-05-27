@@ -50,4 +50,8 @@
   select * from users where user_id=#{userId}
 </select>
 
+  <delete id="yangDeleteUserById" parameterType="java.lang.Integer">
+    DELETE  FROM friends WHERE friends.user_id=#{param1} AND friends.friend_id=#{param2}
+  </delete>
+
 </mapper>

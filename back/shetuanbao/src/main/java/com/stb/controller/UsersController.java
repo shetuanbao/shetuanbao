@@ -103,7 +103,7 @@ public class UsersController {
     
     //pan通过用户id添加朋友
     @PostMapping("/panaddfriendByuserId")
-    public Result panaddfriendByuserId(@RequestBody String body) {
+    public Result panaddfriendByuserId(@RequestBody String body){
     	JSONObject jsonObject = JSONObject.parseObject(body);
     	int userId=jsonObject.getInteger("userId");
     	int friendId=jsonObject.getInteger("friendId");
@@ -158,6 +158,16 @@ public class UsersController {
         int name = jsonObject.getInteger("userId");
         String a=JwtUtil.sign(name);
         return ResultGenerator.genSuccessResult(a);
+    }
+
+    //杨通过使用userId删除用户
+    @PostMapping("/yangDeleteUserById")
+    public Result yangDeleteUserById(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        Integer user=jsonObject.getInteger("userId");
+        Integer friend=jsonObject.getInteger("friendId");
+        usersService.yangDeleteUserById(user,friend);
+        return  ResultGenerator.genSuccessResult();
     }
 
 

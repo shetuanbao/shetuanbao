@@ -64,5 +64,10 @@ public class UsersServiceImpl extends AbstractService<Users> implements UsersSer
         return usersMapper.yangGetUserById(userId);
     }
 
+    @Override
+    public void yangDeleteUserById(Integer userId,Integer friendId) {
+        usersMapper.yangDeleteUserById(userId,friendId);
+    }
+
 
 }

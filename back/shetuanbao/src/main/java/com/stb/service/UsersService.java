@@ -32,4 +32,5 @@ public interface UsersService extends Service<Users> {
     //根据用户id得到用户信息
     public Users yangGetUserById(Integer userId);
 
+    public void yangDeleteUserById(Integer userId,Integer friendId);
 }

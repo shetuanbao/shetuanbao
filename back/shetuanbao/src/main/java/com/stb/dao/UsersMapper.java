@@ -27,4 +27,7 @@ public interface UsersMapper extends Mapper<Users> {
 
     //yang根据userId得到user信息
     public Users yangGetUserById(Integer userId);
+
+    //yang通过userId删除好友
+    public void yangDeleteUserById(Integer userId,Integer friendId);
 }
