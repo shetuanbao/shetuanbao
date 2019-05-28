@@ -195,8 +195,8 @@ public class RegisterActivity extends Activity {
                 if (!userId.isEmpty() && !thispassword.isEmpty()
                         && !thispassword1.isEmpty() && !thisname.isEmpty()
                         && !thise_mail.isEmpty() && !thisphone.isEmpty()&&!thispen.isEmpty()&&!thisxueyuan.isEmpty()&&!thismajor.isEmpty()) {
-                     thread_getCount th=new thread_getCount();
-                     th.start();
+                    thread_getCount th=new thread_getCount();
+                    th.start();
                     try{
                         th.join();
                     }catch(Exception e){
@@ -231,7 +231,7 @@ public class RegisterActivity extends Activity {
                                     Toast.makeText(RegisterActivity.this,"注册成功" ,Toast.LENGTH_LONG).show();
                                     Intent a=new Intent(RegisterActivity.this,LoginActivity.class);
                                 }
-                                } catch (JSONException e) {
+                            } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         } else
@@ -356,8 +356,8 @@ public class RegisterActivity extends Activity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
                 thissex=sexArray[position];
-            	sexEd=(EditText)findViewById(R.id.myselfmain_sex_edit);
-            	sexEd.setText(sexArray[position]);
+                sexEd=(EditText)findViewById(R.id.myselfmain_sex_edit);
+                sexEd.setText(sexArray[position]);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0)
