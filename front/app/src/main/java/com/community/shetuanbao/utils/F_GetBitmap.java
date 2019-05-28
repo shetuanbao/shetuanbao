@@ -42,9 +42,9 @@ public class F_GetBitmap {
 	public static Bitmap getSDBitmap(String picName) {
 		picFilePath = Environment.getExternalStorageDirectory()+ "/download_test" + "/" + picName;
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inDither = false; /* ������ͼƬ�������� */
-		options.inPreferredConfig = null; /* �����ý���������ѷ�ʽ���� */
-		options.inSampleSize = 1; /* ͼƬ���?����С���� */
+		options.inDither = false;
+		options.inPreferredConfig = null;
+		options.inSampleSize = 1;
 		Bitmap bit = BitmapFactory.decodeFile(picFilePath, options);
 		return bit;
 	}
@@ -77,7 +77,7 @@ public class F_GetBitmap {
 		FileOutputStream fos = null;
 		file = new File(filePath + "/" + picName);
 		try {
-			fos = new FileOutputStream(file); // ����SD����
+			fos = new FileOutputStream(file);
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
 			bitmap.recycle();
 			System.gc();

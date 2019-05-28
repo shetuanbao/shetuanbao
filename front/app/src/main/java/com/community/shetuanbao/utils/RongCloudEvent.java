@@ -1,7 +1,10 @@
 package com.community.shetuanbao.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+
+import com.community.shetuanbao.community.CommunityStaffActivity;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.model.UIConversation;
@@ -78,13 +81,13 @@ public class RongCloudEvent implements RongIM.ConversationBehaviorListener,
     @Override
     public boolean onMessageClick(Context context, View view, Message message) {
         if (message.getContent() instanceof ImageMessage) { //鐎圭偟骞囨导姘崇樈閻ｅ矂娼伴悙鐟板毊閺屻儳婀呮径褍娴橀柅鏄忕帆  娓氭繆绂� PhotoActivity 閸滐拷閸忚泛绔风仦锟芥禒銉ュ挤 menu/de_fix_username.xml
-//            ImageMessage imageMessage = (ImageMessage) message.getContent();
-//            Intent intent = new Intent(context, PhotoActivity.class);
-//            intent.putExtra("photo", imageMessage.getLocalUri() == null ? imageMessage.getRemoteUri() : imageMessage.getLocalUri());
-//            if (imageMessage.getThumUri() != null)
-//                intent.putExtra("thumbnail", imageMessage.getThumUri());
-//            context.startActivity(intent);
-            return false;
+            ImageMessage imageMessage = (ImageMessage) message.getContent();
+            Intent intent = new Intent(context, CommunityStaffActivity.class);
+            intent.putExtra("photo", imageMessage.getLocalUri() == null ? imageMessage.getRemoteUri() : imageMessage.getLocalUri());
+            if (imageMessage.getThumUri() != null)
+                intent.putExtra("thumbnail", imageMessage.getThumUri());
+            context.startActivity(intent);
+            return true;
         }
         return false;
     }

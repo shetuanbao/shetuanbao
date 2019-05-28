@@ -14,55 +14,36 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.community.shetuanbao.R;
 
 public class RefreshableView extends LinearLayout implements View.OnTouchListener {
 
-    /**
-     *  涓嬫媺鐘舵��
-     */
+
     public static final int STATUS_PULL_TO_REFRESH = 0;
 
-    /**
-     *閲婃斁绔嬪嵆鍒锋柊鐘舵��
-     */
+
     public static final int STATUS_RELEASE_TO_REFRESH = 1;
 
-    /**
-     * 姝ｅ湪鍒锋柊鐘舵��
-     */
     public static final int STATUS_REFRESHING = 2;
 
-    /**
-     * 鍒锋柊瀹屾垚鎴栨湭鍒锋柊鐘舵��
-     */
+
     public static final int STATUS_REFRESH_FINISHED = 3;
 
-    /**
-     * 涓嬫媺澶撮儴鍥炴粴鐨勯�熷害
-     */
     public static final int SCROLL_SPEED = -20;
 
-    /**
-     * 涓�鍒嗛挓鐨勬绉掑�硷紝鐢ㄤ簬鍒ゆ柇涓婃鐨勬洿鏂版椂闂�
-     */
+
     public static final long ONE_MINUTE = 60 * 1000;
 
-    /**
-     *涓�鍒嗛挓鐨勬绉掑�硷紝鐢ㄤ簬鍒ゆ柇涓婃鐨勬洿鏂版椂闂�
-     */
+
     public static final long ONE_HOUR = 60 * ONE_MINUTE;
 
-    /**
-     * 涓�灏忔椂鐨勬绉掑�硷紝鐢ㄤ簬鍒ゆ柇涓婃鐨勬洿鏂版椂闂�
-     */
+
     public static final long ONE_DAY = 24 * ONE_HOUR;
 
-    /**
-     * 涓�澶╃殑姣鍊硷紝鐢ㄤ簬鍒ゆ柇涓婃鐨勬洿鏂版椂闂�
-     */
+
     public static final long ONE_MONTH = 30 * ONE_DAY;
 
     /**
@@ -70,108 +51,48 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
      */
     public static final long ONE_YEAR = 12 * ONE_MONTH;
 
-    /**
-     * 涓婃鏇存柊鏃堕棿鐨勫瓧绗︿覆甯搁噺锛岀敤浜庝綔涓篠haredPreferences鐨勯敭鍊�
-     */
     private static final String UPDATED_AT = "updated_at";
 
-    /**
-     * 涓嬫媺鍒锋柊鐨勫洖璋冩帴鍙�
-     */
+
     private PullToRefreshListener mListener;
 
-    /**
-     * 鐢ㄤ簬瀛樺偍涓婃鏇存柊鏃堕棿
-     */
     private SharedPreferences preferences;
 
-    /**
-     * 涓嬫媺澶寸殑View
-     */
     private View header;
 
-    /**
-     * 闇�瑕佸幓涓嬫媺鍒锋柊鐨凩istView
-     */
     private ListView view;
 
-    /**
-     * 鍒锋柊鏃舵樉绀虹殑杩涘害鏉�
-     */
     private ProgressBar progressBar;
 
-    /**
-     * 鎸囩ず涓嬫媺鍜岄噴鏀剧殑绠ご
-     */
+
     private ImageView arrow;
 
-    /**
-     * 鎸囩ず涓嬫媺鍜岄噴鏀剧殑鏂囧瓧鎻忚堪
-     */
     private TextView description;
 
-    /**
-     * 涓婃鏇存柊鏃堕棿鐨勬枃瀛楁弿杩�
-     */
+
     private TextView updateAt;
 
-    /**
-     * 涓嬫媺澶寸殑甯冨眬鍙傛暟
-     */
     private MarginLayoutParams headerLayoutParams;
 
-    /**
-     * 涓婃鏇存柊鏃堕棿鐨勬绉掑��
-     */
     private long lastUpdateTime;
 
-    /**
-     * 涓轰簡闃叉涓嶅悓鐣岄潰鐨勪笅鎷夊埛鏂板湪涓婃鏇存柊鏃堕棿涓婁簰鐩告湁鍐茬獊锛屼娇鐢╥d鏉ュ仛鍖哄垎
-     */
+
     private int mId = -1;
 
-    /**
-     * 涓嬫媺澶寸殑楂樺害
-     */
     private int hideHeaderHeight;
 
-    /**
-     * 褰撳墠澶勭悊浠�涔堢姸鎬侊紝鍙�夊�兼湁STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
-     * STATUS_REFRESHING 鍜� STATUS_REFRESH_FINISHED
-     */
     private int currentStatus = STATUS_REFRESH_FINISHED;;
 
-    /**
-     * 璁板綍涓婁竴娆＄殑鐘舵�佹槸浠�涔堬紝閬垮厤杩涜閲嶅鎿嶄綔
-     */
     private int lastStatus = currentStatus;
 
-    /**
-     * 鎵嬫寚鎸変笅鏃剁殑灞忓箷绾靛潗鏍�
-     */
     private float yDown;
 
-    /**
-     * 閸︺劏顫﹂崚銈呯暰娑撶儤绮撮崝銊ょ閸撳秶鏁ら幋閿嬪閹稿洤褰叉禒銉╅崝銊ф畱閺堬拷銇囬崐绗猴拷
-     */
     private int touchSlop;
 
-    /**
-     * 鍦ㄨ鍒ゅ畾涓烘粴鍔ㄤ箣鍓嶇敤鎴锋墜鎸囧彲浠ョЩ鍔ㄧ殑鏈�澶у�笺��
-     */
     private boolean loadOnce;
 
-    /**
-     * 鏄惁宸插姞杞借繃涓�娆ayout锛岃繖閲宱nLayout涓殑鍒濆鍖栧彧闇�鍔犺浇涓�娆�
-     */
     private boolean ableToPull;
 
-    /**
-     * 涓嬫媺鍒锋柊鎺т欢鐨勬瀯閫犲嚱鏁帮紝浼氬湪杩愯鏃跺姩鎬佹坊鍔犱竴涓笅鎷夊ご鐨勫竷灞�
-     *
-     * @param context
-     * @param attrs
-     */
     public RefreshableView(Context context, AttributeSet attrs) {
         super(context, attrs);
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -309,7 +230,7 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
     private void setIsAbleToPull(MotionEvent event) {
 //    	LinearLayout all =(LinearLayout) view.getChildAt(0);
 //    	RelativeLayout 	firstChild=(RelativeLayout)all.getChildAt(0);
-//
+
 //        if (firstChild != null&&firstChild.getId()==R.id.home_tool&&firstChild.getTop() == 0) {
 //            if (firstChild.getTop() == 0) {
 //                if (!ableToPull) {
