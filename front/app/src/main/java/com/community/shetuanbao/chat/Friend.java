@@ -1,6 +1,8 @@
 package com.community.shetuanbao.chat;
 
 public class Friend {
+
+
     private String userId;
 
     private String userName;
@@ -10,7 +12,10 @@ public class Friend {
     public Friend(String userId,String userName,String portraitUri){
         this.userId = userId;
         this.userName = userName;
-        this.portraitUri = portraitUri;//头像uri
+        this.portraitUri = portraitUri;
+    }
+
+    public Friend(Integer integer, String userName, String portraitUri) {
     }
 
     public String getUserId() {
@@ -36,4 +41,6 @@ public class Friend {
     public void setPortraitUri(String portraitUri) {
         this.portraitUri = portraitUri;
     }
+
+
 }

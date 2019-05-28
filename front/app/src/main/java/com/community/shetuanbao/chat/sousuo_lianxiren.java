@@ -31,7 +31,7 @@ public class sousuo_lianxiren extends Activity {
 
     public ImageView fanhui=null;//返回
     AutoCompleteTextView act=null;//自动补全文本
-    String s="";
+    int s;
     Map<String, Object> params=new HashMap<>();
     ImageView sousuo=null;//搜索框
     TextView tishi=null;//提示信息
@@ -66,10 +66,10 @@ public class sousuo_lianxiren extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                s=act.getText().toString();
+                s=Integer.parseInt(act.getText().toString());
                 for(int i=0;i<sno.length;i++)
                 {
-                    if(s.equals(sno[i]))
+                    if(s==sno[i])
                         bool=false;
                 }
                 if(bool)
@@ -82,7 +82,7 @@ public class sousuo_lianxiren extends Activity {
                     bool=true;
                     Intent intent=new Intent(sousuo_lianxiren.this,CommunityStaffActivity.class);
                     Bundle bundle=new Bundle();
-                    bundle.putString("sno", s);
+                    bundle.putInt("sno", s);
                     intent.putExtras(bundle);
                     tishi.setText("");
                     startActivity(intent);
@@ -97,9 +97,6 @@ public class sousuo_lianxiren extends Activity {
             String res ;
             params=new HashMap<>();
             try {
-//                int s=1;
-//                params.put("userId",s);
-//                res = RequestUtils.post("/users/yangGetUserById",params);
                 res=RequestUtils.get("/users/list");
                 Log.d("response", res);
                 JSONObject jsonObject = new JSONObject(res);

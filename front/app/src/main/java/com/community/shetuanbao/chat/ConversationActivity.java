@@ -1,5 +1,6 @@
 package com.community.shetuanbao.chat;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.FontManager;
@@ -26,6 +28,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.rong.imkit.MainActivity;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 public class ConversationActivity extends FragmentActivity {
     private TextView title;//对话活动题目
@@ -79,11 +85,8 @@ public class ConversationActivity extends FragmentActivity {
                 String userName="许";
 
 //                    sName=NetInfoUtil.getusername(sId);
-                try {
-                    count=GetFriendInfo.getfriends().length();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    count=GetFriendInfo.a;
+
                 if(count==0){
                     mHandler.sendEmptyMessage(1);
                 }
@@ -186,10 +189,12 @@ public class ConversationActivity extends FragmentActivity {
                     map.put("pen", pen);
                     map.put("photo", touxiang);
                     shejiao_lianxiren.list.add(map);
-                    shejiao_lianxiren.ba.notifyDataSetChanged();
-                    shejiao_lianxiren.xuehao.add(sId);
+//                    shejiao_lianxiren.ba.notifyDataSetChanged();
+//                    shejiao_lianxiren.xuehao.add(sId);
                     break;
             }
         }
     };
+
+
 }

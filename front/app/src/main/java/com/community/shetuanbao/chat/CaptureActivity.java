@@ -46,7 +46,6 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
-        //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         cancelScanButton = (TextView) this.findViewById(R.id.btn_cancel_scan);
@@ -123,7 +122,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
             return;
         }
         if (handler == null) {
-//            handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
+//            handler = new CaptureActivityHandler(this,decodeFormats, characterSet);
         }
     }
 
@@ -163,9 +162,6 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 
     private void initBeepSound() {
         if (playBeep && mediaPlayer == null) {
-            // The volume on STREAM_SYSTEM is not adjustable, and users found it
-            // too loud,
-            // so we now play on the music stream.
             setVolumeControlStream(AudioManager.STREAM_MUSIC);
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
