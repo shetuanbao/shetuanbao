@@ -44,14 +44,6 @@ public class UsersController {
         return ResultGenerator.genSuccessResult(user);
     }
 
-    @PostMapping("/register")
-    public Result register(Users user) {
-        if (!user.getUserName().equals("") && !user.getPassword().equals("")) {
-            usersService.save(user);
-            return ResultGenerator.genSuccessResult();
-        }
-        return ResultGenerator.genFailResult();
-    }
     
     //pan通过用户id获取状态
     @PostMapping("/pangetstatusByuserId")
