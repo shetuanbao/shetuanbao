@@ -32,304 +32,303 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class MainFrame extends ActivityGroup
 {
-    private LinearLayout frameBottomLuntan,frameBottomviewactivity,frameBottomviewtalk,
-            frameBottomviewperson;
-    private ImageView bottomviewLuntanImageview,bottomviewActivityImageview,bottomviewTalkImageview,
-            bottomviewPersonImageview;
-    private TextView bottomviewLuntanTextview,bottomviewActivityTextview,bottomviewTalkTextview,
-            bottomviewPersonTextview;
-    private android.support.v4.view.ViewPager mViewPager;
-    private List<View> list=new ArrayList<View>();
-    private View view=null;
-    private View view1=null;
-    private View view2=null;
-    private View view4=null;
-    private PagerAdapter pagerAdapter=null;
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.mainframe);
-        Exit.getInstance().addActivities(this);
-        initView();
-    }
-    private void initView()
-    {
-        mViewPager=(ViewPager)findViewById(R.id.framepager);
-        frameBottomLuntan = (LinearLayout)findViewById(R.id.frame_bottomview_luntan);
-        frameBottomviewactivity = (LinearLayout)findViewById(R.id.frame_bottomview_activity);
-        frameBottomviewtalk = (LinearLayout)findViewById(R.id.frame_bottomview_talk);
-        frameBottomviewperson = (LinearLayout)findViewById(R.id.frame_bottomview_person);
-        bottomviewLuntanImageview = (ImageView) findViewById(R.id.frame_bottomview_luntan_imageview);
-        bottomviewActivityImageview = (ImageView) findViewById(R.id.frame_bottomview_activity_imageview);
-        bottomviewTalkImageview = (ImageView) findViewById(R.id.frame_bottomview_talk_imageview);
-        bottomviewPersonImageview = (ImageView) findViewById(R.id.frame_bottomview_person_imageview);
+  private LinearLayout frameBottomLuntan,frameBottomviewactivity,frameBottomviewtalk,
+          frameBottomviewperson;
+  private ImageView bottomviewLuntanImageview,bottomviewActivityImageview,bottomviewTalkImageview,
+          bottomviewPersonImageview;
+  private TextView bottomviewLuntanTextview,bottomviewActivityTextview,bottomviewTalkTextview,
+          bottomviewPersonTextview;
+  private android.support.v4.view.ViewPager mViewPager;
+  private List<View> list=new ArrayList<View>();
+  private View view=null;
+  private View view1=null;
+  private View view2=null;
+  private View view4=null;
+  private PagerAdapter pagerAdapter=null;
+  @Override
+  protected void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    setContentView(R.layout.mainframe);
+    Exit.getInstance().addActivities(this);
+    initView();
+  }
+  private void initView()
+  {
+    mViewPager=(ViewPager)findViewById(R.id.framepager);
+    frameBottomLuntan = (LinearLayout)findViewById(R.id.frame_bottomview_luntan);
+    frameBottomviewactivity = (LinearLayout)findViewById(R.id.frame_bottomview_activity);
+    frameBottomviewtalk = (LinearLayout)findViewById(R.id.frame_bottomview_talk);
+    frameBottomviewperson = (LinearLayout)findViewById(R.id.frame_bottomview_person);
+    bottomviewLuntanImageview = (ImageView) findViewById(R.id.frame_bottomview_luntan_imageview);
+    bottomviewActivityImageview = (ImageView) findViewById(R.id.frame_bottomview_activity_imageview);
+    bottomviewTalkImageview = (ImageView) findViewById(R.id.frame_bottomview_talk_imageview);
+    bottomviewPersonImageview = (ImageView) findViewById(R.id.frame_bottomview_person_imageview);
 
-        bottomviewLuntanTextview = (TextView) findViewById(R.id.frame_bottemview_luntan_textview);
-        bottomviewActivityTextview = (TextView) findViewById(R.id.frame_bottomview_activity_textview);
-        bottomviewTalkTextview = (TextView) findViewById(R.id.frame_bottomview_talk_textview);
-        bottomviewPersonTextview = (TextView) findViewById(R.id.frame_bottomview_person_textview);
-        list.add(0,getZero());
-        list.add(1,null);
-        list.add(2,null);
-        list.add(3,null);
-        mViewPager.setOffscreenPageLimit(2);
-        pagerAdapter=new PagerAdapter(){
-            View v=null;
-            @Override
-            public boolean isViewFromObject(View agr0,Object agr1)
-            {
-                return agr0==agr1;
-            }
-            @Override
-            public int getCount()
-            {
-                return list.size();
-            }
-            @Override
-            public void destroyItem(ViewGroup container , int position,
-                                    Object object){
-                container.removeView(list.get(position));
+    bottomviewLuntanTextview = (TextView) findViewById(R.id.frame_bottemview_luntan_textview);
+    bottomviewActivityTextview = (TextView) findViewById(R.id.frame_bottomview_activity_textview);
+    bottomviewTalkTextview = (TextView) findViewById(R.id.frame_bottomview_talk_textview);
+    bottomviewPersonTextview = (TextView) findViewById(R.id.frame_bottomview_person_textview);
+    list.add(0,getZero());
+    list.add(1,null);
+    list.add(2,null);
+    list.add(3,null);
+    mViewPager.setOffscreenPageLimit(2);
+    pagerAdapter=new PagerAdapter(){
+      View v=null;
+      @Override
+      public boolean isViewFromObject(View agr0,Object agr1)
+      {
+        return agr0==agr1;
+      }
+      @Override
+      public int getCount()
+      {
+        return list.size();
+      }
+      @Override
+      public void destroyItem(ViewGroup container , int position,
+                              Object object){
+        container.removeView(list.get(position));
 
-            }
-            @Override
-            public Object instantiateItem(ViewGroup container,int position){
-                if(position==0)
-                {
-                    v=getZero();
-                    container.removeView(v);
-                    container.addView(v);
-                    list.remove(0);
-                    list.add(0,v);
-                }
-                else if(position==1)
-                {
+      }
+      @Override
+      public Object instantiateItem(ViewGroup container,int position){
+        if(position==0)
+        {
+          v=getZero();
+          container.removeView(v);
+          container.addView(v);
+          list.remove(0);
+          list.add(0,v);
+        }
+        else if(position==1)
+        {
 //                    v=getOne();
 //                    container.removeView(v);
 //                    container.addView(v);
 //                    list.remove(1);
 //                    list.add(1,v);
-                }
-                else if(position==2)
-                {
-//                    v=getTwo();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(2);
-//                    list.add(2,v);
-                }
-                else if(position==3)
-                {
+        }
+        else if(position==2)
+        {
+          v=getTwo();
+          container.removeView(v);
+          container.addView(v);
+          list.remove(2);
+          list.add(2,v);
+        }
+        else if(position==3)
+        {
 //                    v=getThree();
 //                    container.removeView(v);
 //                    container.addView(v);
 //                    list.remove(3);
 //                    list.add(3,v);
-                }
-                return v;
-            }
+        }
+        return v;
+      }
 
-        };
-        mViewPager.setAdapter(pagerAdapter);
-        MyBtnOnClick myTouchlistener=new MyBtnOnClick();
-        frameBottomLuntan.setOnClickListener(myTouchlistener);
-        frameBottomviewactivity.setOnClickListener(myTouchlistener);
-        frameBottomviewtalk.setOnClickListener(myTouchlistener);
-        frameBottomviewperson.setOnClickListener(myTouchlistener);
-        //vierpager子页面改变时底部按钮的改变（类似与选中提示）
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
+    };
+    mViewPager.setAdapter(pagerAdapter);
+    MyBtnOnClick myTouchlistener=new MyBtnOnClick();
+    frameBottomLuntan.setOnClickListener(myTouchlistener);
+    frameBottomviewactivity.setOnClickListener(myTouchlistener);
+    frameBottomviewtalk.setOnClickListener(myTouchlistener);
+    frameBottomviewperson.setOnClickListener(myTouchlistener);
+    //vierpager子页面改变时底部按钮的改变（类似与选中提示）
+    mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      @Override
 
-            public void onPageSelected(int arg0) {
-                // �������ť��ʽ
-                initButtomBth();
-                // ���ն�Ӧ��view��tag���жϵ����л����ĸ����档
-                // ���Ķ�Ӧ��button״̬
-                if(arg0 == 0) {
-                    bottomviewLuntanImageview
-                            .setImageResource(R.mipmap.b_shetuan);
-                    bottomviewLuntanTextview.setTextColor(Color.parseColor("#49c4d6"));
+      public void onPageSelected(int arg0) {
+        // �������ť��ʽ
+        initButtomBth();
+        // ���ն�Ӧ��view��tag���жϵ����л����ĸ����档
+        // ���Ķ�Ӧ��button״̬
+        if(arg0 == 0) {
+          bottomviewLuntanImageview
+                  .setImageResource(R.mipmap.b_shetuan);
+          bottomviewLuntanTextview.setTextColor(Color.parseColor("#49c4d6"));
 
-                }else if(arg0 == 1) {
-                    bottomviewActivityImageview
-                            .setImageResource(R.mipmap.b_huodong);
-                    bottomviewActivityTextview.setTextColor(Color.parseColor("#49c4d6"));
+        }else if(arg0 == 1) {
+          bottomviewActivityImageview
+                  .setImageResource(R.mipmap.b_huodong);
+          bottomviewActivityTextview.setTextColor(Color.parseColor("#49c4d6"));
 
-                }else if(arg0 == 2) {
-                    bottomviewTalkImageview
-                            .setImageResource(R.mipmap.b_shejiao);
-                    bottomviewTalkTextview.setTextColor(Color.parseColor("#49c4d6"));
+        }else if(arg0 == 2) {
+          bottomviewTalkImageview
+                  .setImageResource(R.mipmap.b_shejiao);
+          bottomviewTalkTextview.setTextColor(Color.parseColor("#49c4d6"));
 
-                }else if(arg0 == 3) {
-                    bottomviewPersonImageview
-                            .setImageResource(R.mipmap.b_geren);
-                    bottomviewPersonTextview.setTextColor(Color.parseColor("#49c4d6"));
+        }else if(arg0 == 3) {
+          bottomviewPersonImageview
+                  .setImageResource(R.mipmap.b_geren);
+          bottomviewPersonTextview.setTextColor(Color.parseColor("#49c4d6"));
 
-                }
-            }
+        }
+      }
 
-            /**
-             * ����ҳ�滬���� arg0 ��ʾ��ǰ������view arg1 ��ʾ�����İٷֱ� arg2 ��ʾ�����ľ���
-             * */
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
+      /**
+       * ����ҳ�滬���� arg0 ��ʾ��ǰ������view arg1 ��ʾ�����İٷֱ� arg2 ��ʾ�����ľ���
+       * */
+      @Override
+      public void onPageScrolled(int arg0, float arg1, int arg2) {
+      }
 
-            /**
-             * ��������״̬ arg0 ��ʾ���ǵĻ���״̬ 0:Ĭ��״̬ 1:����״̬ 2:����ֹͣ
-             * */
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-    }
-    @SuppressWarnings("deprecation")
-    public View getZero()                          //�õ���̳view
-    {
-        view = this
-                .getLocalActivityManager()
-                .startActivity("luntan",
-                        new Intent(MainFrame.this, MainCommunityActivity.class))
-                .getDecorView();
-        return view;                               //����view
-    }
-    @SuppressWarnings("deprecation")
-    public View getOne()                           //�õ�ʧ������view
-    {
+      /**
+       * ��������״̬ arg0 ��ʾ���ǵĻ���״̬ 0:Ĭ��״̬ 1:����״̬ 2:����ֹͣ
+       * */
+      @Override
+      public void onPageScrollStateChanged(int arg0) {
+      }
+    });
+  }
+  @SuppressWarnings("deprecation")
+  public View getZero()                          //�õ���̳view
+  {
+    view = this
+            .getLocalActivityManager()
+            .startActivity("luntan",
+                    new Intent(MainFrame.this, MainCommunityActivity.class))
+            .getDecorView();
+    return view;                               //����view
+  }
+  @SuppressWarnings("deprecation")
+  public View getOne()                           //�õ�ʧ������view
+  {
 //        view1 = MainFrame.this
 //                .getLocalActivityManager()
 //                .startActivity("lostandfind",
 //                        new Intent(MainFrame.this,MainCampaignActivity.class))
 //                .getDecorView();
 //        return view1;                              //����view
-        return null;
-    }
-    @SuppressWarnings("deprecation")
-    public View getTwo()                           //�õ������г�view
-    {
-//        view2 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("shopping",
-//                        new Intent(MainFrame.this,MainSocialActivity.class))
-//                .getDecorView();
-//        return view2;                              //����view
-        return null;
-    }
-    @SuppressWarnings("deprecation")
-    public View getThree()                           //�õ�����view
-    {
+    return null;
+  }
+  @SuppressWarnings("deprecation")
+  public View getTwo()                           //�õ������г�view
+  {
+    view2 = MainFrame.this
+            .getLocalActivityManager()
+            .startActivity("shopping",
+                    new Intent(MainFrame.this,MainSocialActivity.class))
+            .getDecorView();
+    return view2;                              //����view
+  }
+  @SuppressWarnings("deprecation")
+  public View getThree()                           //�õ�����view
+  {
 //        view4 = MainFrame.this
 //                .getLocalActivityManager()
 //                .startActivity("more",
 //                        new Intent(MainFrame.this,MainMyselfActivity.class))
 //                .getDecorView();
 //        return view4;                               //����view
-        return null;
-    }
-    //点击底部按钮时改变底部按钮的样式（类似与选中提示）
-    private class MyBtnOnClick implements View.OnClickListener {
-        @Override
-        public void onClick(View arg0) {
-            int mBtnid = arg0.getId();
-            //�������ǵ�viewpager��ת�Ǹ�����0������������ǵ�list���,�൱��list������±�
-            switch (mBtnid) {
-                case R.id.frame_bottomview_luntan :
-                    mViewPager.setCurrentItem(0);
-                    initButtomBth();
-                    bottomviewLuntanImageview
-                            .setImageResource(R.mipmap.b_shetuan);
-                    bottomviewLuntanTextview.setTextColor(Color.parseColor("#49c4d6"));
-                    break;
-                case R.id.frame_bottomview_activity :
-                    mViewPager.setCurrentItem(1);
-                    initButtomBth();
-                    bottomviewActivityImageview
-                            .setImageResource(R.mipmap.b_huodong);
-                    bottomviewActivityTextview.setTextColor(Color.parseColor("#49c4d6"));
-                    break;
-                case R.id.frame_bottomview_talk :
-                    mViewPager.setCurrentItem(2);
-                    initButtomBth();
-                    bottomviewTalkImageview
-                            .setImageResource(R.mipmap.b_shejiao);
-                    bottomviewTalkTextview.setTextColor(Color.parseColor("#49c4d6"));
-
-                    break;
-                case R.id.frame_bottomview_person :
-
-                    mViewPager.setCurrentItem(3);
-                    initButtomBth();
-                    bottomviewPersonImageview.setImageResource(R.mipmap.b_geren);
-                    bottomviewPersonTextview.setTextColor(Color.parseColor("#49c4d6"));
-                    break;
-            }
-        }
-    }
-    private void initButtomBth() {
-        bottomviewLuntanImageview.setImageResource(R.drawable.search_bottom_index);
-        bottomviewActivityImageview.setImageResource(R.drawable.search_bottom_search);
-        bottomviewTalkImageview.setImageResource(R.drawable.search_bottom_tuijian);
-        bottomviewPersonImageview.setImageResource(R.drawable.search_bottom_myself);
-        bottomviewLuntanTextview.setTextColor(getResources().getColor(
-                R.color.search_bottom_textcolor));
-        bottomviewActivityTextview.setTextColor(getResources().getColor(
-                R.color.search_bottom_textcolor));
-        bottomviewTalkTextview.setTextColor(getResources().getColor(
-                R.color.search_bottom_textcolor));
-        bottomviewPersonTextview.setTextColor(getResources().getColor(
-                R.color.search_bottom_textcolor));
-    }
+    return null;
+  }
+  //点击底部按钮时改变底部按钮的样式（类似与选中提示）
+  private class MyBtnOnClick implements View.OnClickListener {
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean onKeyDown(int keyCode, KeyEvent event)      //��д���ؼ�
-    {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            AlertDialog isExit=new AlertDialog.Builder(this).create();
-            isExit.setTitle("系统提示");
-            isExit.setMessage("确定退出吗？");
-            isExit.setButton("确定",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Exit.exitActivity();
-                        }
-                    }
-            );
-            isExit.setButton2("取消",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }
-            );
-            isExit.show();
-        }
-        return true;
+    public void onClick(View arg0) {
+      int mBtnid = arg0.getId();
+      //�������ǵ�viewpager��ת�Ǹ�����0������������ǵ�list���,�൱��list������±�
+      switch (mBtnid) {
+        case R.id.frame_bottomview_luntan :
+          mViewPager.setCurrentItem(0);
+          initButtomBth();
+          bottomviewLuntanImageview
+                  .setImageResource(R.mipmap.b_shetuan);
+          bottomviewLuntanTextview.setTextColor(Color.parseColor("#49c4d6"));
+          break;
+        case R.id.frame_bottomview_activity :
+          mViewPager.setCurrentItem(1);
+          initButtomBth();
+          bottomviewActivityImageview
+                  .setImageResource(R.mipmap.b_huodong);
+          bottomviewActivityTextview.setTextColor(Color.parseColor("#49c4d6"));
+          break;
+        case R.id.frame_bottomview_talk :
+          mViewPager.setCurrentItem(2);
+          initButtomBth();
+          bottomviewTalkImageview
+                  .setImageResource(R.mipmap.b_shejiao);
+          bottomviewTalkTextview.setTextColor(Color.parseColor("#49c4d6"));
+
+          break;
+        case R.id.frame_bottomview_person :
+
+          mViewPager.setCurrentItem(3);
+          initButtomBth();
+          bottomviewPersonImageview.setImageResource(R.mipmap.b_geren);
+          bottomviewPersonTextview.setTextColor(Color.parseColor("#49c4d6"));
+          break;
+      }
     }
-    public void toastSelf(String msgStr)
+  }
+  private void initButtomBth() {
+    bottomviewLuntanImageview.setImageResource(R.drawable.search_bottom_index);
+    bottomviewActivityImageview.setImageResource(R.drawable.search_bottom_search);
+    bottomviewTalkImageview.setImageResource(R.drawable.search_bottom_tuijian);
+    bottomviewPersonImageview.setImageResource(R.drawable.search_bottom_myself);
+    bottomviewLuntanTextview.setTextColor(getResources().getColor(
+            R.color.search_bottom_textcolor));
+    bottomviewActivityTextview.setTextColor(getResources().getColor(
+            R.color.search_bottom_textcolor));
+    bottomviewTalkTextview.setTextColor(getResources().getColor(
+            R.color.search_bottom_textcolor));
+    bottomviewPersonTextview.setTextColor(getResources().getColor(
+            R.color.search_bottom_textcolor));
+  }
+  @Override
+  @SuppressWarnings("deprecation")
+  public boolean onKeyDown(int keyCode, KeyEvent event)      //��д���ؼ�
+  {
+    if(keyCode == KeyEvent.KEYCODE_BACK)
     {
-        Bundle bd=new Bundle();                          //����Bundle
-        bd.putString("msg", msgStr);                     //����ַ���Ϣ
-        Message msg=new Message();                       //����Message
-        msg.what=0;                                      //Message���Ϊ��
-        msg.setData(bd);                                 //Message���Bundle
-        hd.sendMessage(msg);                             //����Message��Handler
+      AlertDialog isExit=new AlertDialog.Builder(this).create();
+      isExit.setTitle("系统提示");
+      isExit.setMessage("确定退出吗？");
+      isExit.setButton("确定",
+              new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                  Exit.exitActivity();
+                }
+              }
+      );
+      isExit.setButton2("取消",
+              new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+              }
+      );
+      isExit.show();
     }
-    Handler hd=new Handler()                             //����һ��Handler
+    return true;
+  }
+  public void toastSelf(String msgStr)
+  {
+    Bundle bd=new Bundle();                          //����Bundle
+    bd.putString("msg", msgStr);                     //����ַ���Ϣ
+    Message msg=new Message();                       //����Message
+    msg.what=0;                                      //Message���Ϊ��
+    msg.setData(bd);                                 //Message���Bundle
+    hd.sendMessage(msg);                             //����Message��Handler
+  }
+  Handler hd=new Handler()                             //����һ��Handler
+  {
+    @SuppressLint("HandlerLeak")
+    @Override
+    public void handleMessage(Message msg)
     {
-        @SuppressLint("HandlerLeak")
-        @Override
-        public void handleMessage(Message msg)
-        {
-            switch(msg.what)
-            {
-                case 0:
-                    Bundle bd=msg.getData();               //����Bundle�õ���Ϣ
-                    String msgStr=bd.getString("msg");     //�õ��ַ���
-                    Toast.makeText(MainFrame.this, msgStr, Toast.LENGTH_LONG).show(); //Toast��ʾ��Ϣ
-                    break;
-            }
-        }
-    };
+      switch(msg.what)
+      {
+        case 0:
+          Bundle bd=msg.getData();               //����Bundle�õ���Ϣ
+          String msgStr=bd.getString("msg");     //�õ��ַ���
+          Toast.makeText(MainFrame.this, msgStr, Toast.LENGTH_LONG).show(); //Toast��ʾ��Ϣ
+          break;
+      }
+    }
+  };
 }

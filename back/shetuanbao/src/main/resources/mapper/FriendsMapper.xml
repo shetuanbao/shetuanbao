@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stb.dao.FriendsMapper">
+    <resultMap id="BaseResultMap" type="com.stb.model.Users">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="username" jdbcType="CHAR" property="userName" />
+        <result column="userpassword" jdbcType="CHAR" property="password" />
+        <result column="useremail" jdbcType="CHAR" property="useremail" />
+        <result column="userphone" jdbcType="CHAR" property="userphone" />
+        <result column="sex" jdbcType="CHAR" property="sex" />
+        <result column="userpen" jdbcType="CHAR" property="userpen" />
+        <result column="userphoto" jdbcType="CHAR" property="userphoto" />
+        <result column="static" jdbcType="CHAR" property="status" />
+        <result column="major" jdbcType="CHAR" property="major" />
+        <result column="xueyuan" jdbcType="CHAR" property="xueyuan" />
+    </resultMap>
+
+    <select id="findFriends" resultMap="BaseResultMap">
+    SELECT * FROM `users` WHERE users.user_id
+     IN
+    (SELECT  friend_id FROM friends WHERE friends.user_id=#{userId})
+  </select>
+
+</mapper>

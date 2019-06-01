@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.community.shetuanbao.chat.ConversationActivity">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_height="50.0dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/gengduo_modifybiaoti12"
+        android:gravity="center_vertical"
+        android:id="@+id/liaotian_person">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/liaotian_name"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="60dp"
+            android:gravity="center_vertical"
+            android:id="@+id/back_conversition"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:text="返回"
+            android:layout_weight="0.6"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/baocun"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:text="保存"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <fragment
+
+
+        android:id="@+id/conversation"
+
+
+        android:name="io.rong.imkit.fragment.ConversationFragment"
+
+
+        android:layout_width="match_parent"
+
+
+        android:layout_height="match_parent" />
+
+</android.support.constraint.ConstraintLayout>

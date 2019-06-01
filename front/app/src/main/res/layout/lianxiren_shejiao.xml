@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".chat.shejiao_lianxiren">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.example.administrator.font.util.RefreshableView
+        android:id="@+id/refreshable_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:divider="@color/gray"
+            android:dividerHeight="1px" />
+        <TextView
+            android:id="@+id/meiyoulianxiren"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="您还没添加好友"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:gravity="center"/>
+    </com.example.administrator.font.util.RefreshableView>
+
+</FrameLayout>

@@ -1,5 +1,4 @@
 package com.community.shetuanbao.Login;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,20 +14,25 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.chat.MyApp;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.RequestUtils;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.rong.imkit.MainActivity;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     public static SharedPreferences sp;
@@ -183,8 +187,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                                 e.printStackTrace();
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
                             }
                             pd.dismiss();
                         }
@@ -214,24 +218,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         @Override
         public void run(){
             try{
-            params=new HashMap<>();
-            params.put("userId",Integer.valueOf(userNameValue));
-            String res = RequestUtils.post("/users/pangetstatusByuserId",params);
-            try {
-                JSONObject jsonObject = new JSONObject(res);
-                if (jsonObject.getInt("code") == 200) {
-                    // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
-                    zhuangtai=jsonObject.getString("data");
-                } else {
-                    Looper.prepare();
-                    Toast.makeText(LoginActivity.this, "获取信息失败", Toast.LENGTH_LONG).show();
+                params=new HashMap<>();
+                params.put("userId",Integer.valueOf(userNameValue));
+                String res = RequestUtils.post("/users/pangetstatusByuserId",params);
+                try {
+                    JSONObject jsonObject = new JSONObject(res);
+                    if (jsonObject.getInt("code") == 200) {
+                        // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+                        zhuangtai=jsonObject.getString("data");
+                    } else {
+                        Looper.prepare();
+                        Toast.makeText(LoginActivity.this, "获取信息失败", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         }
 
     }
@@ -271,4 +275,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
         return true;
     }
+
+
+
 }
+

@@ -10,6 +10,9 @@ import com.stb.util.Imageutil;
 import freemarker.core.ReturnInstruction.Return;
 
 import org.apache.catalina.User;
+
+import com.stb.util.JwtUtil;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -45,12 +48,30 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public Result register(Users user) {
-        if (!user.getUserName().equals("") && !user.getPassword().equals("")) {
-            usersService.save(user);
-            return ResultGenerator.genSuccessResult();
-        }
-        return ResultGenerator.genFailResult();
+    public Result register(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int userId=jsonObject.getInteger("userId");
+        String username=jsonObject.getString("userName");
+        String password=jsonObject.getString("password");
+        String useremail=jsonObject.getString("useremail");
+        String userphone=jsonObject.getString("userphone");
+        String sex=jsonObject.getString("sex");
+        String userpen=jsonObject.getString("userpen");
+        String major=jsonObject.getString("major");
+        String xueyuan=jsonObject.getString("xueyuan");
+        Users u=new Users();
+        u.setMajor(major);
+        u.setPassword(password);
+        u.setSex(sex);
+        u.setUseremail(useremail);
+        u.setUserId(userId);
+        u.setUserName(username);
+        u.setUserpen(userpen);
+        u.setUserphone(userphone);
+        u.setXueyuan(xueyuan);
+        usersService.register(u);
+        String res = "注册成功";
+        return ResultGenerator.genSuccessResult(res);
     }
     
     //pan通过用户id获取状态
@@ -156,4 +177,52 @@ public class UsersController {
     	usersService.update(users);
     	return ResultGenerator.genSuccessResult();
     }
+
+   @PostMapping("/yangGetIdCount")
+    public Result yangGetIdCount(@RequestBody String body){
+       JSONObject jsonObject = JSONObject.parseObject(body);
+       Integer name = jsonObject.getInteger("userId");
+       int a=usersService.yangGetIdCount(name);
+       return ResultGenerator.genSuccessResult(a);
+   }
+
+   //yang利用userId查找用户
+    @PostMapping("/yangGetUserById")
+    public Result yangGetUserById(@RequestBody String body){
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        Integer name = jsonObject.getInteger("userId");
+        Users user=usersService.yangGetUserById(name);
+        return ResultGenerator.genSuccessResult(user);
+    }
+    //根据
+    @PostMapping("/yangGetPhoto")
+    public Result panfindpicture(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        String name = jsonObject.getString("userphoto");
+        byte[] result=Imageutil.getImage(name);
+        List<Byte> result1=new ArrayList();
+        for(int i=0;i<result.length;i++) {
+             result1.add(result[i]);
+        }
+        return ResultGenerator.genSuccessResult(result1);
+    }
+     //得到token的代码
+    @PostMapping("/getToken")
+    public Result getToken(@RequestBody String body){
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int name = jsonObject.getInteger("userId");
+        String a=JwtUtil.sign(name);
+        return ResultGenerator.genSuccessResult(a);
+    }
+
+    //杨通过使用userId删除用户
+    @PostMapping("/yangDeleteUserById")
+    public Result yangDeleteUserById(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        Integer user=jsonObject.getInteger("userId");
+        Integer friend=jsonObject.getInteger("friendId");
+        usersService.yangDeleteUserById(user,friend);
+        return  ResultGenerator.genSuccessResult();
+    }
+
 }
