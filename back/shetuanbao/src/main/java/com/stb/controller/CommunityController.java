@@ -99,4 +99,13 @@ public class CommunityController {
         }
         return ResultGenerator.genSuccessResult(result1);
     }
+
+    //lu通过用户id从community_users和community表获取用户参加过的社团
+    @PostMapping("/lugetCommunitiesByUserId")
+    public Result lugetCommunitiesByUserId(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int userId = jsonObject.getIntValue("userId");
+        List<String> list = communityService.lugetCommunityNamesByUserId(userId);
+        return ResultGenerator.genSuccessResult(list);
+    }
 }

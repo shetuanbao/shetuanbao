@@ -7,9 +7,10 @@ public class Users {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String userName;
 
+    @Column(name="userpassword")
     private String password;
 
     private String useremail;
@@ -22,6 +23,7 @@ public class Users {
 
     private String userphoto;
 
+    @Column(name="static")
     private String status;
 
     private String major;

@@ -21,4 +21,10 @@
   <select id="panfindByCommunityUser" resultType="Integer">
     SELECT `user_id` FROM `community_users` WHERE `community_id`=#{communityId}
   </select>
+
+  <select id="lugetCommunityNamesByUserId" resultType="String">
+      select c.community_name
+	  from `community` c, `community_users` cu
+	  where cu.`user_id`=#{userId} and cu.`community_id`=c.`community_id`
+  </select>
 </mapper>

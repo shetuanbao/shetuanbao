@@ -11,7 +11,9 @@ import com.stb.util.JwtUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -169,6 +171,51 @@ public class UsersController {
         usersService.yangDeleteUserById(user,friend);
         return  ResultGenerator.genSuccessResult();
     }
+    //lu通过用户id获取用户图片等信息
+    @PostMapping("/lugetUserByUserId")
+    public Result lugetUserByUserId(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        Integer userId = jsonObject.getInteger("userId");
+        Users user = usersService.findById(userId);
+        byte[] userphoto = Imageutil.getImage(user.getUserphoto());
+        List<Byte> photo=new ArrayList<Byte>();
+        for(int i=0;i<userphoto.length;i++) {
+            photo.add(userphoto[i]);
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("user", user);
+        map.put("photo", photo);
+        return ResultGenerator.genSuccessResult(map);
+    }
 
+    //lu更新用户个人信息
+    @PostMapping("/luupdateUser")
+    public Result luupdateUser(@RequestBody String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        Users users = new Users();
+        Integer userId = new Integer(jsonObject.getString("userId"));
+        if (userId == null || usersService.findById(userId) == null) {
+            return ResultGenerator.genFailResult("该用户不存在");
+        } else {
+            users.setUserId(userId);
+        }
+        if (jsonObject.getString("userName") != null) {
+            users.setUserName(jsonObject.getString("userName"));
+        }
+        if (jsonObject.getString("sex") != null) {
+            users.setSex(jsonObject.getString("sex"));
+        }
+        if (jsonObject.getString("useremail") != null) {
+            users.setUseremail(jsonObject.getString("useremail"));
+        }
+        if (jsonObject.getString("userphone") != null) {
+            users.setUserphone(jsonObject.getString("userphone"));
+        }
+        if (jsonObject.getString("userpen") != null) {
+            users.setUserpen(jsonObject.getString("userpen"));
+        }
+        usersService.update(users);
+        return ResultGenerator.genSuccessResult();
+    }
 
 }

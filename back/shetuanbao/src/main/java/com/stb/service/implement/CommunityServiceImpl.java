@@ -30,4 +30,9 @@ public class CommunityServiceImpl extends AbstractService<Community> implements 
     public List<Integer> panfindByCommunityUser(int communityId){
     	return communityMapper.panfindByCommunityUser(communityId);
     }
+
+    @Override
+    public List<String> lugetCommunityNamesByUserId(int userId) {
+        return communityMapper.lugetCommunityNamesByUserId(userId);
+    }
 }
