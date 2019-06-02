@@ -98,7 +98,7 @@ public class CommunityCharitableActivity extends Activity {
                     if (jsonObject.getInt("code") == 200) {
                         // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
                         JSONArray list = (JSONArray) jsonObject.getJSONObject("data").get("list");
-                        tempid = new int[list.length()];
+                            tempid = new int[list.length()];
                         for (int i = 0; i < list.length(); i++) {
                             tempid[i]=list.getJSONObject(i).getInt("communityId");
                         }
@@ -190,7 +190,7 @@ public class CommunityCharitableActivity extends Activity {
                         }
                     }
                     else{
-                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
+                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);
                         if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
                             F_GetBitmap.bitmap = null;
                         }

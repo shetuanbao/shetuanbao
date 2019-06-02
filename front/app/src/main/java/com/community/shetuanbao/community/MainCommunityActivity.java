@@ -579,7 +579,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                 convertView.setTag(myViews);
             } else {
                 myViews = (ViewHolder) convertView.getTag();
-
             }
             myViews.image.setImageBitmap((Bitmap) data.get(position).get("image"));
             myViews.name.setText((String) data.get(position).get("name"));

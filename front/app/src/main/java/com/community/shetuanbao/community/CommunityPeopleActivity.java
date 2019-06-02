@@ -175,7 +175,8 @@ public void initList()
         public void handleMessage(Message msg) {
             showDialog(0);
         }
-    };@SuppressWarnings("deprecation")
+    };
+    @SuppressWarnings("deprecation")
     @SuppressLint("InflateParams")
     private class baseAdapter extends BaseAdapter
     {
