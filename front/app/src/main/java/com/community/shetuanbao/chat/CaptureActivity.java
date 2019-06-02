@@ -18,13 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.utils.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
 import com.zxing.decoding.CaptureActivityHandler;
 import com.zxing.decoding.InactivityTimer;
-import com.zxing.view.ViewfinderView;
 import android.view.SurfaceHolder.Callback;
 import java.io.IOException;
 import java.util.Map;
@@ -56,7 +56,7 @@ public class CaptureActivity extends Activity implements Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
-        viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+        viewfinderView =  findViewById(R.id.viewfinder_view);
         cancelScanButton = (TextView) this.findViewById(R.id.btn_cancel_scan);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
