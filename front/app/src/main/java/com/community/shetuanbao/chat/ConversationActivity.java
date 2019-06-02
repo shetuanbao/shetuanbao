@@ -15,7 +15,6 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.FontManager;
@@ -32,6 +31,7 @@ import java.util.Map;
 import io.rong.imkit.MainActivity;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 public class ConversationActivity extends FragmentActivity {
     private TextView title;//对话活动题目
@@ -71,6 +71,7 @@ public class ConversationActivity extends FragmentActivity {
                 init2();
             }
         });
+        initUnreadCountListener();
     }
     public void init()
     {//从数据库中根据用户id获取用户的名字
@@ -117,8 +118,6 @@ public class ConversationActivity extends FragmentActivity {
                             Looper.prepare();
 //                            Toast.makeText(HttpTestActivity.this,"登陆成功", Toast.LENGTH_LONG).show();
 //                                    Looper.loop();
-//                            Intent intent = new Intent(HttpTestActivity.this, ActivityInfoActivity.class);
-//                            startActivity(intent);
                         } else {
                             // 后台返回失败结果
                             Looper.prepare();
@@ -195,6 +194,39 @@ public class ConversationActivity extends FragmentActivity {
             }
         }
     };
+    /**
+     *
+            * 融云未读消息监听
+ */
+    private void initUnreadCountListener() {
+        final Conversation.ConversationType[] conversationTypes = {Conversation.ConversationType.PRIVATE, Conversation.ConversationType.DISCUSSION,
+                Conversation.ConversationType.GROUP, Conversation.ConversationType.SYSTEM,
+                Conversation.ConversationType.PUBLIC_SERVICE};
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RongIM.getInstance().setOnReceiveUnreadCountChangedListener(mCountListener, conversationTypes);
+            }
+        }, 500);
+    }
+    public RongIM.OnReceiveUnreadCountChangedListener mCountListener = new RongIM.OnReceiveUnreadCountChangedListener() {
+        @Override
+        public void onMessageIncreased(int count) {
+            Log.e("tag","count:" + count);
+            if (count == 0) {
+//                tvTabBadge.setVisibility(View.GONE);
+            } else if (count > 0 && count < 100) {
+//                tvTabBadge.setVisibility(View.VISIBLE);
+//                tvTabBadge.setText(count + "");
+            } else {
+//                tvTabBadge.setVisibility(View.VISIBLE);
+//                tvTabBadge.setText("99+");
+            }
+        }
+    };
+
 
 
 }

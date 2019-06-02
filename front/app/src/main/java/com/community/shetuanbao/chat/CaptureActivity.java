@@ -2,6 +2,7 @@ package com.community.shetuanbao.chat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -18,44 +19,55 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.R;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
 import com.zxing.decoding.CaptureActivityHandler;
 import com.zxing.decoding.InactivityTimer;
 import com.zxing.view.ViewfinderView;
-
+import android.view.SurfaceHolder.Callback;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Vector;
 
-public class CaptureActivity extends Activity implements SurfaceHolder.Callback {
+import static io.rong.imlib.model.PublicServiceMenu.PublicServiceMenuItemType.View;
+
+public class CaptureActivity extends Activity implements Callback {
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
+    private CameraManager cameraManager;
+    private Map<DecodeHintType, ?> decodeHints;
     private boolean hasSurface;
     private Vector<BarcodeFormat> decodeFormats;
     private String characterSet;
     private InactivityTimer inactivityTimer;
     private MediaPlayer mediaPlayer;
+
     private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
     private TextView cancelScanButton;
+
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
-        CameraManager.init(getApplication());
+        //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         cancelScanButton = (TextView) this.findViewById(R.id.btn_cancel_scan);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
+
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        CameraManager.init(getApplication());
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         if (hasSurface) {
@@ -64,10 +76,11 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
             surfaceHolder.addCallback(this);
             surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         }
-        decodeFormats = new Vector<BarcodeFormat>();
-        characterSet = "utf-8";
+        decodeFormats = null;
+        characterSet = null;
 
         playBeep = true;
+
         AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
             playBeep = false;
@@ -83,6 +96,13 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
             handler = null;
         }
         CameraManager.get().closeDriver();
+        if (!hasSurface) {
+            SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+            SurfaceHolder surfaceHolder = surfaceView.getHolder();
+            surfaceHolder.removeCallback(this);
+        }
+        super.onPause();
+
     }
 
     @Override
@@ -116,13 +136,13 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     private void initCamera(SurfaceHolder surfaceHolder) {
         try {
             CameraManager.get().openDriver(surfaceHolder);
+        if (handler == null) {
+//            handler = new CaptureActivityHandler(this, decodeFormats,decodeHints, characterSet, cameraManager);
+        }
         } catch (IOException ioe) {
             return;
         } catch (RuntimeException e) {
             return;
-        }
-        if (handler == null) {
-//            handler = new CaptureActivityHandler(this,decodeFormats, characterSet);
         }
     }
 
@@ -146,13 +166,16 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
         hasSurface = false;
 
     }
-
     public ViewfinderView getViewfinderView() {
         return viewfinderView;
     }
 
     public Handler getHandler() {
         return handler;
+    }
+
+    public CameraManager getCameraManager() {
+        return cameraManager;
     }
 
     public void drawViewfinder() {
@@ -162,6 +185,9 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 
     private void initBeepSound() {
         if (playBeep && mediaPlayer == null) {
+            // The volume on STREAM_SYSTEM is not adjustable, and users found it
+            // too loud,
+            // so we now play on the music stream.
             setVolumeControlStream(AudioManager.STREAM_MUSIC);
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -183,7 +209,6 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 
     private static final long VIBRATE_DURATION = 200L;
 
-    @SuppressLint("MissingPermission")
     private void playBeepSoundAndVibrate() {
         if (playBeep && mediaPlayer != null) {
             mediaPlayer.start();

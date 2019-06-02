@@ -128,9 +128,10 @@ public class lianxiren_message extends Activity implements View.OnClickListener{
         switch(v.getId())
         {
             case R.id.faxiaoxi:
-//                if (RongIM.getInstance() != null)
-//                this.finish();
-                RongIM.getInstance().startPrivateChat(this, userId.toString(),"标题");
+//                Intent it=new Intent(lianxiren_message.this,ChatInterfaceActivity.class);
+//                startActivity(it);
+                if (RongIM.getInstance() != null)
+                    RongIM.getInstance().startPrivateChat(this, userId.toString(),"标题");
                 break;
             case R.id.myselftool_text1:
                 this.finish();

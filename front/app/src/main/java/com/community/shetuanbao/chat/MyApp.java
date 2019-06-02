@@ -3,6 +3,8 @@ package com.community.shetuanbao.chat;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.community.shetuanbao.utils.RongCloudEvent;
 
@@ -12,6 +14,7 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
 public class MyApp extends Application {
 
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     @Override
     public void onCreate() {
 
@@ -39,6 +42,7 @@ public class MyApp extends Application {
      * @param context
      * @return 进程名字的字符串
      */
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public static String getCurProcessName(Context context) {
 
         int pid = android.os.Process.myPid();
