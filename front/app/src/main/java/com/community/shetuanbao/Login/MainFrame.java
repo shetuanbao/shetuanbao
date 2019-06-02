@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.community.shetuanbao.Personal.MainPersonalActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.community.MainCommunityActivity;
 import com.community.shetuanbao.utils.Exit;
@@ -120,11 +121,11 @@ public class MainFrame extends ActivityGroup
         }
         else if(position==3)
         {
-//                    v=getThree();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(3);
-//                    list.add(3,v);
+                    v=getThree();
+                    container.removeView(v);
+                    container.addView(v);
+                    list.remove(3);
+                    list.add(3,v);
         }
         return v;
       }
@@ -217,13 +218,13 @@ public class MainFrame extends ActivityGroup
   @SuppressWarnings("deprecation")
   public View getThree()                           //�õ�����view
   {
-//        view4 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("more",
-//                        new Intent(MainFrame.this,MainMyselfActivity.class))
-//                .getDecorView();
-//        return view4;                               //����view
-    return null;
+        view4 = MainFrame.this
+                .getLocalActivityManager()
+                .startActivity("more",
+                        new Intent(MainFrame.this,MainPersonalActivity.class))
+                .getDecorView();
+        return view4;                               //����view
+//    return null;
   }
   //点击底部按钮时改变底部按钮的样式（类似与选中提示）
   private class MyBtnOnClick implements View.OnClickListener {

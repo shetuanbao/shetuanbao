@@ -1,5 +1,6 @@
 package com.community.shetuanbao.Login;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,7 +8,9 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -63,6 +66,7 @@ public class MainSocialActivity extends FragmentActivity {
     ImageView school;
     ImageView sousuo=null;
     String scanResult=null;
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,7 @@ public class MainSocialActivity extends FragmentActivity {
         sousuo=(ImageView)findViewById(R.id.main_searc_image);
         sousuo.setOnClickListener(new View.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -103,6 +108,8 @@ public class MainSocialActivity extends FragmentActivity {
         InitImageView();
         InitTextView();
     }
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
 
@@ -150,6 +157,7 @@ public class MainSocialActivity extends FragmentActivity {
     {
         new Thread(new Runnable()
         {
+            @RequiresApi(api = Build.VERSION_CODES.DONUT)
             @Override
             public void run()
             {
@@ -260,6 +268,7 @@ public class MainSocialActivity extends FragmentActivity {
         }
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     private Fragment initConversation()
     {
         if (mCoversationList == null) {
@@ -309,6 +318,7 @@ public class MainSocialActivity extends FragmentActivity {
         }
         return true;
     }
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     private void connect(String token) {
 
         if (getApplicationInfo().packageName.equals(MyApp.getCurProcessName(getApplicationContext()))) {
