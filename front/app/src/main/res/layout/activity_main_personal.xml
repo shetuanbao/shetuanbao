@@ -103,18 +103,18 @@
                 android:text="用户帮助"
                 android:textColor="#666666"
                 android:textSize="18sp" />
-            <TextView
-                android:id="@+id/mine_guanli"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gengduo_beijingtiao"
-                android:layout_margin="0.5dp"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:padding="11dp"
-                android:text="管理"
-                android:textColor="#666666"
-                android:textSize="18sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/mine_guanli"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/gengduo_beijingtiao"-->
+                <!--android:layout_margin="0.5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="left|center_vertical"-->
+                <!--android:padding="11dp"-->
+                <!--android:text="管理"-->
+                <!--android:textColor="#666666"-->
+                <!--android:textSize="18sp" />-->
 
         </LinearLayout>
     </LinearLayout>
