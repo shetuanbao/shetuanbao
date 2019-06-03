@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.ACache;
 import com.community.shetuanbao.utils.Exit;
@@ -123,7 +124,7 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
         public void run(){
             // 使用user_id获取用户信息
             Map<String, Object> params = new HashMap<>();
-            params.put("userId", 2013141006);
+            params.put("userId", LoginActivity.sp.getInt("SNO", 0));
             try {
                 String res = RequestUtils.post("/users/lugetUserByUserId", params);
                 Log.d("response", res);
