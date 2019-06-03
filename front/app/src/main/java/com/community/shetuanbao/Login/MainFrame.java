@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.Personal.MainPersonalActivity;
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.activity.MainCampaignActivity;
 import com.community.shetuanbao.community.MainCommunityActivity;
 import com.community.shetuanbao.utils.Exit;
 
@@ -105,11 +106,11 @@ public class MainFrame extends ActivityGroup
         }
         else if(position==1)
         {
-//                    v=getOne();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(1);
-//                    list.add(1,v);
+                    v=getOne();
+                    container.removeView(v);
+                    container.addView(v);
+                    list.remove(1);
+                    list.add(1,v);
         }
         else if(position==2)
         {
@@ -142,10 +143,8 @@ public class MainFrame extends ActivityGroup
       @Override
 
       public void onPageSelected(int arg0) {
-        // �������ť��ʽ
         initButtomBth();
-        // ���ն�Ӧ��view��tag���жϵ����л����ĸ����档
-        // ���Ķ�Ӧ��button״̬
+
         if(arg0 == 0) {
           bottomviewLuntanImageview
                   .setImageResource(R.mipmap.b_shetuan);
@@ -169,16 +168,12 @@ public class MainFrame extends ActivityGroup
         }
       }
 
-      /**
-       * ����ҳ�滬���� arg0 ��ʾ��ǰ������view arg1 ��ʾ�����İٷֱ� arg2 ��ʾ�����ľ���
-       * */
+
       @Override
       public void onPageScrolled(int arg0, float arg1, int arg2) {
       }
 
-      /**
-       * ��������״̬ arg0 ��ʾ���ǵĻ���״̬ 0:Ĭ��״̬ 1:����״̬ 2:����ֹͣ
-       * */
+
       @Override
       public void onPageScrollStateChanged(int arg0) {
       }
@@ -197,13 +192,13 @@ public class MainFrame extends ActivityGroup
   @SuppressWarnings("deprecation")
   public View getOne()                           //�õ�ʧ������view
   {
-//        view1 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("lostandfind",
-//                        new Intent(MainFrame.this,MainCampaignActivity.class))
-//                .getDecorView();
-//        return view1;                              //����view
-    return null;
+        view1 = MainFrame.this
+                .getLocalActivityManager()
+                .startActivity("lostandfind",
+                        new Intent(MainFrame.this,MainCampaignActivity.class))
+                .getDecorView();
+        return view1;                              //����view
+//    return null;
   }
   @SuppressWarnings("deprecation")
   public View getTwo()                           //�õ������г�view
@@ -231,7 +226,6 @@ public class MainFrame extends ActivityGroup
     @Override
     public void onClick(View arg0) {
       int mBtnid = arg0.getId();
-      //�������ǵ�viewpager��ת�Ǹ�����0������������ǵ�list���,�൱��list������±�
       switch (mBtnid) {
         case R.id.frame_bottomview_luntan :
           mViewPager.setCurrentItem(0);
