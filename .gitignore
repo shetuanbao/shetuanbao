@@ -7,3 +7,8 @@ front/local.properties
 back/.metadata
 back/.recommenders
 back/RemoteSystemsTempFiles
+back/shetuanbao/.classpath
+back/shetuanbao/.project
+back/shetuanbao/.settings/
+back/shetuanbao/target/
+
