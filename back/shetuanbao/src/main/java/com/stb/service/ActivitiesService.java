@@ -15,5 +15,7 @@ public interface ActivitiesService extends Service<Activities> {
     public List<Activities> pangetactivityByCommunityId(int communityId);
     public List<String> getAlbum(int activityId);
     public Activities getDetail(int activityId);
+    public void insertUser(int activityId,int userId);
+    public int check(int activityId,int userId);
 
 }

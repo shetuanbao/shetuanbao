@@ -16,10 +16,8 @@ public interface CommunityService extends Service<Community> {
 	
 	//pan通过社团id查找社团成员
 	public List<Integer> panfindByCommunityUser(int communityId);
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> remotes/origin/dev1
 	public List<String> lugetCommunityNamesByUserId(int userId);
+
+	public int check(int activityId,int userId);
 }

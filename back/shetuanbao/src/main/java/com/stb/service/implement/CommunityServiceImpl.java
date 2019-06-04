@@ -31,15 +31,14 @@ public class CommunityServiceImpl extends AbstractService<Community> implements 
     	return communityMapper.panfindByCommunityUser(communityId);
     }
 
-<<<<<<< HEAD
     @Override
     public List<String> lugetCommunityNamesByUserId(int userId) {
         return communityMapper.lugetCommunityNamesByUserId(userId);
     }
-=======
-	@Override
-	public List<String> lugetCommunityNamesByUserId(int userId) {
-		return communityMapper.lugetCommunityNamesByUserId(userId);
-	}
->>>>>>> remotes/origin/dev1
+
+    @Override
+    public int check(int communityId, int userId) {
+        return communityMapper.check(communityId,userId);
+    }
+
 }

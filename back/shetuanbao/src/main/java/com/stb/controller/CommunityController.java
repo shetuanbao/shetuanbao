@@ -110,7 +110,6 @@ public class CommunityController {
         }
         return ResultGenerator.genSuccessResult(result1);
     }
-<<<<<<< HEAD
 
     //lu通过用户id从community_users和community表获取用户参加过的社团
     @PostMapping("/lugetCommunitiesByUserId")
@@ -119,15 +118,16 @@ public class CommunityController {
         int userId = jsonObject.getIntValue("userId");
         List<String> list = communityService.lugetCommunityNamesByUserId(userId);
         return ResultGenerator.genSuccessResult(list);
-=======
-    
-    //lu通过用户id从community_users和community表获取用户参加过的社团
-    @PostMapping("/lugetCommunitiesByUserId")
-    public Result lugetCommunitiesByUserId(@RequestBody String body) {
-    	JSONObject jsonObject = JSONObject.parseObject(body);
-    	int userId = jsonObject.getIntValue("userId");
-    	List<String> list = communityService.lugetCommunityNamesByUserId(userId);
-    	return ResultGenerator.genSuccessResult(list);
->>>>>>> remotes/origin/dev1
     }
+
+    //检查是否为社团成员
+    @PostMapping("/checkCommunity")
+    public Result check(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        int activityId=jsonObject.getInteger("communityId");
+        int userId=jsonObject.getInteger("userId");
+        int a=communityService.check(activityId,userId);
+        return ResultGenerator.genSuccessResult(a);
+    }
+
 }

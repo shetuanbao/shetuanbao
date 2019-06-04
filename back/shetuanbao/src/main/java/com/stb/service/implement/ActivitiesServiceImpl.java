@@ -37,6 +37,15 @@ public class ActivitiesServiceImpl extends AbstractService<Activities> implement
         return activitiesMapper.getDetail(activityId);
     }
 
+    @Override
+    public void insertUser(int activityId, int userId) {
+        activitiesMapper.insertUser(activityId,userId);
+    }
+
+    @Override
+    public int check(int activityId, int userId) {
+        return activitiesMapper.check(activityId,userId);
+    }
 
 
 }

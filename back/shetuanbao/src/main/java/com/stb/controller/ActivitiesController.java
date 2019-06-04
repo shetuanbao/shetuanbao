@@ -91,5 +91,22 @@ public class ActivitiesController {
         Activities list = activitiesService.getDetail(activityId);
         return ResultGenerator.genSuccessResult(list);
     }
+    @PostMapping("/insertUser")
+    public Result insertUser(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        int userId=jsonObject.getInteger("userId");
+        int activityId=jsonObject.getInteger("activityId");
+        activitiesService.insertUser(activityId,userId);
+        return ResultGenerator.genSuccessResult();
+    }
+
+    @PostMapping("/checkInActivity")
+    public Result check(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        int activityId=jsonObject.getInteger("activityId");
+        int userId=jsonObject.getInteger("userId");
+        int a=activitiesService.check(activityId,userId);
+        return ResultGenerator.genSuccessResult(a);
+    }
 
 }
