@@ -2,6 +2,7 @@ package com.stb.controller;
 import com.stb.core.Result;
 import com.stb.core.ResultGenerator;
 import com.stb.model.Activities;
+import com.stb.model.activityPinlun;
 import com.stb.service.ActivitiesService;
 import com.stb.util.Imageutil;
 import com.alibaba.fastjson.JSONObject;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/04/27.
-*/
+ * Created by CodeGenerator on 2019/04/27.
+ */
 @RestController
 @RequestMapping("/activities")
 public class ActivitiesController {
@@ -47,22 +48,24 @@ public class ActivitiesController {
         return ResultGenerator.genSuccessResult(activities);
     }
 
-    @GetMapping("/list")
-    public Result list() {
+    @PostMapping("/list")
+    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        PageHelper.startPage(page, size);
         List<Activities> list = activitiesService.findAll();
-        return ResultGenerator.genSuccessResult(list);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
-    
-   //pan通过社团id获取活动
+
+    //pan通过社团id获取活动
     @PostMapping("/pangetactivityByCommunityId")
     public Result pangetactivityByCommunityId(@RequestBody String body) {
-    	JSONObject jsonObject = JSONObject.parseObject(body);
-    	int communityId=jsonObject.getInteger("communityId");
-    	List<Activities> list = activitiesService.pangetactivityByCommunityId(communityId);
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int communityId=jsonObject.getInteger("communityId");
+        List<Activities> list = activitiesService.pangetactivityByCommunityId(communityId);
         return ResultGenerator.genSuccessResult(list);
     }
-   
-  //pan通过活动图标名称获取图标
+
+    //pan通过活动图标名称获取图标
     @PostMapping("/panfindpicture")
     public Result panfindpicture(@RequestBody String body) {
         JSONObject jsonObject = JSONObject.parseObject(body);
@@ -70,8 +73,23 @@ public class ActivitiesController {
         byte[] result=Imageutil.getImage(name);
         List<Byte> result1=new ArrayList();
         for(int i=0;i<result.length;i++) {
-        	result1.add(result[i]);
+            result1.add(result[i]);
         }
         return ResultGenerator.genSuccessResult(result1);
     }
+    @PostMapping("/yangGetAlbum")
+    public  Result yangGetAlbum(@RequestBody String body){
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int activityId=jsonObject.getInteger("activityId");
+        List<String> list = activitiesService.getAlbum(activityId);
+        return ResultGenerator.genSuccessResult(list);
+    }
+    @PostMapping("/getActivityDetail")
+    public  Result getActivityDetail(@RequestBody String body){
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        int activityId=jsonObject.getInteger("activityId");
+        Activities list = activitiesService.getDetail(activityId);
+        return ResultGenerator.genSuccessResult(list);
+    }
+
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">社团宝</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -24,14 +23,6 @@
     <string name="more_phone">联系电话：</string>
 
     <string name="scan_text"> </string>
-
-
-
-
-
-
-
-
     <string name="andy">活动名称:迎新舞会\r\n活动时间:2016年5月1日\r\n活动地点:校礼堂</string>
     <string name="bill">活动名称:元旦晚会\r\n活动时间:2016年10月5日\r\n活动地点:教室</string>
     <string name="edgar">活动名称:篮球赛\r\n活动时间:2016年5月10日\r\n活动地点:篮球场</string>

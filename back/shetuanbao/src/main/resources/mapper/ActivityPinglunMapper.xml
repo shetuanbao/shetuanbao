@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stb.dao.ActivityPinglunMapper">
+    <resultMap id="BaseResultMap" type="com.stb.model.activityPinlun">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="sid_activity" jdbcType="CHAR" property="activityId" />
+        <result column="sid_user" jdbcType="CHAR" property="userId" />
+        <result column="sdetail" jdbcType="CHAR" property="sdetail" />
+        <result column="stime" jdbcType="CHAR" property="stime" />
+        <result column="sname" jdbcType="CHAR" property="sname" />
+        <result column="spicture" jdbcType="CHAR" property="spicture" />
+    </resultMap>
+
+    <select id="getPinglun" resultMap="BaseResultMap">
+        SELECT * FROM activity_pinglun WHERE sid_activity=#{activityId}
+    </select>
+<delete id="deletePinglun" parameterType="String">
+    DELETE FROM activity_pinglun WHERE sid_activity=#{activityId} AND sid_user=#{userId}
+</delete>
+</mapper>

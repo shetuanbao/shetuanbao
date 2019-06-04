@@ -37,14 +37,14 @@ public class grideActivity extends Activity{
 	String image[]=null;
 	String name[]=null;
 	baseAdapter base;
-	String id=null;
+	int id;
 	@Override
 	public void onCreate(Bundle savedInstanceState){ 
         super.onCreate(savedInstanceState); 
         setContentView(R.layout.gride);
         Intent intent = getIntent();
         //得到活动的相册
-        id = intent.getStringExtra("id");
+        id = intent.getIntExtra("id",0);
         thread_get gg=new thread_get();
         gg.start();
         try{

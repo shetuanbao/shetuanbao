@@ -32,6 +32,7 @@ import android.widget.TextView;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.GetActivityInfo;
 import com.community.shetuanbao.utils.RefreshableView;
 
 public class huodong_sousuo extends Activity {
@@ -88,6 +89,7 @@ public class huodong_sousuo extends Activity {
 		@Override
 		public void run() {
 			//得到活动的各种信息
+
 //			namey = NetInfoUtil.gethuodongbyname(sousuo);
 //			timey = NetInfoUtil.gethuodongtimebyname(sousuo);
 //			didiany = NetInfoUtil.gethuodongplacebyname(sousuo);

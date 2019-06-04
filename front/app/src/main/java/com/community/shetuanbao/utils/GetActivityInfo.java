@@ -26,6 +26,7 @@ public class GetActivityInfo {
     public static  Integer[] activityLei;//活动类型
     public static  String[] time;//活动时间
     public static String[] palce;//活动地点
+    public static String[] album;
     public static int a;
 //    public static byte[][] all_image;
 
@@ -100,5 +101,30 @@ public class GetActivityInfo {
             Log.d("error", String.valueOf(e));
         }
         return image;
+    }
+
+    public static String[] getAlbum(int id) {
+        byte[] image=null;
+        Map<String, Object> params = new HashMap<>();
+        params = new HashMap<>();
+        params.put("activityId", id);
+        String res1 = null;
+        try {
+            res1 = RequestUtils.post("/activities/yangGetAlbum", params);
+            JSONObject jsonObject1 = new JSONObject(res1);
+            Log.d("byte",res1);
+            if (jsonObject1.getInt("code") == 200) {
+                // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+                JSONArray list1 = (JSONArray) jsonObject1.get("data");
+                album = new String[list1.length()];
+                for (int j = 0; j < list1.length(); j++) {
+                    album[j] = list1.getJSONObject(j).toString();
+                }
+                return album;
+            }
+        } catch (Exception e) {
+            Log.d("error", String.valueOf(e));
+        }
+        return album;
     }
 }

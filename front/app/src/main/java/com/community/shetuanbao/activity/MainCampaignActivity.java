@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,11 +24,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.community.MainCommunityActivity;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
 import com.community.shetuanbao.utils.GetActivityInfo;
 import com.community.shetuanbao.utils.RefreshableView;
+import com.community.shetuanbao.utils.RequestUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -77,6 +81,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +105,7 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
     private RelativeLayout title = null;
     private RelativeLayout title_gone = null;
     private AutoCompleteTextView actv;
+    Map<String, Object> params;
     ImageView search = null;
     ImageView back = null;
     String mes;
@@ -120,19 +130,12 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
     Bitmap[] imagehuadong;
     Bitmap[] imageDatafu;
     byte[][] all_imagefu;
-    byte[] all_image;
+    byte[][] all_image;
     byte[][] all_imagedong;
     byte[][] allimage;
     private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
     private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
     private List<Map<String, Object>> huadong = new ArrayList<Map<String, Object>>();
-    List<String[]> namey = new ArrayList<String[]>();
-    List<String[]> timey = new ArrayList<String[]>();
-    List<String[]> didiany = new ArrayList<String[]>();
-    List<String[]> idy = new ArrayList<String[]>();
-    List<String[]> imagey = new ArrayList<String[]>();
-    List<String[]> imaged = new ArrayList<String[]>();
-    List<String[]> zong = new ArrayList<String[]>();
     private baseAdapter base = null;
     private RelativeLayout nodate = null;
     private ImageView nodate_image = null;
@@ -148,14 +151,16 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
     static int countz = 0;
     static int countx = 0;
     static int idd=85001;
-    static Integer idd2[]=null;//活动id
-    static String namee[]=null;//活动名
-    static String placee[]=null;//活动地点
-    static String timee[]=null;//活动时间
-//    private String huodongname[]=null;
+    static Integer[] idd2=null;//活动id
+    static String[] namee=null;//活动名
+    static String[] placee=null;//活动地点
+    static String[] timee=null;//活动时间
+    static String[] introduce=null;
+    static Integer[] leixing=null;
+    private String[] huodongname=null;
     private int actnum;//表示活动的数量
     private boolean isRunning = true;
-    private String huodongid[]=null;
+    private Integer[] huodongid=null;
     static int huodongcount=0;
     boolean shifou=false;
     ScrollView sc=null;
@@ -163,12 +168,13 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
-
+            // 执行滑动到下一个页面
             viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
             if (isRunning) {
-
-                handler.sendEmptyMessageDelayed(0, 2000);
+                // 在发一个handler延时
+                handler.sendEmptyMessageDelayed(0, 3000);
             }
+
         };
     };
     @SuppressWarnings("deprecation")
@@ -236,7 +242,7 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
         pd2.setMax(100);
         pd2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd2.setCancelable(false);
-        pd2.setMessage("鍔犺浇涓�...璇风◢鍚�");
+        pd2.setMessage("正在加载，请稍后....");
         search = (ImageView)findViewById(R.id.main_search_title_image);
         title = (RelativeLayout)findViewById(R.id.huodong);
         title_gone = (RelativeLayout) findViewById(R.id.main_search_title_clock);
@@ -281,6 +287,7 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
                 title_gone.setVisibility(View.GONE);
             }
         });
+        //加载活动线程
         thread_ntd th = new thread_ntd();
         th.start();
         try {
@@ -288,17 +295,23 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         actv = (AutoCompleteTextView) findViewById(R.id.title_bar_name_text);
         actv.setThreshold(1);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(MainCampaignActivity.this,
-                R.layout.autocompletetextview, namee);
+                R.layout.autocompletetextview, huodongname);
         actv.setAdapter(adapter2);
         actv.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
-                for (int i = 0; i < actnum; i++) {
-                    if (actv.getText().toString().trim().equals(namee[i].toString().trim())) {
+                for (int i = 0; i < huodongname.length; i++) {
+                    if (actv.getText().toString().trim().equals(huodongname[i])) {
                         String messa = actv.getText().toString();
                         Intent it=new Intent(MainCampaignActivity.this,huodong_sousuo.class);
                         it.putExtra("sousuo", messa);
@@ -379,97 +392,141 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
+            //返回所有社团的所有信息
             try {
-                GetActivityInfo.GetActivities();
-               actnum= GetActivityInfo.a;
-//                all = new String[n][zong.get(0).length];
-//                name = new String[all.length];
-//                time = new String[all.length];
-//                didian = new String[all.length];
-                id = new Integer[actnum];//活动类型
-                image = new String[actnum];//照片名
-                all_image = new byte[actnum];
-//                imageData = new Bitmap[all.length];
-//                imageDatafu=new Bitmap[all.length];
-//                all_imagefu=new byte[all.length][];
-                idd2=new Integer[actnum];//活动id
-                placee=new String[actnum];//活动地点
-                namee=new String[actnum];//活动名
-                timee=new String[actnum];//活动时间
-                imageData = new Bitmap[actnum];
-                num = actnum;
-                if (num < 5) {
-                    n = num;
-                    x = n;
-                    num = num - n;
-                } else {
-                    n = 5;
-                    x = n;
-                    num = num - n;
-                }
-                    for (int i = 0; i <actnum; i++) {
-                            idd2[i]=GetActivityInfo.activityId[i];
-                            namee[i]=GetActivityInfo.activityName[i];
-                            timee[i]=GetActivityInfo.time[i];
-                            placee[i]=GetActivityInfo.palce[i];
-                            id[i]=GetActivityInfo.activityLei[i];
-                            image[i] = GetActivityInfo.activityPicture[i] + ".png";
-
-                    }
-                    for (int i = 0; i < actnum; i++) {
-                        if (F_GetBitmap.isEmpty(image[i])) {
-                            all_image=GetActivityInfo.getImage2(image[i]);
-//                        all_image[i] = NetInfoUtil.getPicture(image[i]);
-                            F_GetBitmap.setInSDBitmap(all_image, image[i]);
-                            InputStream input = null;
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-                            options.inSampleSize = 2;
-                            input = new ByteArrayInputStream(all_image);
-                            @SuppressWarnings({ "rawtypes", "unchecked" })
-                            SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                            imageData[i] = (Bitmap) softRef.get();
-                            System.out.println(imageData.length);
+                params=new HashMap<>();
+                params.put("page",0);
+                params.put("size",0);
+                String res = RequestUtils.post("/activities/list",params);
+                Log.d("response",res);
+                try {
+                    JSONObject jsonObject = new JSONObject(res);
+                    if (jsonObject.getInt("code") == 200) {
+                        // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+                        JSONArray list = (JSONArray) jsonObject.getJSONObject("data").get("list");
+                        num=list.length();
+                        if (num < 5) {
+                            n = num;
+                            x = n;
+                            num = num - n;
                         } else {
-                            imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// 鎷垮埌鐨勬槸BitMap绫诲瀷鐨勫浘鐗囨暟鎹�
-                            if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-                                F_GetBitmap.bitmap = null;
+                            n = 5;
+                            x = n;
+                            num = num - n;
+                        }
+//                        shetuan = new String[n];
+                        id = new Integer[n];
+                        timee = new String[n];
+                        placee=new String[n];
+                        namee=new String[n];
+                        imageData = new Bitmap[n];
+                        image=new String[n];
+                        leixing=new Integer[n];
+                        introduce=new String[n];
+                        for (int i = 0; i < n; i++) {
+                            namee[i]=list.getJSONObject(i).getString("activityTitle");
+                            id[i]=list.getJSONObject(i).getInt("activityId");
+                            introduce[i]=list.getJSONObject(i).getString("activityIntroduce");
+                            image[i]=list.getJSONObject(i).getString("activityPicture")+".png";
+                            timee[i]=list.getJSONObject(i).getString("activityTime");
+                            placee[i]=list.getJSONObject(i).getString("activityPlace");
+                            leixing[i]=list.getJSONObject(i).getInt("leixing");
+
+                        }
+                        huodongname=new String[list.length()];
+                        huodongid=new Integer[list.length()];
+                        for(int i=0;i<list.length();i++) {
+                            huodongname[i]=list.getJSONObject(i).getString("activityTitle");
+                            huodongid[i]=list.getJSONObject(i).getInt("activityId");
+                        }
+                        all_image=new byte[n][];
+                        //加载图片线程
+                        Thread_pic thread_pic=new Thread_pic();
+                        thread_pic.start();
+                        try {
+                            thread_pic.join();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        initList();
+                    } else {
+                        Looper.prepare();
+                        Toast.makeText(MainCampaignActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public class Thread_pic extends Thread{
+        @Override
+        public void run(){
+            try {
+                for(int i=0;i<all_image.length;i++) {
+                    if (F_GetBitmap.isEmpty(image[i])) {
+                        Log.d("qwerty","走到这里");
+                        params = new HashMap<>();
+                        params.put("tubiao", image[i]);
+                        String res1 = RequestUtils.post("/community/panfindtubiao", params);
+                        try {
+                            JSONObject jsonObject1 = new JSONObject(res1);
+                            if (jsonObject1.getInt("code") == 200) {
+                                // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+                                JSONArray list1 = (JSONArray) jsonObject1.get("data");
+                                all_image[i] = new byte[list1.length()];
+                                for (int j = 0; j < list1.length(); j++) {
+                                    all_image[i][j] = (byte) list1.getInt(j);
+                                }
+                                F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
+                                InputStream input = null;
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inSampleSize = 1;
+                                input = new ByteArrayInputStream(all_image[i]);
+                                @SuppressWarnings({ "rawtypes", "unchecked" })
+                                SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
+                                imageData[i] = (Bitmap) softRef.get();
+                                Log.d("bitmaptest","压缩前图片的大小"+ (imageData[i].getByteCount())
+
+                                        + "M宽度为"+ imageData[i].getWidth() + "高度为"+ imageData[i].getHeight());
+                                System.out.println(imageData.length);
+                            } else {
+                                Looper.prepare();
+                                Toast.makeText(MainCampaignActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
-//                    for (int i = 0; i < actnum; i++) {
-//                        if (F_GetBitmap.isEmpty(image[i])) {
-////                        all_imagefu[i] = NetInfoUtil.getPicture(image[i]);
-//                            F_GetBitmap.setInSDBitmap(all_imagefu[i], image[i]);
-//                            InputStream input = null;
-//                            BitmapFactory.Options options = new BitmapFactory.Options();
-//                            options.inSampleSize = 2;
-//                            input = new ByteArrayInputStream(all_imagefu[i]);
-//                            @SuppressWarnings({ "rawtypes", "unchecked" })
-//                            SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-//                            imageDatafu[i] = (Bitmap) softRef.get();
-//                        } else {
-//                            imageDatafu[i] = F_GetBitmap.getSDBitmap(image[i]);// 鎷垮埌鐨勬槸BitMap绫诲瀷鐨勫浘鐗囨暟鎹�
-//                            if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-//                                F_GetBitmap.bitmap = null;
-//                            }
-//                        }
-//                    }
-                    initList();
-
-
+                    else{
+                        Log.d("qwerty","走到这里123");
+                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
+                        if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
+                            F_GetBitmap.bitmap = null;
+                        }
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
     public void initList() {
-        for (int i = 0; i < actnum; i++) {
+        for (int i = 0; i < namee.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("name", namee[i]);
             map.put("time", timee[i]);
             map.put("image", imageData[i]);
             map.put("didian", placee[i]);
-            map.put("id", idd2[i]);
+            map.put("id", id[i]);
             listItem.add(map);
         }
         inithandler();
@@ -526,7 +583,7 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
                 it.putExtra("name", mes);
                 it.putExtra("time", mes2);
                 it.putExtra("place", mes3);
-                it.putExtra("id", huodongid[arg2]);
+                it.putExtra("id", id[arg2]);
                 startActivity(it);
             }
         });
@@ -609,55 +666,80 @@ public class MainCampaignActivity extends Activity implements ViewPager.OnPageCh
     private class thread_shangla extends Thread {//涓婃媺鍔犺浇鏇村淇℃伅鐨勫瓙绾跨▼
         @Override
         public void run() {
-            if (num < 5) {
-                n = num;
-                x = x + n;
-                num = num - n;
-            } else {
-                n = 5;
-                x = x + n;
-                num = num - n;
-            }
-            for (int i = 0; i <actnum; i++) {
-                idd2[i]=GetActivityInfo.activityId[i];
-                namee[i]=GetActivityInfo.activityName[i];
-                timee[i]=GetActivityInfo.time[i];
-                placee[i]=GetActivityInfo.palce[i];
-                id[i]=GetActivityInfo.activityLei[i];
-                image[i] = GetActivityInfo.activityPicture[i] + ".png";
-
-            }
-            for (int i = 0; i < actnum; i++) {
-                if (F_GetBitmap.isEmpty(image[i])) {
-                    all_image=GetActivityInfo.getImage2(image[i]);
-//                        all_image[i] = NetInfoUtil.getPicture(image[i]);
-                    F_GetBitmap.setInSDBitmap(all_image, image[i]);
-                    InputStream input = null;
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2;
-                    input = new ByteArrayInputStream(all_image);
-                    @SuppressWarnings({ "rawtypes", "unchecked" })
-                    SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                    imageData[i] = (Bitmap) softRef.get();
-                    System.out.println(imageData.length);
-                } else {
-                    imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// 鎷垮埌鐨勬槸BitMap绫诲瀷鐨勫浘鐗囨暟鎹�
-                    if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-                        F_GetBitmap.bitmap = null;
+            try{
+            params=new HashMap<>();
+            params.put("page",0);
+            params.put("size",0);
+            String res = RequestUtils.post("/activities/list",params);
+            try {
+                JSONObject jsonObject = new JSONObject(res);
+                if (jsonObject.getInt("code") == 200) {
+                    // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+                    JSONArray list = (JSONArray) jsonObject.getJSONObject("data").get("list");
+                    if (num < 5) {
+                        n = num;
+                        x = x + n;
+                        num = num - n;
+                    } else {
+                        n = 5;
+                        x = x + n;
+                        num = num - n;
                     }
+                    id = new Integer[n];
+                    timee = new String[n];
+                    placee=new String[n];
+                    namee=new String[n];
+                    imageData = new Bitmap[n];
+                    image=new String[n];
+                    leixing=new Integer[n];
+                    introduce=new String[n];
+                    for (int i = 0; i < n; i++) {
+                        namee[i]=list.getJSONObject(i).getString("activityTitle");
+                        id[i]=list.getJSONObject(i).getInt("activityId");
+                        introduce[i]=list.getJSONObject(i).getString("activityIntroduce");
+                        image[i]=list.getJSONObject(i).getString("activityPicture")+".png";
+                        timee[i]=list.getJSONObject(i).getString("activityTime");
+                        placee[i]=list.getJSONObject(i).getString("activityPlace");
+                        leixing[i]=list.getJSONObject(i).getInt("leixing");
+
+                    }
+//                    huodongname=new String[list.length()];
+//                    huodongid=new Integer[list.length()];
+//                    for(int i=0;i<list.length();i++) {
+//                        huodongname[i]=list.getJSONObject(i).getString("activityTitle");
+//                        huodongid[i]=list.getJSONObject(i).getInt("activityId");
+//                    }
+                    all_image=new byte[n][];
+                    //加载图片线程
+                    Thread_pic thread_pic=new Thread_pic();
+                    thread_pic.start();
+                    try {
+                        thread_pic.join();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+//                        initList();
+                } else {
+                    Looper.prepare();
+                    Toast.makeText(MainCampaignActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-                for (int i = 0; i < name.length; i++) {
-                    Map<String, Object> map = new HashMap<String, Object>();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+                for (int i = 0; i < namee.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
                     map.put("name", namee[i]);
                     map.put("time", timee[i]);
                     map.put("image", imageData[i]);
                     map.put("didian", placee[i]);
-                    map.put("id", idd2[i]);
-                    listItem.add(map);
-                }
+                    map.put("id", id[i]);
+            listItem.add(map);
             }
         }
+    }
 
     private void loadMoreData() {
         thread_shangla lmd = new thread_shangla();
