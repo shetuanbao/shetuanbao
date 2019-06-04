@@ -98,10 +98,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity android:name=".Login.LoadActivity">
-        <activity android:name=".Login.LoadActivity" />
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.MainFrame" />
-        <activity android:name=".HttpTestActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -110,7 +106,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".Activities.ActivityInfoActivity" />
         <activity android:name=".Personal.PersonalInformationActivity" />
         <activity android:name=".Personal.MainPersonalActivity">
             <intent-filter>
@@ -119,8 +114,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.MainFrame" />
         <activity android:name=".community.MainCommunityActivity" />
         <activity android:name=".community.CommunitySportActivity" />
         <activity android:name=".community.CommunityLiteratureActivity" />
@@ -134,8 +127,6 @@
         <activity android:name=".chat.lianxiren_message" />
         <activity android:name=".chat.sousuo_lianxiren" />
         <activity android:name=".Login.MainSocialActivity" />
-        <activity android:name=".Personal.PersonalInformationActivity" />
-        <activity android:name=".Personal.MainPersonalActivity" />
         <activity android:name=".Personal.PersonalSettingsActivity" />
         <activity android:name=".Personal.PersonalQrActivity" />
         <activity android:name=".Personal.PersonalContactUsActivity" />
@@ -199,7 +190,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".activity.MainCampaignActivity"></activity>
         <activity android:name="community.MainCommunityActivity" />
         <activity android:name="community.CommunitySportActivity" />
         <activity android:name="community.CommunityLiteratureActivity" />
@@ -209,17 +199,7 @@
         <activity android:name="community.CommunityDetailActivity" />
         <activity android:name="community.CommunityPeopleActivity" />
         <activity android:name="community.CommunityStaffActivity" />
-        <activity android:name=".Personal.PersonalHelpActivity" />
-        <activity android:name=".Personal.PersonalAdviceActivity"></activity>
-        <activity android:name=".community.MainCommunityActivity"></activity>
-        <activity android:name=".community.CommunitySportActivity"></activity>
-        <activity android:name=".community.CommunityLiteratureActivity"></activity>
-        <activity android:name=".community.CommunityLearningActivity"></activity>
-        <activity android:name=".community.CommunityCharitableActivity"></activity>
-        <activity android:name=".community.CommunitySearchActivity"></activity>
-        <activity android:name=".community.CommunityDetailActivity"></activity>
-        <activity android:name=".community.CommunityPeopleActivity"></activity>
-        <activity android:name=".community.CommunityStaffActivity"></activity>
+
     </application>
 
 </manifest>

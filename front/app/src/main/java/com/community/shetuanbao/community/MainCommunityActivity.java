@@ -557,7 +557,7 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
         }
         @Override
         public int getCount() {
-            return data.size();// ��¼��ǰ�б����ж�������
+            return data.size();
         }
         @Override
         public Object getItem(int position) {

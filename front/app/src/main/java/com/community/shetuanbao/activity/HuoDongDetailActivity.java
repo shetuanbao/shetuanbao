@@ -46,11 +46,13 @@ import android.widget.Toast;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.GetActivityInfo;
 import com.community.shetuanbao.utils.RoundImageView;
 
 @SuppressLint({ "HandlerLeak", "SimpleDateFormat" })
 public class HuoDongDetailActivity extends Activity {
 	private TextView funhui = null;
+	HashMap<String,Object> params;
 	public static int state =0;
     TextView xiangce=null;
 	ProgressDialog pd;
@@ -68,26 +70,26 @@ public class HuoDongDetailActivity extends Activity {
 	List<String[]> idy2 = new ArrayList<String[]>();
 	List<String[]> timey2=new ArrayList<String[]>();
 	Bitmap picture;
-	Bitmap imageData[];
+	Bitmap imageData[];//活动相册
 	byte all_image[][];
 	TextView tt = null;
 	TextView tt2 = null;
 	TextView tt3 = null;
-	TextView tt4 = null;
-	String re_name = null;
-	String re_time = null;
-	String re_place = null;
-	String re_id = null;
+	TextView tt4 = null;//显示活动信息的四个textView
+	String re_name = null;//活动名称
+	String re_time = null;//活动时间
+	String re_place = null;//活动地点
+	String re_id = null;//活动id
 	private String[][] all = null;
 	private String[][] all_2 = null;
 	private String[][] all_3 = null;
 	private String[][] all_4 = null;
 	private String[][] all_5=null;
-	private String detail[] = null;
-	private String image[] = null;
-	private String name[] = null;
-	private String id[] = null;
-	private String time[]=null;
+	private String detail[] = null;//活动介绍
+	private String image[] = null;//活动的图片
+	private String name[] = null;//活动名称
+	private String id[] = null;//活动id
+	private String time[]=null;//活动时间
 	String msg3 = null;
 	private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
 	private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
@@ -296,6 +298,7 @@ public class HuoDongDetailActivity extends Activity {
 	public class thread_delete extends Thread {
 		@Override
 		public void run() {
+
 //			NetInfoUtil.deletehuodongpinglun(re_id + "#" + Constant.userName);//删除活动的评论
 		}
 	}
