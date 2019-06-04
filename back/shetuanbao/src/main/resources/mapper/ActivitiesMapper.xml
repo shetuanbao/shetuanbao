@@ -26,7 +26,11 @@
     <select id="getDetail" resultMap="BaseResultMap">
         SELECT * FROM activities WHERE activity_id=#{activityId}
     </select>
+<insert id="insertUser" parameterType="Integer">
+    insert into activity_user values (activity_id=#{arg0},user_id=#{arg1})
+</insert>
 
-
-
+<select id="check" resultType="Integer">
+    SELECT count(user_id) FROM activity_user WHERE activity_id=#{arg0} AND user_id=#{arg1}
+</select>
 </mapper>
