@@ -21,7 +21,11 @@
   <select id="panfindByCommunityUser" resultType="Integer">
     SELECT `user_id` FROM `community_users` WHERE `community_id`=#{communityId}
   </select>
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> remotes/origin/dev1
   <select id="lugetCommunityNamesByUserId" resultType="String">
       select c.community_name
 	  from `community` c, `community_users` cu

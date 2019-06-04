@@ -35,8 +35,19 @@ public class CommunityController {
     private CommunityService communityService;
 
     @PostMapping("/add")
-    public Result add(Community community) {
-        communityService.save(community);
+    public Result add(@RequestBody String body) {
+    	JSONObject jsonObject = JSONObject.parseObject(body);
+    	Community community = new Community();
+    	if (jsonObject.getInteger("communityId") != null) {
+    		community.setCommunityId(jsonObject.getInteger("communityId"));
+    	}
+    	if (jsonObject.getString("communityName") != null) {
+    		community.setCommunityName(jsonObject.getString("communityName"));
+    	}
+    	if (jsonObject.getString("communityKouhao") != null) {
+    		community.setCommunityName(jsonObject.getString("communityKouhao"));
+    	}
+    	communityService.save(community);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -99,6 +110,7 @@ public class CommunityController {
         }
         return ResultGenerator.genSuccessResult(result1);
     }
+<<<<<<< HEAD
 
     //lu通过用户id从community_users和community表获取用户参加过的社团
     @PostMapping("/lugetCommunitiesByUserId")
@@ -107,5 +119,15 @@ public class CommunityController {
         int userId = jsonObject.getIntValue("userId");
         List<String> list = communityService.lugetCommunityNamesByUserId(userId);
         return ResultGenerator.genSuccessResult(list);
+=======
+    
+    //lu通过用户id从community_users和community表获取用户参加过的社团
+    @PostMapping("/lugetCommunitiesByUserId")
+    public Result lugetCommunitiesByUserId(@RequestBody String body) {
+    	JSONObject jsonObject = JSONObject.parseObject(body);
+    	int userId = jsonObject.getIntValue("userId");
+    	List<String> list = communityService.lugetCommunityNamesByUserId(userId);
+    	return ResultGenerator.genSuccessResult(list);
+>>>>>>> remotes/origin/dev1
     }
 }

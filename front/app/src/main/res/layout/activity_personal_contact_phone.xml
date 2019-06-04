@@ -78,7 +78,11 @@
                 android:layout_marginLeft="-45dp"
                 android:scaleX="0.6"
                 android:scaleY="0.6"
+<<<<<<< HEAD
                 android:background="@mipmap/lianxiren"/>
+=======
+                android:background="@drawable/lianxiren"/>
+>>>>>>> remotes/origin/dev1
 
         </LinearLayout>
         <View
@@ -177,7 +181,6 @@
                 android:scaleX="0.6"
                 android:scaleY="0.6"
                 android:background="@mipmap/lianxiren"/>
-
         </LinearLayout>
         <View
             android:layout_width="match_parent"

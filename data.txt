@@ -1,0 +1,108 @@
+表名：	community_cishan	（慈善相关社团数据表）
+字段名	字段类型	描述
+community_id	char(5)	社团id
+community_name	char(15)	社团名
+		
+表名：	community_tiyu	(体育相关社团数据表)
+字段名	字段类型	描述
+community_id	char(5)	社团id
+community_name	char(15)	社团名
+		
+表名：	community_xueshu	(学术相关社团数据表)
+字段名	字段类型	描述
+community_id	char(5)	社团id
+community_name	char(15)	社团名
+		
+表名：	community_wenyi	(文艺相关社团数据表)
+字段名	字段类型	描述
+community_id	char(5)	社团id
+community_name	char(15)	社团名
+		
+表名：	yijian	(用户意见数据表)
+字段名	字段类型	描述
+user_id	char(10)	提出意见用户id
+lianxi	char(20)	用户联系方式
+detail	char(100)	具体意见
+time	char(20)	提出意见的时间
+username	char(10)	用户名
+userpicture	char(10)	用户头像
+		
+表名：	users	(用户数据表)
+字段名	字段类型	描述
+user_id	int(11)	用户id
+username	char(20)	用户名
+userpassword	char(20)	用户密码
+useremail	char(50)	用户邮箱
+userphone	char(12)	用户电话
+sex	char(4)	用户性别
+userpen	char(100)	用户签名
+userphoto	char(20)	用户头像
+status	char(2)	表示用户id是否被封
+major	char(20)	用户专业
+xueyuan	char(20)	用户学院
+		
+		
+表名：	president	(app管理员数据表)
+字段名	字段类型	描述
+id	char(10)	管理员id
+password	char(15)	管理员密码
+		
+表名：	community_users	(参与社团的成员数据表)
+字段名	字段类型	描述
+user_id	int(11)	用户id
+community_id	int(11)	社团id
+stat	char(2)	用户是否被封状态
+		
+表名：	activity_pinglun	(活动评论数据表)
+字段名	字段类型	描述
+sid_activity	char(5)	活动id
+sid_user	char(10)	评论的用户id
+sdetail	char(200)	评论内容
+stime	char(25)	评论时间
+sname	char(20）	用户名
+spicture	char(20)	用户头像
+		
+表名：	community_compaign	(社团运动数据表)
+字段名	字段类型	描述
+compaign_id	int(11)	社团活动id
+compaign_picture_id	int(11)	社团运动照片
+compaign_introduce	char(200)	社团运动的介绍
+compaign_time	timestamp	社团运动开展的时间
+community_id	int(11)	社团id
+		
+表名：	administrator	(社团管理员数据表)
+字段名	字段类型	描述
+community_id	int(11)	社团id
+user_id	int(11)	社团管理员id
+password	varchar(20)	管理密码
+		
+表名：	friends	(联系人数据表)
+字段名	字段类型	描述
+user_id	int(11)	用户id
+friend_id	int(11)	联系人id
+		
+表名：	activity_user	(参与活动人员数据表)
+字段名	字段类型	描述
+activity_id	int(11)	活动id
+user_id	int(11)	用户id
+		
+表名：	activities	(活动数据表)
+字段名	字段类型	描述
+activity_id	int(11)	活动id
+activity_title	char(20)	活动题目
+activity_time	char(255)	活动时间
+activity_place	char(50)	活动举办地点
+activity_introduce	char(255)	活动介绍
+activity_picture	char(100)	活动照片
+community_id	int(11)	举动活动的社团id
+leixing	int(11)	活动类型
+		
+表名：	community	(社团信息数据表)
+字段名	字段类型	描述
+community_id	int(11)	社团id
+community_name	char(20)	社团名字
+community_introduce	char(255)	社团介绍
+community_kouhao	char(50)	社团口号
+community_tubiao	char(255)	社团图标
+community_picture	char(100)	社团图片
+community_stat	int(11)	社团状态
