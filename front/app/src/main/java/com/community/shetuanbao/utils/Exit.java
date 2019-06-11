@@ -9,7 +9,9 @@ public class Exit {
 	
 	public static List<Activity> activity=new LinkedList<Activity>();
     private static Exit instance;
-    
+
+	private Exit(){}
+
     public static Exit getInstance()
     {
     	if(null == instance)

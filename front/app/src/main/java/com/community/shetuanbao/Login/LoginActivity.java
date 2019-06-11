@@ -20,6 +20,8 @@ import com.community.shetuanbao.R;
 import com.community.shetuanbao.chat.MyApp;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.RequestUtils;
+import com.community.shetuanbao.utils.User;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -88,6 +90,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
             if(zhuangtai2.equals("1")){
+                User.getInstance().init(sp.getString("USER_NAME",""),sp.getString("PASSWORD",""),sp.getInt("SNO", 0),sp.getString("userphone",""),sp.getString("sex",""),sp.getString("userpen",""),sp.getString("userphoto",""),sp.getString("status",""),sp.getString("major",""),sp.getString("xueyuan",""));
                 Intent in=new Intent(LoginActivity.this,MainFrame.class);
                 startActivity(in);
             }
@@ -177,10 +180,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             editor.putString("USER_NAME", user.getString("userName"));
                             editor.putString("PASSWORD",passwordValue);
                             editor.putInt("SNO",user.getInt("userId"));
+                            editor.putString("userphone",user.getString("userphone"));
+                            editor.putString("sex",user.getString("sex"));
+                            editor.putString("userpen",user.getString("userpen"));
+                            editor.putString("userphoto",user.getString("userphoto"));
+                            editor.putString("status",user.getString("status"));
+                            editor.putString("major",user.getString("major"));
+                            editor.putString("xueyuan",user.getString("xueyuan"));
                             editor.putString("Token", name+"#"+String.valueOf(user.getInt("userId"))+"#"+"file:///"+ Environment.getExternalStorageDirectory().toString()+"/download_test/"+user.getString("userphoto"));
                             editor.putBoolean("CHECK", true);
                             editor.putBoolean("zhuangtai", true);
                             editor.commit();
+                            User.getInstance().init(user.getString("userName"),passwordValue,user.getInt("userId"),user.getString("userphone"),user.getString("sex"),user.getString("userpen"),user.getString("userphoto"),user.getString("status"),user.getString("major"),user.getString("xueyuan"));
                             mHandler.sendEmptyMessage(SUCCESS);
                             Intent ii=new Intent(LoginActivity.this,MainFrame.class);
                             startActivity(ii);

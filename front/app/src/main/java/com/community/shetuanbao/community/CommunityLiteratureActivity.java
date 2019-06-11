@@ -27,7 +27,10 @@ import android.widget.Toast;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.LocalLoader;
+import com.community.shetuanbao.utils.NetLoader;
 import com.community.shetuanbao.utils.RequestUtils;
+import com.community.shetuanbao.utils.communitytubiaoStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -156,48 +159,57 @@ public class CommunityLiteratureActivity extends Activity {
     public class Thread_pic extends Thread{
         @Override
         public void run(){
-            try {
-                for(int i=0;i<all_image.length;i++) {
-                    if (F_GetBitmap.isEmpty(image[i])) {
-                        params = new HashMap<>();
-                        params.put("tubiao", image[i]);
-                        String res1 = RequestUtils.post("/community/panfindtubiao", params);
-                        try {
-                            JSONObject jsonObject1 = new JSONObject(res1);
-                            if (jsonObject1.getInt("code") == 200) {
-                                // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
-                                JSONArray list1 = (JSONArray) jsonObject1.get("data");
-                                all_image[i] = new byte[list1.length()];
-                                for (int j = 0; j < list1.length(); j++) {
-                                    all_image[i][j] = (byte) list1.getInt(j);
-                                }
-                                F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
-                                InputStream input = null;
-                                BitmapFactory.Options options = new BitmapFactory.Options();
-                                options.inSampleSize = 1;
-                                input = new ByteArrayInputStream(all_image[i]);
-                                @SuppressWarnings({ "rawtypes", "unchecked" })
-                                SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                                imageData[i] = (Bitmap) softRef.get();
-                                System.out.println(imageData.length);
-                            } else {
-                                Looper.prepare();
-                                Toast.makeText(CommunityLiteratureActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    else{
-                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
-                        if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-                            F_GetBitmap.bitmap = null;
-                        }
-                    }
+            //策略模式加模板模式
+            for(int i=0;i<all_image.length;i++) {
+                if (F_GetBitmap.isEmpty(image[i])){
+                    imageData[i]= new NetLoader().loadImage(image[i],new communitytubiaoStrategy());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                else{
+                    imageData[i]= new LocalLoader().loadImage(image[i],new communitytubiaoStrategy());
+                }
             }
+//            try {
+//                for(int i=0;i<all_image.length;i++) {
+//                    if (F_GetBitmap.isEmpty(image[i])) {
+//                        params = new HashMap<>();
+//                        params.put("tubiao", image[i]);
+//                        String res1 = RequestUtils.post("/community/panfindtubiao", params);
+//                        try {
+//                            JSONObject jsonObject1 = new JSONObject(res1);
+//                            if (jsonObject1.getInt("code") == 200) {
+//                                // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+//                                JSONArray list1 = (JSONArray) jsonObject1.get("data");
+//                                all_image[i] = new byte[list1.length()];
+//                                for (int j = 0; j < list1.length(); j++) {
+//                                    all_image[i][j] = (byte) list1.getInt(j);
+//                                }
+//                                F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
+//                                InputStream input = null;
+//                                BitmapFactory.Options options = new BitmapFactory.Options();
+//                                options.inSampleSize = 1;
+//                                input = new ByteArrayInputStream(all_image[i]);
+//                                @SuppressWarnings({ "rawtypes", "unchecked" })
+//                                SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
+//                                imageData[i] = (Bitmap) softRef.get();
+//                                System.out.println(imageData.length);
+//                            } else {
+//                                Looper.prepare();
+//                                Toast.makeText(CommunityLiteratureActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    else{
+//                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
+//                        if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
+//                            F_GetBitmap.bitmap = null;
+//                        }
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
