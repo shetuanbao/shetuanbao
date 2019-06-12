@@ -34,4 +34,30 @@ public class ActivityPinglunController {
         pinglunService.deletePinglun(activityId,userId);
         return ResultGenerator.genSuccessResult();
     }
+    
+    //mo
+    @PostMapping("/insertPinglun")
+    public Result insertPinglun(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        String activityId=jsonObject.getString("activityId");
+        String userId=jsonObject.getString("userId");
+        String sdetail=jsonObject.getString("sdetail");
+        String stime=jsonObject.getString("stime");
+        String sname=jsonObject.getString("sname");
+        String spicture=jsonObject.getString("spicture");
+        
+        pinglunService.insertPinglun(activityId,userId,sdetail,stime,sname,spicture);
+        return ResultGenerator.genSuccessResult();
+    }
+    
+    //mo
+    @PostMapping("/moDeletePinglun")
+    public Result moDeletePinglun(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        String activityId=jsonObject.getString("activityId");
+        pinglunService.moDeletePinglun(activityId);
+        return ResultGenerator.genSuccessResult();
+    }
+    
+    
 }

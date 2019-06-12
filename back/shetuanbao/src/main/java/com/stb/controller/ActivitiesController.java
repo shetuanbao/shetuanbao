@@ -24,30 +24,35 @@ public class ActivitiesController {
     @Resource
     private ActivitiesService activitiesService;
 
+    
     @PostMapping("/add")
     public Result add(Activities activities) {
         activitiesService.save(activities);
         return ResultGenerator.genSuccessResult();
     }
-
+    
+    
     @PostMapping("/delete")
     public Result delete(@RequestParam Integer id) {
         activitiesService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
-
+    
+    
     @PostMapping("/update")
     public Result update(Activities activities) {
         activitiesService.update(activities);
         return ResultGenerator.genSuccessResult();
     }
-
+    
+   
     @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
         Activities activities = activitiesService.findById(id);
         return ResultGenerator.genSuccessResult(activities);
     }
-
+    
+  
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
@@ -77,6 +82,8 @@ public class ActivitiesController {
         }
         return ResultGenerator.genSuccessResult(result1);
     }
+    
+    //mo
     @PostMapping("/yangGetAlbum")
     public  Result yangGetAlbum(@RequestBody String body){
         JSONObject jsonObject = JSONObject.parseObject(body);
@@ -84,6 +91,8 @@ public class ActivitiesController {
         List<String> list = activitiesService.getAlbum(activityId);
         return ResultGenerator.genSuccessResult(list);
     }
+    
+    //mo
     @PostMapping("/getActivityDetail")
     public  Result getActivityDetail(@RequestBody String body){
         JSONObject jsonObject = JSONObject.parseObject(body);
@@ -91,6 +100,8 @@ public class ActivitiesController {
         Activities list = activitiesService.getDetail(activityId);
         return ResultGenerator.genSuccessResult(list);
     }
+    
+    //mo
     @PostMapping("/insertUser")
     public Result insertUser(@RequestBody String body){
         JSONObject jsonObject=JSONObject.parseObject(body);
@@ -99,7 +110,9 @@ public class ActivitiesController {
         activitiesService.insertUser(activityId,userId);
         return ResultGenerator.genSuccessResult();
     }
-
+    
+    
+    //mo
     @PostMapping("/checkInActivity")
     public Result check(@RequestBody String body){
         JSONObject jsonObject=JSONObject.parseObject(body);
@@ -108,5 +121,15 @@ public class ActivitiesController {
         int a=activitiesService.check(activityId,userId);
         return ResultGenerator.genSuccessResult(a);
     }
-
+    
+  //mo通过活动name获取活动
+    @PostMapping("/moGetActivityByName")
+    public Result moGetActivityByName(@RequestBody String body){
+        JSONObject jsonObject=JSONObject.parseObject(body);
+        String activityName=jsonObject.getString("activityName");
+        Activities a=activitiesService.moGetActivityByName(activityName);
+        return ResultGenerator.genSuccessResult(a);
+    }
+    
+    
 }

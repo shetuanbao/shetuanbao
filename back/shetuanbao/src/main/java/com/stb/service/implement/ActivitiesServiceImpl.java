@@ -46,6 +46,12 @@ public class ActivitiesServiceImpl extends AbstractService<Activities> implement
     public int check(int activityId, int userId) {
         return activitiesMapper.check(activityId,userId);
     }
-
+    
+  //mo通过社团name获取活动
+    @Override
+    public Activities moGetActivityByName(String activityName) {
+    	return activitiesMapper.moGetActivityByName(activityName);
+    }
+  
 
 }

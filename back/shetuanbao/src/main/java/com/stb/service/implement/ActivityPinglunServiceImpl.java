@@ -19,7 +19,16 @@ public class ActivityPinglunServiceImpl extends AbstractService<activityPinlun> 
     public List<activityPinlun> getPinglun(String activityId) {
         return  activityPinglunMapper.getPinglun(activityId);
     }
+    @Override
     public void deletePinglun(String activityId,String userId){
         activityPinglunMapper.deletePinglun(activityId,userId);
+    }
+    @Override
+    public void insertPinglun(String activityId,String userId,String sdetail,String stime,String sname,String spicture){
+    	activityPinglunMapper.insertPinglun(activityId,userId,sdetail,stime,sname,spicture);
+    }
+    @Override
+    public void moDeletePinglun(String activityId) {
+    	activityPinglunMapper.moDeletePinglun(activityId);
     }
 }

@@ -129,5 +129,7 @@ public class CommunityController {
         int a=communityService.check(activityId,userId);
         return ResultGenerator.genSuccessResult(a);
     }
+    
+    
 
 }

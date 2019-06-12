@@ -19,4 +19,10 @@
 <delete id="deletePinglun" parameterType="String">
     DELETE FROM activity_pinglun WHERE sid_activity=#{activityId} AND sid_user=#{userId}
 </delete>
+<insert id="insertPinglun" parameterType="String">
+    INSERT INTO `activity_pinglun`(`sid_activity`, `sid_user`, `sdetail`, `stime`, `sname`, `spicture`) VALUES (#{activityId},#{userId},#{sdetail},#{stime},#{sname},#{spicture})
+</insert>
+<delete id="moDeletePinglun" parameterType="String">
+    DELETE FROM activity_pinglun WHERE sid_activity=#{activityId}
+</delete>
 </mapper>

@@ -1,4 +1,5 @@
 package com.community.shetuanbao.activity;
+import java.io.IOException;
 import java.util.Calendar;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -16,16 +17,19 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,11 +47,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
 import com.community.shetuanbao.utils.GetActivityInfo;
+import com.community.shetuanbao.utils.RequestUtils;
 import com.community.shetuanbao.utils.RoundImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @SuppressLint({ "HandlerLeak", "SimpleDateFormat" })
 public class HuoDongDetailActivity extends Activity {
@@ -90,6 +100,8 @@ public class HuoDongDetailActivity extends Activity {
 	private String name[] = null;//活动名称
 	private String id[] = null;//活动id
 	private String time[]=null;//活动时间
+	private String renming;//人名
+	private String rentupian;
 	String msg3 = null;
 	private List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
 	private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
@@ -128,6 +140,7 @@ public class HuoDongDetailActivity extends Activity {
 	String shifou=null;
 	String shifou2=null;
 	String leixing=null;
+	int communityId;
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -167,6 +180,7 @@ public class HuoDongDetailActivity extends Activity {
 		tt2 = (TextView) findViewById(R.id.huodong_address_2);
 		tt3 = (TextView) findViewById(R.id.huodong_time_2);
 		tt4 = (TextView) findViewById(R.id.huodong_detail_2);
+		//获取评论
 		new AysncTask_get().execute();
 		xiangce=(TextView)findViewById(R.id.restaurial_name_2);
 		xiangce.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +207,7 @@ public class HuoDongDetailActivity extends Activity {
 					Toast.makeText(HuoDongDetailActivity.this, "评论不可为空!!",
 							Toast.LENGTH_LONG).show();
 				}else{
+					//插入评论
 					new AysncTask_team().execute();
 					Intent it = new Intent(HuoDongDetailActivity.this,HuoDongDetailActivity.class);
 					it.putExtra("name", re_name);
@@ -284,15 +299,69 @@ public class HuoDongDetailActivity extends Activity {
 	public class thread_insert extends Thread {
 		@Override
 		public void run() {
-			
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				SharedPreferences s= LoginActivity.sp;
+				params.put("userId", s.getInt("SNO",0) );
+				String res = RequestUtils.post("/users/pangetuserByuserId", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+				if (jsonObject1.getInt("code") == 200) {
+					//todo mo
+					JSONObject users = jsonObject1.getJSONObject("data");
+                    renming =users.getString("userName");
+					rentupian =users.getString("userphoto");
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "获取用户信息失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 			String messa = actv.getText().toString();
 			Date date=new Date();
 			DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time3=format.format(date);
+			//todo mo
 //			zong=NetInfoUtil.gethuodongnameandpicture(Constant.userName);
+
+            //todo mo
 //			cz3=zong.get(0)[0];
 			//插入活动的评论
 //			NetInfoUtil.inserthuodongpinglun(re_id + "#" + Constant.userName + "#" + messa+"#"+time3+"#"+zong.get(0)[0]+"#"+zong.get(0)[1]);
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				params.put("activityId", re_id );
+				SharedPreferences s= LoginActivity.sp;
+
+				params.put("userId", s.getInt("SNO",0) );
+				params.put("sdetail", messa);
+				params.put("sname", renming);
+				params.put("spicture", rentupian);
+				params.put("stime", time3);
+				String res = RequestUtils.post("/pinglun/insertPinglun", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+				if (jsonObject1.getInt("code") == 200) {
+					//todo mo
+					Toast.makeText(HuoDongDetailActivity.this, "mo：评论成功", Toast.LENGTH_LONG).show();
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：评论失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 	public class thread_delete extends Thread {
@@ -300,122 +369,227 @@ public class HuoDongDetailActivity extends Activity {
 		public void run() {
 
 //			NetInfoUtil.deletehuodongpinglun(re_id + "#" + Constant.userName);//删除活动的评论
+            //todo mo
+            //mo根据活动id删除活动的评论
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				params.put("activityId", re_id );
+				String res = RequestUtils.post("/pinglun/moDeletePinglun", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+				if (jsonObject1.getInt("code") == 200) {
+					//todo mo
+					Toast.makeText(HuoDongDetailActivity.this, "mo：删除评论成功", Toast.LENGTH_LONG).show();
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：删除评论失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 	public class thread_pinglun extends Thread {
 		@Override
 		public void run() {
 			//得到活动的信息
-//			detaily = NetInfoUtil.gethuodongpinglun(re_id);
-//			//shifou=NetInfoUtil.pdshetuanrenyuan(Constant.userName+"#"+re_id);
-//			shifou2=NetInfoUtil.shifoubaoming(Constant.userName+"#"+re_id);
-//			msg3 = NetInfoUtil.gethuodongdetail(re_id);
-//			imagey = NetInfoUtil.gethuodongpinglunpicture(re_id);
-//			namey = NetInfoUtil.gethuodongpinglunname(re_id);
-//			idy = NetInfoUtil.gethuodongpinglunid(re_id);
-//			timey=NetInfoUtil.gethuodongtime2(re_id);
-			
-			all = new String[detaily.size()][detaily.get(0).length];
-			all_2 = new String[imagey.size()][imagey.get(0).length];
-			all_3 = new String[namey.size()][namey.get(0).length];
-			all_4 = new String[idy.size()][idy.get(0).length];
-			all_5=new String[timey.size()][timey.get(0).length];
-			detail = new String[all.length];
-			image = new String[all_2.length];
-			name = new String[all_3.length];
-			id = new String[all_4.length];
-			time=new String[all_5.length];
-			all_image = new byte[all_2.length][];
-			imageData = new Bitmap[all_2.length];
-			if (detaily.get(0)[0].equals("")) {
-				
-			} else {
-				for (int i = 0; i < detaily.size(); i++) {
-					for (int j = 0; j < detaily.get(i).length; j++) {
-						all[i][j] = detaily.get(i)[j];
-						all_3[i][j] = namey.get(i)[j];
-						all_4[i][j] = idy.get(i)[j];
-						all_5[i][j]=timey.get(i)[j];
-						detail[i] = all[i][0];
-						name[i] = all_3[i][0];
-						id[i] = all_4[i][0];
-						time[i]=all_5[i][0];
+			try {
+
+				HashMap<String, Object> params = new HashMap<>();
+				params.put("activityId", re_id);
+				String res = RequestUtils.post("/activities/yangGetAlbum", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+				if (jsonObject1.getInt("code") == 200) {
+					// 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+					JSONArray list = (JSONArray) jsonObject1.get("data");
+					image=new String[list.length()];
+					for(int i=0;i<list.length();i++){
+						image[i]=list.getJSONObject(i).getString("pictureId")+".png";
 					}
-				}
-				for (int i = 0; i < imagey.size(); i++) {
-					for (int j = 0; j < imagey.get(i).length; j++) {
-						all_2[i][j] = imagey.get(i)[j];
-						image[i] = all_2[i][0];
-					}
-				}
-				for (int i = 0; i < imagey.size(); i++) {
-					if (F_GetBitmap.isEmpty(image[i])) {
-//						all_image[i] = NetInfoUtil.getPicture(image[i]);
-						F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
-						InputStream input = null;
-						BitmapFactory.Options options = new BitmapFactory.Options();
-						options.inSampleSize = 2;
-						input = new ByteArrayInputStream(all_image[i]);
-						@SuppressWarnings({ "rawtypes", "unchecked" })
-						SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-						imageData[i] = (Bitmap) softRef.get();
-						System.out.println(imageData.length);
-					} else {
-						imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// 拿到的是BitMap类型的图片数据
-						if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-							F_GetBitmap.bitmap = null;
+					imageData3=new Bitmap[list.length()];
+					for(int i=0;i<imageData3.length;i++) {
+						if (F_GetBitmap.isEmpty(image[i])) {
+							params = new HashMap<>();
+							params.put("picture", image[i]);
+							String res1 = RequestUtils.post("/activities/panfindpicture", params);
+							try {
+								JSONObject jsonObject2 = new JSONObject(res1);
+								if (jsonObject2.getInt("code") == 200) {
+									// 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
+									JSONArray list1 = (JSONArray) jsonObject2.get("data");
+									all_image[i] = new byte[list1.length()];
+									for (int j = 0; j < list1.length(); j++) {
+										all_image[i][j] = (byte) list1.getInt(j);
+									}
+									F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
+									InputStream input = null;
+									BitmapFactory.Options options = new BitmapFactory.Options();
+									options.inSampleSize = 1;
+									input = new ByteArrayInputStream(all_image[i]);
+									@SuppressWarnings({"rawtypes", "unchecked"})
+									SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
+									imageData3[i] = (Bitmap) softRef.get();
+								} else {
+									Looper.prepare();
+									Toast.makeText(HuoDongDetailActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						} else {
+							imageData3[i] = F_GetBitmap.getSDBitmap(image[i]);
+							if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
+								F_GetBitmap.bitmap = null;
+							}
 						}
 					}
 				}
-				initList();
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-//			xiangcey=NetInfoUtil.gethuodongxiangce(re_id);//得到活动相册
-			all_xiangce=new String[xiangcey.size()][xiangcey.get(0).length];
-			xiangce2=new String[all_xiangce.length];
-			imageData3=new Bitmap[all_xiangce.length];
-			all_image3=new byte[all_xiangce.length][];
-			if(xiangcey.get(0)[0].equals("")){
-				
-			}else{
-				for(int i=0;i<xiangcey.size();i++){
-					for(int j=0;j<xiangcey.get(i).length;j++){
-						all_xiangce[i][j]=xiangcey.get(i)[j];
-						xiangce2[i]=all_xiangce[i][0]+".png";
-					}
-				}
-				for (int i = 0; i < xiangcey.size(); i++) {
-					if (F_GetBitmap.isEmpty(xiangce2[i])) {
-//						all_image3[i] = NetInfoUtil.getPicture(xiangce2[i]);
-						F_GetBitmap.setInSDBitmap(all_image3[i], xiangce2[i]);
-						InputStream input = null;
-						BitmapFactory.Options options = new BitmapFactory.Options();
-						options.inSampleSize = 2;
-						input = new ByteArrayInputStream(all_image3[i]);
-						@SuppressWarnings({ "rawtypes", "unchecked" })
-						SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-						imageData3[i] = (Bitmap) softRef.get();
-					} else {
-						imageData3[i] = F_GetBitmap.getSDBitmap(xiangce2[i]);// �õ�����BitMap���͵�ͼƬ���
-						if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-							F_GetBitmap.bitmap = null;
-						}
-					}
-				}
-			}
+
 		}
 	}
 	private class thread_pd extends Thread{
 		@Override
 		public void run(){
 //			shifou=NetInfoUtil.pdshetuanrenyuan(Constant.userName+"#"+re_id);
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				params.put("activityName",re_name  );
+				String res = RequestUtils.post("/activities/moGetActivityByName", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+
+				if (jsonObject1.getInt("code") == 200) {
+					JSONObject users = jsonObject1.getJSONObject("data");
+					leixing = String.valueOf(users.getInt("leixing"));
+					communityId=users.getInt("communityId");
+
+
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：检查失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+//				SharedPreferences s= LoginActivity.sp;
+//
+//				params.put("userId", s.getInt("SNO",0) );
+				params.put("communityId",communityId  );
+				String res = RequestUtils.post("/community/panfindByCommunityUser", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+
+				if (jsonObject1.getInt("code") == 200) {
+					JSONArray users = jsonObject1.getJSONArray("data");
+					SharedPreferences s= LoginActivity.sp;
+					int a=s.getInt("SNO",0);
+					shifou="0";
+					for(int i=0;i<users.length();i++) {
+						if(users.getInt(i)==a){
+							shifou="1";
+						}
+
+					}
+
+
+
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：检查失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
 //			shifou2=NetInfoUtil.shifoubaoming(Constant.userName+"#"+re_id);//查看是否报名
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				SharedPreferences s= LoginActivity.sp;
+
+				params.put("userId", s.getInt("SNO",0) );
+				params.put("activityId",re_id  );
+				String res = RequestUtils.post("/activities/checkInActivity", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+
+				if (jsonObject1.getInt("code") == 200) {
+					int num = jsonObject1.getInt("data");
+					if(num>0){
+						shifou2="1";
+//						Toast.makeText(HuoDongDetailActivity.this, "已报名", Toast.LENGTH_LONG).show();
+					}else if(num==0){
+						shifou2="0";
+//						Toast.makeText(HuoDongDetailActivity.this, "未报名", Toast.LENGTH_LONG).show();
+					}
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：检查失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
 //			leixing=NetInfoUtil.gethuodongleixing(re_id);//活动的类型名
+
+
 		}
 	}
 	private class thread extends Thread{
 		@Override
 		public void run(){
 //			NetInfoUtil.inserthuodongrenyuan(Constant.userName+"<#>"+re_id);//插入活动人员
+			try {
+				HashMap<String, Object> params = new HashMap<>();
+				params = new HashMap<>();
+				SharedPreferences s= LoginActivity.sp;
+
+				params.put("userId", s.getInt("SNO",0) );
+				params.put("activityId",re_id  );
+				String res = RequestUtils.post("/activities/insertUser", params);
+				JSONObject jsonObject1 = new JSONObject(res);
+				if (jsonObject1.getInt("code") == 200) {
+					//todo mo
+					Toast.makeText(HuoDongDetailActivity.this, "mo：插入活动人员成功", Toast.LENGTH_LONG).show();
+				} else {
+					Looper.prepare();
+					Toast.makeText(HuoDongDetailActivity.this, "mo：插入活动人员失败", Toast.LENGTH_LONG).show();
+				}
+
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 	public void initList() {
