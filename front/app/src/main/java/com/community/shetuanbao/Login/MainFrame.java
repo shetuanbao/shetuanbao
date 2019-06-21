@@ -20,7 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.community.shetuanbao.Personal.MainPersonalActivity;
 import com.community.shetuanbao.R;
+import com.community.shetuanbao.activity.MainCampaignActivity;
 import com.community.shetuanbao.community.MainCommunityActivity;
 import com.community.shetuanbao.utils.Exit;
 
@@ -104,11 +106,11 @@ public class MainFrame extends ActivityGroup
         }
         else if(position==1)
         {
-//                    v=getOne();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(1);
-//                    list.add(1,v);
+                    v=getOne();
+                    container.removeView(v);
+                    container.addView(v);
+                    list.remove(1);
+                    list.add(1,v);
         }
         else if(position==2)
         {
@@ -120,11 +122,11 @@ public class MainFrame extends ActivityGroup
         }
         else if(position==3)
         {
-//                    v=getThree();
-//                    container.removeView(v);
-//                    container.addView(v);
-//                    list.remove(3);
-//                    list.add(3,v);
+                    v=getThree();
+                    container.removeView(v);
+                    container.addView(v);
+                    list.remove(3);
+                    list.add(3,v);
         }
         return v;
       }
@@ -141,10 +143,8 @@ public class MainFrame extends ActivityGroup
       @Override
 
       public void onPageSelected(int arg0) {
-        // �������ť��ʽ
         initButtomBth();
-        // ���ն�Ӧ��view��tag���жϵ����л����ĸ����档
-        // ���Ķ�Ӧ��button״̬
+
         if(arg0 == 0) {
           bottomviewLuntanImageview
                   .setImageResource(R.mipmap.b_shetuan);
@@ -168,69 +168,62 @@ public class MainFrame extends ActivityGroup
         }
       }
 
-      /**
-       * ����ҳ�滬���� arg0 ��ʾ��ǰ������view arg1 ��ʾ�����İٷֱ� arg2 ��ʾ�����ľ���
-       * */
+
       @Override
       public void onPageScrolled(int arg0, float arg1, int arg2) {
       }
 
-      /**
-       * ��������״̬ arg0 ��ʾ���ǵĻ���״̬ 0:Ĭ��״̬ 1:����״̬ 2:����ֹͣ
-       * */
+
       @Override
       public void onPageScrollStateChanged(int arg0) {
       }
     });
   }
   @SuppressWarnings("deprecation")
-  public View getZero()                          //�õ���̳view
+  public View getZero()                          //显示第一个页面
   {
     view = this
             .getLocalActivityManager()
             .startActivity("luntan",
                     new Intent(MainFrame.this, MainCommunityActivity.class))
             .getDecorView();
-    return view;                               //����view
+    return view;                               //返回第一个view
   }
   @SuppressWarnings("deprecation")
-  public View getOne()                           //�õ�ʧ������view
+  public View getOne()                           //得到第二个view
   {
-//        view1 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("lostandfind",
-//                        new Intent(MainFrame.this,MainCampaignActivity.class))
-//                .getDecorView();
-//        return view1;                              //����view
-    return null;
+        view1 = MainFrame.this
+                .getLocalActivityManager()
+                .startActivity("lostandfind",
+                        new Intent(MainFrame.this,MainCampaignActivity.class))
+                .getDecorView();
+        return view1;
   }
   @SuppressWarnings("deprecation")
-  public View getTwo()                           //�õ������г�view
+  public View getTwo()                           //得到第三个view
   {
     view2 = MainFrame.this
             .getLocalActivityManager()
             .startActivity("shopping",
                     new Intent(MainFrame.this,MainSocialActivity.class))
             .getDecorView();
-    return view2;                              //����view
+    return view2;
   }
   @SuppressWarnings("deprecation")
-  public View getThree()                           //�õ�����view
+  public View getThree()                           //得到第四个view
   {
-//        view4 = MainFrame.this
-//                .getLocalActivityManager()
-//                .startActivity("more",
-//                        new Intent(MainFrame.this,MainMyselfActivity.class))
-//                .getDecorView();
-//        return view4;                               //����view
-    return null;
+        view4 = MainFrame.this
+                .getLocalActivityManager()
+                .startActivity("more",
+                        new Intent(MainFrame.this,MainPersonalActivity.class))
+                .getDecorView();
+        return view4;
   }
   //点击底部按钮时改变底部按钮的样式（类似与选中提示）
   private class MyBtnOnClick implements View.OnClickListener {
     @Override
     public void onClick(View arg0) {
       int mBtnid = arg0.getId();
-      //�������ǵ�viewpager��ת�Ǹ�����0������������ǵ�list���,�൱��list������±�
       switch (mBtnid) {
         case R.id.frame_bottomview_luntan :
           mViewPager.setCurrentItem(0);
@@ -308,12 +301,12 @@ public class MainFrame extends ActivityGroup
   }
   public void toastSelf(String msgStr)
   {
-    Bundle bd=new Bundle();                          //����Bundle
-    bd.putString("msg", msgStr);                     //����ַ���Ϣ
-    Message msg=new Message();                       //����Message
-    msg.what=0;                                      //Message���Ϊ��
-    msg.setData(bd);                                 //Message���Bundle
-    hd.sendMessage(msg);                             //����Message��Handler
+    Bundle bd=new Bundle();
+    bd.putString("msg", msgStr);
+    Message msg=new Message();
+    msg.what=0;
+    msg.setData(bd);
+    hd.sendMessage(msg);
   }
   Handler hd=new Handler()                             //����һ��Handler
   {
@@ -324,9 +317,9 @@ public class MainFrame extends ActivityGroup
       switch(msg.what)
       {
         case 0:
-          Bundle bd=msg.getData();               //����Bundle�õ���Ϣ
-          String msgStr=bd.getString("msg");     //�õ��ַ���
-          Toast.makeText(MainFrame.this, msgStr, Toast.LENGTH_LONG).show(); //Toast��ʾ��Ϣ
+          Bundle bd=msg.getData();
+          String msgStr=bd.getString("msg");
+          Toast.makeText(MainFrame.this, msgStr, Toast.LENGTH_LONG).show();
           break;
       }
     }

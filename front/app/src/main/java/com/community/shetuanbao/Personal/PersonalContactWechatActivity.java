@@ -12,30 +12,30 @@ import com.community.shetuanbao.utils.FontManager;
 
 public class PersonalContactWechatActivity extends Activity {
 
-    TextView fanhui=null;
+  TextView fanhui=null;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_personal_contact_wechat);
-        FontManager.changeFonts(FontManager.getContentView(this), this);
-        fanhui=(TextView)findViewById(R.id.weixintool_text1);
-        fanhui.setOnClickListener(new View.OnClickListener() {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    setContentView(R.layout.activity_personal_contact_wechat);
+    FontManager.changeFonts(FontManager.getContentView(this), this);
+    fanhui=(TextView)findViewById(R.id.weixintool_text1);
+    fanhui.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                finish();
-            }
-        });
+      @Override
+      public void onClick(View v) {
+        // TODO Auto-generated method stub
+        finish();
+      }
+    });
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (keyCode == KeyEvent.KEYCODE_BACK) {
+      finish();
     }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-        }
-        return false;
-    }
+    return false;
+  }
 }

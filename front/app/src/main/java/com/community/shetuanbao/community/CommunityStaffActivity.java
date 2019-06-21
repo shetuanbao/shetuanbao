@@ -2,12 +2,10 @@ package com.community.shetuanbao.community;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,20 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.LocalLoader;
+import com.community.shetuanbao.utils.NetLoader;
 import com.community.shetuanbao.utils.RequestUtils;
+import com.community.shetuanbao.utils.User;
+import com.community.shetuanbao.utils.usertubiaoStrategy;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,9 +70,7 @@ public class CommunityStaffActivity extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-//                finish();
-                d();
+                User.getInstance().addfriend(CommunityStaffActivity.this,userId);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +92,8 @@ public class CommunityStaffActivity extends Activity {
             {
                 try {
                     params = new HashMap<>();
-                    params.put("userId",  LoginActivity.sp.getInt("SNO",0));
+                    User test=User.getInstance().clone();
+                    params.put("userId",  test.getUserId());
                     params.put("friendId",userId);
                     String res = RequestUtils.post("/users/pancheckfriendByuserId", params);
                     try {
@@ -184,48 +180,12 @@ public class CommunityStaffActivity extends Activity {
     public class Thread_pic extends Thread{
         @Override
         public void run(){
-            try {
-                if(F_GetBitmap.isEmpty(photo))
-                {
-                    params = new HashMap<>();
-                    params.put("photo", photo);
-                    String res1 = RequestUtils.post("/users/panfindphoto", params);
-                    try {
-                        JSONObject jsonObject1 = new JSONObject(res1);
-                        if (jsonObject1.getInt("code") == 200) {
-                            // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
-                            JSONArray list1 = (JSONArray) jsonObject1.get("data");
-                            byte[] b = new byte[list1.length()];
-                            for (int j = 0; j < list1.length(); j++) {
-                                b[j] = (byte) list1.getInt(j);
-                            }
-                            F_GetBitmap.setInSDBitmap(b, photo);
-                            InputStream input = null;
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-                            options.inSampleSize = 1;
-                            input = new ByteArrayInputStream(b);
-                            @SuppressWarnings({ "rawtypes", "unchecked" })
-                            SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                            touxiang = (Bitmap) softRef.get();
-                        } else {
-                            Looper.prepare();
-                            Toast.makeText(CommunityStaffActivity.this, "获取信息失败", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else
-                {
-                    touxiang=F_GetBitmap.getSDBitmap(photo);
-                    if(F_GetBitmap.bitmap!=null && !F_GetBitmap.bitmap.isRecycled())
-                    {
-                        F_GetBitmap.bitmap = null;
-                    }
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+            //            //策略模式加模板模式
+            if (F_GetBitmap.isEmpty(photo)){
+                touxiang= new NetLoader().loadImage(photo,new usertubiaoStrategy());
+            }
+            else{
+                touxiang= new LocalLoader().loadImage(photo,new usertubiaoStrategy());
             }
         }
     }

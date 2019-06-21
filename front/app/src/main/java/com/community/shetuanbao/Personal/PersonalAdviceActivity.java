@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.FontManager;
-import com.community.shetuanbao.utils.NetInfoUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -128,7 +127,8 @@ public class PersonalAdviceActivity extends Activity implements View.OnClickList
             Date date=new Date();
             DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time=format.format(date);
-            zong=NetInfoUtil.getyijianren(Constant.userName);
+//            zong=NetInfoUtil.getyijianren(Constant.userName);
+            zong=new ArrayList<>();
             all=new String[zong.size()][zong.get(0).length];
             name=new String[all.length];
             picture=new String[all.length];
@@ -142,7 +142,7 @@ public class PersonalAdviceActivity extends Activity implements View.OnClickList
                         picture[i]=all[i][1];
                     }
                 }
-                NetInfoUtil.feedback(Constant.userName+"#"+contact.getText().toString().trim()+"#"+content.getText().toString().trim()+"#"+time+"#"+name[0]+"#"+picture[0]);
+//                NetInfoUtil.feedback(Constant.userName+"#"+contact.getText().toString().trim()+"#"+content.getText().toString().trim()+"#"+time+"#"+name[0]+"#"+picture[0]);
             }
         }
     }

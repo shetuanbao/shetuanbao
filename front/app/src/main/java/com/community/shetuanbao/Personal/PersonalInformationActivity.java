@@ -1,13 +1,10 @@
 package com.community.shetuanbao.Personal;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -20,10 +17,8 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.ACache;
-import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
-import com.community.shetuanbao.utils.NetInfoUtil;
 import com.community.shetuanbao.utils.RequestUtils;
 import com.community.shetuanbao.utils.RoundImageView;
 

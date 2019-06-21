@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,6 @@ import com.community.shetuanbao.utils.RefreshableView;
 import com.community.shetuanbao.R;
 public class shejiao_lianxiren extends  Fragment  implements OnItemClickListener, UserInfoProvider {
     public  static List<Map<String, Object>> list=null;
-//    private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
     private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
     public static ArrayList<Integer> xuehao=null;
     private String name[];
@@ -66,11 +64,10 @@ public class shejiao_lianxiren extends  Fragment  implements OnItemClickListener
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lianxiren_shejiao, container,false);
         rd=(RefreshableView)view.findViewById(R.id.refreshable_view);
-        listView=view.findViewById(R.id.lianxi_list);
+        listView=view.findViewById(R.id.list);
         rl=(TextView)view.findViewById(R.id.meiyoulianxiren);
         list=new  ArrayList<Map<String, Object>>();
         userInfo=new ArrayList<Friend>();
-//        userInfo.add(new Friend(user[0],user[1],user[2]));
         init();
         RongIM.setUserInfoProvider(this, true);
         rd.setOnRefreshListener(new com.community.shetuanbao.utils.RefreshableView.PullToRefreshListener() {
@@ -211,7 +208,6 @@ public class shejiao_lianxiren extends  Fragment  implements OnItemClickListener
         {
             mInflater = LayoutInflater.from(context);
             data.addAll(list);
-//            list.clear();
         }
         @Override
         public int getCount(){
@@ -233,11 +229,11 @@ public class shejiao_lianxiren extends  Fragment  implements OnItemClickListener
             ViewHolder myViews;
             if (convertView == null) {
                 myViews = new ViewHolder();
-            convertView = getActivity().getLayoutInflater().inflate(R.layout.lianxiren_list, null);
-            myViews.name=(TextView)convertView.findViewById(R.id.shejiao_lianxiren_friend);
-            myViews.pen=(TextView)convertView.findViewById(R.id.shejiao_lianxiren_pen);
-            myViews.photo=(ImageView)convertView.findViewById(R.id.shejiao_lianxiren_touxiang);
-            convertView.setTag(myViews);
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.lianxiren_list, null);
+                myViews.name=(TextView)convertView.findViewById(R.id.shejiao_lianxiren_friend);
+                myViews.pen=(TextView)convertView.findViewById(R.id.shejiao_lianxiren_pen);
+                myViews.photo=(ImageView)convertView.findViewById(R.id.shejiao_lianxiren_touxiang);
+                convertView.setTag(myViews);
             } else {
                 myViews = (ViewHolder) convertView.getTag();
             }

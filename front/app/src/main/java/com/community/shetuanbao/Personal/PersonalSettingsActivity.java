@@ -2,7 +2,6 @@ package com.community.shetuanbao.Personal;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,16 +9,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.community.shetuanbao.Login.LoginActivity;
 import com.community.shetuanbao.R;
-import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.FontManager;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-
-import java.util.Hashtable;
 
 public class PersonalSettingsActivity extends Activity implements View.OnClickListener {
     TextView fanhui=null;
@@ -68,12 +60,12 @@ public class PersonalSettingsActivity extends Activity implements View.OnClickLi
                 startActivity(it);
                 break;
             case R.id.zhuxiao:
-//                Intent logoutIntent = new Intent(PersonalSettingsActivity.this, LoginActivity.class);
-//
-//                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//                startActivity(logoutIntent);
-//                LoginActivity.sp.edit().clear().commit();
+                Intent logoutIntent = new Intent(PersonalSettingsActivity.this, LoginActivity.class);
+
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(logoutIntent);
+                LoginActivity.sp.edit().clear().commit();
                 break;
             case R.id.my_erweima:
                 Intent intent=new Intent(PersonalSettingsActivity.this,PersonalQrActivity.class);

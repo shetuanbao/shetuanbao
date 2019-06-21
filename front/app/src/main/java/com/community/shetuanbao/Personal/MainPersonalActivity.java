@@ -124,7 +124,9 @@ public class MainPersonalActivity extends Activity implements View.OnClickListen
         public void run(){
             // 使用user_id获取用户信息
             Map<String, Object> params = new HashMap<>();
+
             params.put("userId", LoginActivity.sp.getInt("SNO", 0));
+//            params.put("userId", 2);
             try {
                 String res = RequestUtils.post("/users/lugetUserByUserId", params);
                 Log.d("response", res);

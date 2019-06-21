@@ -124,9 +124,6 @@ public class RoundImageView extends ImageView {
      *
      鑾峰彇瑁佸壀鍚庣殑鍦嗗舰鍥剧墖
 
-     *
-     @param radius鍗婂緞
-
      */
 
     public Bitmap getCroppedRoundBitmap(Bitmap bmp, int radius) {

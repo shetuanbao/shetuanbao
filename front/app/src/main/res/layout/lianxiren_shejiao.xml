@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".chat.shejiao_lianxiren">
+    tools:context="com.community.shetuanbao.chat.shejiao_lianxiren">
 
     <!-- TODO: Update blank fragment layout -->
-    <com.example.administrator.font.util.RefreshableView
+    <com.community.shetuanbao.utils.RefreshableView
         android:id="@+id/refreshable_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -26,6 +26,6 @@
             android:visibility="gone"
             android:textSize="20sp"
             android:gravity="center"/>
-    </com.example.administrator.font.util.RefreshableView>
+    </com.community.shetuanbao.utils.RefreshableView>
 
 </FrameLayout>

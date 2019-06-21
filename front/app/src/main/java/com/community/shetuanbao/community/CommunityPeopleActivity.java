@@ -61,9 +61,6 @@ public class CommunityPeopleActivity extends Activity implements AdapterView.OnI
                 finish();
             }
         });
-        //加载人员数据
-        //测试用
-//        initList();
         thread_ntd th=new thread_ntd();
         th.start();
         try {
@@ -143,18 +140,16 @@ public class CommunityPeopleActivity extends Activity implements AdapterView.OnI
             }
         }
     }
-public void initList()
-{
-//    name1=new String[1];
-//    name1[0]="我是谁";
-    for(int i=0;i<name1.length;i++)
+    public void initList()
     {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", name1[i]);
-        listItem.add(map);
+        for(int i=0;i<name1.length;i++)
+        {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("name", name1[i]);
+            listItem.add(map);
+        }
+        initBaseAdapter();
     }
-    initBaseAdapter();
-}
     static class ViewHolder {
 
         private TextView  name;
@@ -175,7 +170,8 @@ public void initList()
         public void handleMessage(Message msg) {
             showDialog(0);
         }
-    };@SuppressWarnings("deprecation")
+    };
+    @SuppressWarnings("deprecation")
     @SuppressLint("InflateParams")
     private class baseAdapter extends BaseAdapter
     {

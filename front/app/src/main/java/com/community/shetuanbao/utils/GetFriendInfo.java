@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.community.shetuanbao.Login.LoginActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,9 +33,9 @@ public class GetFriendInfo {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getConn() throws IOException {
-        int user_id = 2;
+        int user_id = LoginActivity.sp.getInt("SNO",0);
         Map<String, Object> params = new HashMap<>();
-        params.put("userId", 2);
+        params.put("userId", user_id);
         String res = RequestUtils.post("/friends/findFriends", params);
         Log.d("response", res);
         return res;

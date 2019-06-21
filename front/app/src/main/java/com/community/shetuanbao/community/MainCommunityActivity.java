@@ -39,7 +39,10 @@ import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.Exit;
 import com.community.shetuanbao.utils.F_GetBitmap;
 import com.community.shetuanbao.utils.FontManager;
+import com.community.shetuanbao.utils.LocalLoader;
+import com.community.shetuanbao.utils.NetLoader;
 import com.community.shetuanbao.utils.RequestUtils;
+import com.community.shetuanbao.utils.communitytubiaoStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -367,8 +370,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                         imageData = new Bitmap[n];
                         image=new String[n];
                         for (int i = 0; i < n; i++) {
-//                                listStr += list.get(i).get("activityId") + "\n";
-//                            listStr += list.getJSONObject(i).getInt("activityId") + "\n";
                             shetuan[i]=list.getJSONObject(i).getString("communityName");
                             id[i]=list.getJSONObject(i).getInt("communityId");
                             kouhao[i]=list.getJSONObject(i).getString("communityKouhao");
@@ -415,52 +416,14 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
     public class Thread_pic extends Thread{
         @Override
         public void run(){
-            try {
-                for(int i=0;i<all_image.length;i++) {
-                    if (F_GetBitmap.isEmpty(image[i])) {
-                        Log.d("qwerty","走到这里");
-                        params = new HashMap<>();
-                        params.put("tubiao", image[i]);
-                        String res1 = RequestUtils.post("/community/panfindtubiao", params);
-                        try {
-                            JSONObject jsonObject1 = new JSONObject(res1);
-                            if (jsonObject1.getInt("code") == 200) {
-                                // 注意获取到的数据的数据类型，在后台是数组，则这里是JSONArray，在后台是类，则这里是JSONObject
-                                JSONArray list1 = (JSONArray) jsonObject1.get("data");
-                                all_image[i] = new byte[list1.length()];
-                                for (int j = 0; j < list1.length(); j++) {
-                                    all_image[i][j] = (byte) list1.getInt(j);
-                                }
-                                F_GetBitmap.setInSDBitmap(all_image[i], image[i]);
-                                InputStream input = null;
-                                BitmapFactory.Options options = new BitmapFactory.Options();
-                                options.inSampleSize = 1;
-                                input = new ByteArrayInputStream(all_image[i]);
-                                @SuppressWarnings({ "rawtypes", "unchecked" })
-                                SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                                imageData[i] = (Bitmap) softRef.get();
-                                Log.d("bitmaptest","压缩前图片的大小"+ (imageData[i].getByteCount())
-
-                                        + "M宽度为"+ imageData[i].getWidth() + "高度为"+ imageData[i].getHeight());
-                                System.out.println(imageData.length);
-                            } else {
-                                Looper.prepare();
-                                Toast.makeText(MainCommunityActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    else{
-                        Log.d("qwerty","走到这里123");
-                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
-                        if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
-                            F_GetBitmap.bitmap = null;
-                        }
-                    }
+            //策略模式加模板模式
+            for(int i=0;i<all_image.length;i++) {
+                if (F_GetBitmap.isEmpty(image[i])){
+                    imageData[i]= new NetLoader().loadImage(image[i],new communitytubiaoStrategy());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                else{
+                    imageData[i]= new LocalLoader().loadImage(image[i],new communitytubiaoStrategy());
+                }
             }
         }
     }
@@ -541,7 +504,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                 String mes2 = text2.getText().toString();
                 Intent it = new Intent(MainCommunityActivity.this, CommunityDetailActivity.class);
                 it.putExtra("name", mes);
-//                it.putExtra("id", "123");
                 it.putExtra("id", shetuanid[arg2]);
                 it.putExtra("kouhao", mes2);
                 startActivity(it);
@@ -557,7 +519,7 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
         }
         @Override
         public int getCount() {
-            return data.size();// ��¼��ǰ�б����ж�������
+            return data.size();
         }
         @Override
         public Object getItem(int position) {
@@ -579,7 +541,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                 convertView.setTag(myViews);
             } else {
                 myViews = (ViewHolder) convertView.getTag();
-
             }
             myViews.image.setImageBitmap((Bitmap) data.get(position).get("image"));
             myViews.name.setText((String) data.get(position).get("name"));
@@ -632,8 +593,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                         imageData = new Bitmap[n];
                         image=new String[n];
                         for (int i = 0; i < n; i++) {
-//                                listStr += list.get(i).get("activityId") + "\n";
-//                            listStr += list.getJSONObject(i).getInt("activityId") + "\n";
                             shetuan[i]=list.getJSONObject(x - n + i).getString("communityName");
                             id[i]=list.getJSONObject(x - n + i).getInt("communityId");
                             kouhao[i]=list.getJSONObject(x - n + i).getString("communityKouhao");
@@ -648,7 +607,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-//                        initList();
                     } else {
                         Looper.prepare();
                         Toast.makeText(MainCommunityActivity.this, "获取社团信息失败", Toast.LENGTH_LONG).show();
@@ -659,14 +617,14 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
             } catch (IOException e) {
                 e.printStackTrace();
             }
-                for (int i = 0; i < shetuan.length; i++) {
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("name", shetuan[i]);
-                    map.put("id", id[i]);
-                    map.put("kouhao", kouhao[i]);
-                    map.put("image", imageData[i]);
-                    listItem.add(map);
-                }
+            for (int i = 0; i < shetuan.length; i++) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("name", shetuan[i]);
+                map.put("id", id[i]);
+                map.put("kouhao", kouhao[i]);
+                map.put("image", imageData[i]);
+                listItem.add(map);
+            }
         }
     }
     private void loadMoreData() {
@@ -692,7 +650,6 @@ public class MainCommunityActivity extends Activity implements ViewPager.OnPageC
                 // 判断滚动到底部
                 if (count < 50 && view.getLastVisiblePosition() == (view.getCount() - 1)) {
                     moreView.setVisibility(View.VISIBLE);
-//                     Toast.makeText(this, "加载", Toast.LENGTH_SHORT).show();
                     mHandler2.sendEmptyMessage(0);
                 }
                 break;

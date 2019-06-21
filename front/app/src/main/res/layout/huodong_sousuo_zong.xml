@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/huodong_sousuo"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@mipmap/gengduo_modifybiaoti12">
+
+        <TextView
+            android:id="@+id/huodong_sousuo_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/huodong_sousuo_2"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginRight="100dp"
+            android:src="@mipmap/sousuo1" />      
+                                                    
+        </LinearLayout>
+       
+       <ListView
+            android:id="@+id/huodong_sousuo_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+        
+       <RelativeLayout
+	    android:id="@+id/shetuannodate"
+	    android:visibility="gone"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+
+		<ImageView
+		    android:id="@+id/shetuannodate_image"
+		    android:layout_width="150dp"
+		    android:layout_height="150dp"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:layout_marginTop="71dp"
+		    android:background="@mipmap/ku" />
+
+		<TextView
+		    android:id="@+id/nodate_text"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/nodate_image"
+		    android:layout_alignParentLeft="true"
+		    android:gravity="center"
+		    android:text="亲，未找到需要的活动"
+		    android:textColor="#FF8C00" />
+	</RelativeLayout>		
+</LinearLayout>
+

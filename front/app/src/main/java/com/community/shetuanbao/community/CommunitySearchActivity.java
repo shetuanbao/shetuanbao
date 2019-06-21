@@ -172,7 +172,7 @@ public class CommunitySearchActivity extends Activity {
                         }
                     }
                     else{
-                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);// �õ�����BitMap���͵�ͼƬ����
+                        imageData[i] = F_GetBitmap.getSDBitmap(image[i]);
                         if (F_GetBitmap.bitmap != null && !F_GetBitmap.bitmap.isRecycled()) {
                             F_GetBitmap.bitmap = null;
                         }
@@ -233,7 +233,7 @@ public class CommunitySearchActivity extends Activity {
 
         @Override
         public int getCount() {
-            return data.size();// ��¼��ǰ�б����ж�������
+            return data.size();
         }
 
         @Override

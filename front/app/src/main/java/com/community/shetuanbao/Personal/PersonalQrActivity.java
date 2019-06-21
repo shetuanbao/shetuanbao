@@ -1,7 +1,6 @@
 package com.community.shetuanbao.Personal;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +11,7 @@ import android.widget.Toast;
 
 import com.community.shetuanbao.R;
 import com.community.shetuanbao.utils.ACache;
-import com.community.shetuanbao.utils.Constant;
 import com.community.shetuanbao.utils.F_GetBitmap;
-import com.community.shetuanbao.utils.NetInfoUtil;
 import com.community.shetuanbao.utils.RoundImageView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -25,9 +22,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 public class PersonalQrActivity extends Activity{
     private ImageView qr=null;
@@ -55,7 +50,6 @@ public class PersonalQrActivity extends Activity{
                 finish();
             }
         });
-
         name=(TextView)findViewById(R.id.erweima_text);
         touxiang=(RoundImageView)findViewById(R.id.QR_1);
         qr=(ImageView)findViewById(R.id.QR);
@@ -96,12 +90,6 @@ public class PersonalQrActivity extends Activity{
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
             BitMatrix bitMatrix = new QRCodeWriter().encode(text,
                     BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
-
-            // QRCodeWriter writer = new QRCodeWriter();
-            // // 把输入的文本转为二维码
-            // BitMatrix bitMatrix = writer.encode(text, BarcodeFormat.QR_CODE,
-            // QR_WIDTH, QR_HEIGHT);
-
             int[] pixels = new int[QR_WIDTH * QR_HEIGHT];
             for (int y = 0; y < QR_HEIGHT; y++) {
                 for (int x = 0; x < QR_WIDTH; x++) {
